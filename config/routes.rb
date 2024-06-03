@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  get "/mybands", to: "bands#mybands", as: :mybands
 
+  get "/mybands", to: "bands#mybands", as: :mybands
   resources :bands, except: [ :index ]
 end

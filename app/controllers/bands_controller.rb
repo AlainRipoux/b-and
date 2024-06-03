@@ -18,6 +18,10 @@ class BandsController < ApplicationController
     end
   end
 
+  def mybands
+    @bands = Band.where(user: current_user)
+  end
+
   private
 
   def band_params
