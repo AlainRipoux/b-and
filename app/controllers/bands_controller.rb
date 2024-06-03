@@ -12,13 +12,14 @@ class BandsController < ApplicationController
     @band = Band.create(band_params)
     @band.user = current_user
     if @band.save
-      redirect_to band_path(@band)
+      redirect_to mybands_path
     else
       render :new, status: :unprocessable_entity
     end
   end
 
   def mybands
+    @band = Band.new
     @bands = Band.where(user: current_user)
   end
 
