@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   get "/users", to: "users#index", as: :users
+  get "/mybands", to: "bands#mybands", as: :mybands
   resources :users, except: %i[new create] do
     resources :bands, only: %i[new create]
   end
