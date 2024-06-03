@@ -22,6 +22,7 @@ users = 30.times.map do
     address: Faker::Address.full_address
   )
 end
+
 User.create!(
   firstname: "Admin",
   lastname: "Test",
