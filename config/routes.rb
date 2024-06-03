@@ -10,28 +10,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   get "/users", to: "users#index", as: :users
+  get "/mybands", to: "bands#mybands", as: :mybands
   resources :users, except: %i[new create] do
-    resources :bands, only: %i[new create]
+    resources :bands, only: %i[show new create]
   end
+
   resources :bands, only: %i[edit update destroy]
-
-
-  # resources :users do
-  #   resources :invites do
-  #     resources :messages, only: :create
-  #   end
-  #   resources :bands do
-  #     resources :user_bands do
-  #       resources :band_messages, only: :create
-  #     end
-  #   end
-  # end
-  # resources :bands, only: %i[new create]
-  # resources :messages, only: :show
-  # resources :band_messages, only: :show
-  # resources :invites, only: %i[index]
-  # resources :user_bands, only: %i[index]
-  # resources :user_bands, only: %i[edit update destroy]
-  # resources :invites, only: %i[edit update destroy]
-
 end
