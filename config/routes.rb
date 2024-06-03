@@ -14,7 +14,4 @@ Rails.application.routes.draw do
     resources :bands, only %i[new create]
   end
   resources :bands, only %i[edit update destroy]
-
-
-
 end
