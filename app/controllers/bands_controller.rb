@@ -17,6 +17,10 @@ class BandsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+  
+  def mybands
+    @bands = Band.where(user: current_user)
+  end
 
   def mybands
     @bands = Band.where(user: current_user)
