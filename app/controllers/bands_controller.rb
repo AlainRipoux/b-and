@@ -1,4 +1,4 @@
-class BandController < ApplicationController
+class BandsController < ApplicationController
 
   def show
     @band = Band.find(params[:band_id])
