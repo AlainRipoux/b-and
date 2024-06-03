@@ -9,4 +9,27 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  root to: "users#index"
+  get "/home", to: "users#index", as: :home
+
+
+
+  # resources :users do
+  #   resources :invites do
+  #     resources :messages, only: :create
+  #   end
+  #   resources :bands do
+  #     resources :user_bands do
+  #       resources :band_messages, only: :create
+  #     end
+  #   end
+  # end
+  # resources :bands, only: %i[new create]
+  # resources :messages, only: :show
+  # resources :band_messages, only: :show
+  # resources :invites, only: %i[index]
+  # resources :user_bands, only: %i[index]
+  # resources :user_bands, only: %i[edit update destroy]
+  # resources :invites, only: %i[edit update destroy]
+
 end
