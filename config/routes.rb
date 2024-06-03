@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   get "/users", to: "users#index", as: :users
   resources :bands
-
+  get "/mybands", to: "bands#mybands", as: :mybands
 
   # resources :users do
   #   resources :invites do
