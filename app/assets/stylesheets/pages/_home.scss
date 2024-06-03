@@ -1,1 +1,27 @@
-// Specific CSS for your home-page
+a {
+  text-decoration: none;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 20px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 0;
+}
+
+h1 {
+  text-align: center;
+  margin: 20px 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}

@@ -1,0 +1,13 @@
+<div class="mb-3">
+<%= simple_form_for(user) do |f| %>
+  <%= f.input :firstname %>
+  <%= f.input :lastname %>
+  <%= f.input :nickname %>
+  <%= f.input :instrument %>
+  <%= f.input :biography, as: :text %>
+  <%= f.input :style %>
+  <%= f.input :photo, as: :file %>
+  <%= f.input :address, as: :text %>
+  <%= f.submit "Submit", class: "btn-ghost btn-ghost:hover" %>
+<% end %>
+</div>
