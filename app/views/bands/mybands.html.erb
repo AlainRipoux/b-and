@@ -1,7 +1,11 @@
-<h1> My bands</h1>
+<h1>My bands</h1>
 
 <%# modal de creation de band %>
 
-<% if @bands.any? %>
-<%# affichage des bands ou "pas encore de band"%>
-<% end %>
+<%= render "form-create"  %>
+
+  <% if @bands.any? %>
+  <%# affichage des bands ou "pas encore de band"%>
+  <% else %>
+  <p>Sorry, you don't have any band yet.</p>
+  <% end %>
