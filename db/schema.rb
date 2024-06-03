@@ -10,9 +10,90 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_03_084451) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_03_130708) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "band_messages", force: :cascade do |t|
+    t.string "content"
+    t.bigint "band_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["band_id"], name: "index_band_messages_on_band_id"
+    t.index ["user_id"], name: "index_band_messages_on_user_id"
+  end
+
+  create_table "bands", force: :cascade do |t|
+    t.string "name"
+    t.string "photo"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_bands_on_user_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "name"
+    t.string "location"
+    t.string "type"
+    t.bigint "band_id", null: false
+    t.bigint "user_id", null: false
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["band_id"], name: "index_events_on_band_id"
+    t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "invites", force: :cascade do |t|
+    t.bigint "first_user_id", null: false
+    t.bigint "second_user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["first_user_id"], name: "index_invites_on_first_user_id"
+    t.index ["second_user_id"], name: "index_invites_on_second_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "content"
+    t.bigint "user_id", null: false
+    t.bigint "invite_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invite_id"], name: "index_messages_on_invite_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.bigint "band_id", null: false
+    t.bigint "user_id", null: false
+    t.string "content"
+    t.boolean "done", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["band_id"], name: "index_tasks_on_band_id"
+    t.index ["user_id"], name: "index_tasks_on_user_id"
+  end
+
+  create_table "unavailabilities", force: :cascade do |t|
+    t.date "start_date"
+    t.date "end_date"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_unavailabilities_on_user_id"
+  end
+
+  create_table "user_bands", force: :cascade do |t|
+    t.bigint "band_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["band_id"], name: "index_user_bands_on_band_id"
+    t.index ["user_id"], name: "index_user_bands_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -22,8 +103,30 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_03_084451) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "firstname"
+    t.string "lastname"
+    t.string "nickname"
+    t.string "photo"
+    t.string "instrument"
+    t.string "biography"
+    t.string "style"
+    t.string "address"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "band_messages", "bands"
+  add_foreign_key "band_messages", "users"
+  add_foreign_key "bands", "users"
+  add_foreign_key "events", "bands"
+  add_foreign_key "events", "users"
+  add_foreign_key "invites", "users", column: "first_user_id"
+  add_foreign_key "invites", "users", column: "second_user_id"
+  add_foreign_key "messages", "invites"
+  add_foreign_key "messages", "users"
+  add_foreign_key "tasks", "bands"
+  add_foreign_key "tasks", "users"
+  add_foreign_key "unavailabilities", "users"
+  add_foreign_key "user_bands", "bands"
+  add_foreign_key "user_bands", "users"
 end
