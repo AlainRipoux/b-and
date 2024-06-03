@@ -10,7 +10,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   get "/users", to: "users#index", as: :users
-  resources :bands
+  resources :users, except: %i[new create] do
+    resources :bands, only %i[new create]
+  end
+  resources :bands, only %i[edit update destroy]
 
 
 
