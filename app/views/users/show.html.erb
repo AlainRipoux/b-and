@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="m-5">
+    <div class="col">
+      <%= link_to "Back to list", users_path, class: "btn btn-ghost mb-3" %>
+        <h1><%= @user.firstname %> aka "<%= @user.nickname %>"</h1>
+
+      <div class="d-flex">
+        <div class="d-flex col m-5 border rounded-4 p-4 shadow">
+            <div class="card big_img">
+              <%# <% if @user.photo.attached? == true %>
+                <%# <%= cl_image_tag @user.photo.key, alt: "text" %>
+              <%# <% else %>
+                <%# <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" alt="<%= @user[:name] %>
+              <%# <% end %>
+            </div>
+
+            <div class="d-flex ms-4 mt-3 align-items-center">
+                <div class="mt-25">
+                  <p><strong>Address: <%= @user.address %></strong></p>
+                  <p><i class="fa-solid fa-location-dot"></i> <%= @user.address %></p>
+                  <p><i class="fa-solid fa-money-bill-wave"></i> <%= @user.style %></p>
+                  <p><i class="fa-solid fa-brain"></i> <%= @user.instrument %></p>
+                </div>
+            </div>
+          </div>
+      </div>
+                <div class="col m-1 border rounded-4 p-4 shadow">
+                <h3>Bio:</h3>
+                <p><%= @user.biography %></p>
+                </div>
+    </div>
+  </div>
+
+  <div class="col-9 mx-auto mb-3">
+      <% if @user == current_user %>
+        <div class="d-flex justify-content-between"><%= link_to "Edit your profile", edit_user_path(@user), {:remote => true, 'data-bs-toggle' =>  "modal", 'data-bs-target' => '#editcharacter', class: "col-6 btn btn-large"} %>
+          <%= link_to 'Delete', user_path(@user),
+          data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "col-3 btn btn-ghost btn-ghost:hover" %>
+        </div>
+      <% else %>
+        <div class="d-flex justify-content-center">
+        <%= link_to "Add review", '#', {:remote => true, 'data-bs-toggle' =>  "modal", 'data-bs-target' => '#addreview', class: "btn btn-large btn-large:hover"} %>
+        </div>
+      <% end %>
+  </div>
