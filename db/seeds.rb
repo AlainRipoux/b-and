@@ -3,24 +3,37 @@
 require 'faker'
 
 # Clear existing data
-UserBand.destroy_all
 User.destroy_all
 Band.destroy_all
+UserBand.destroy_all
 
 # Create Users
 users = 30.times.map do
   User.create!(
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
+    firstname: Faker::Name.first_name,
+    lastname: Faker::Name.last_name,
     nickname: Faker::Internet.username,
     email: Faker::Internet.email,
+    password: "azerty",
     photo: Faker::Avatar.image,
     instrument: Faker::Music.instrument,
-    bio: Faker::Lorem.paragraph(sentence_count: 3),
+    biography: Faker::Lorem.paragraph(sentence_count: 3),
     style: Faker::Music.genre,
     address: Faker::Address.full_address
   )
 end
+User.create!(
+  firstname: "Admin",
+  lastname: "Test",
+  nickname: "Admin",
+  email: "admin@band.com",
+  password: "azerty",
+  photo: Faker::Avatar.image,
+  instrument: Faker::Music.instrument,
+  biography: Faker::Lorem.paragraph(sentence_count: 3),
+  style: Faker::Music.genre,
+  address: Faker::Address.full_address
+)
 
 puts "Created 30 users"
 
@@ -28,7 +41,8 @@ puts "Created 30 users"
 bands = 10.times.map do
   Band.create!(
     name: Faker::Music.band,
-    photo: Faker::LoremFlickr.image(size: "300x300", search_terms: ['band'])
+    photo: Faker::LoremFlickr.image(size: "300x300", search_terms: ['band']),
+    user: users.sample
   )
 end
 
