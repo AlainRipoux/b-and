@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   # root "posts#index"
   get "/users", to: "users#index", as: :users
   resources :users, except: %i[new create] do
-    resources :bands, only %i[new create]
+    resources :bands, only: %i[new create]
   end
-  resources :bands, only %i[edit update destroy]
+
+  resources :bands, only: %i[edit update destroy]
 end
