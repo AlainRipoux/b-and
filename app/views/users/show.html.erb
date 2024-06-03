@@ -31,12 +31,10 @@
     </div>
   </div>
 
-  <div class="col-9 mx-auto mb-3">
+  <div class="col mx-auto mb-3">
+      <%= render "users/modal" %>
       <% if @user == current_user %>
-        <div class="d-flex justify-content-between"><%= link_to "Edit your profile", edit_user_path(@user), {:remote => true, 'data-bs-toggle' =>  "modal", 'data-bs-target' => '#editcharacter', class: "col-6 btn btn-large"} %>
-          <%= link_to 'Delete', user_path(@user),
-          data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "col-3 btn btn-ghost btn-ghost:hover" %>
-        </div>
+        <%= link_to "Edit your profil", '#', {:remote => true, 'data-bs-toggle' =>  "modal", 'data-bs-target' => '#edituser', class: "col btn btn-large"} %>
       <% else %>
         <div class="d-flex justify-content-center">
         <%= link_to "Add review", '#', {:remote => true, 'data-bs-toggle' =>  "modal", 'data-bs-target' => '#addreview', class: "btn btn-large btn-large:hover"} %>
