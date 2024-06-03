@@ -1,7 +1,7 @@
 class BandsController < ApplicationController
 
   def show
-    @band = Band.find(params[:band_id])
+    @band = Band.find(params[:id])
   end
 
   def new
@@ -12,14 +12,10 @@ class BandsController < ApplicationController
     @band = Band.create(band_params)
     @band.user = current_user
     if @band.save
-      redirect_to user_band(@band)
+      redirect_to band_path(@band)
     else
       render :new, status: :unprocessable_entity
     end
-  end
-  
-  def mybands
-    @bands = Band.where(user: current_user)
   end
 
   def mybands
