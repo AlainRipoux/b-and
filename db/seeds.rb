@@ -1,6 +1,9 @@
 # db/seeds.rb
 
 require 'faker'
+require 'open-uri'
+
+file = URI.open("https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/NES-Console-Set.jpg/1200px-NES-Console-Set.jpg")
 
 # Clear existing data
 User.destroy_all
@@ -37,14 +40,14 @@ User.create!(
 )
 
 puts "Created 30 users"
-
 # Create Bands
 bands = 10.times.map do
-  Band.create!(
+  band = Band.new(
     name: Faker::Music.band,
-    photo: Faker::LoremFlickr.image(size: "300x300", search_terms: ['band']),
     user: users.sample
   )
+  band.photo.attach(io: file, filename: band.name)
+  band.save!
 end
 
 puts "Created 10 bands"
