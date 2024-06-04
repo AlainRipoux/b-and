@@ -34,6 +34,7 @@ class BandsController < ApplicationController
     @band = Band.find(params[:id])
     @band.destroy
     redirect_to mybands_path
+    authorize @band
   end
 
   private
