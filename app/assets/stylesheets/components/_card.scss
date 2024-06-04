@@ -1,79 +1,42 @@
 .card {
-  width: 80%;
-  height: 1000px;
-  border-radius: 25px;
-  overflow: hidden;
-  text-align: left;
-  transition: all 0.3s ease;
-  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90vw; /* Make the card take up 90% of the viewport width */
+  margin: 20px auto; /* Center the card and add some vertical margin */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  background-color: #fff; /* Add a background color */
 }
 
-.card img {
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card-image {
   width: 100%;
-  height: 200px;
-  display: block;
-  border-radius: 15px;
-  overflow: hidden;
-  object-fit: cover;
+  margin-bottom: 15px;
+}
+
+.card-image img {
+  width: 100%;
+  height: auto; /* Ensure the image maintains its aspect ratio */
+  border-radius: 10px; /* Adjust border radius if needed */
+}
+
+.card-name {
+  margin-bottom: 10px;
+  font-size: 6vw; /* Use viewport units for responsive font size */
+  font-weight: bold;
+  text-align: center; /* Center-align the text */
 }
 
 .card-info {
-  background-color: white;
-  padding: 10px;
-  transition: all 0.3s ease;
-}
-
-.card:hover .card-info {
-  background-color: #f8f2ef;
-}
-
-.card-info h3 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.card-info p {
-  margin: 5px 0;
-  font-size: 14px;
-  color: #666;
-}
-
-.card-info .price {
-  font-size: 16px;
-  color: #000;
-  font-weight: bold;
-}
-
-.card li {
-  text-decoration: none;
-}
-
-li.card {
-  margin: 5px;
-}
-
-.cards-container {
-  width: 100%;
-}
-
-.card-product {
-  overflow: hidden;
-  height: 120px;
-  background: white;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-  display: flex;
-  align-items: center;
-}
-
-.card-product p {
-  font-size: 12px;
-  line-height: 1.4;
-  opacity: 0.7;
-  margin-bottom: 0;
-  margin-top: 8px;
-}
-
-.card-product .card-product-infos {
-  padding: 16px;
+  margin-bottom: 10px;
+  font-size: 4.5vw; /* Use viewport units for responsive font size */
+  text-align: center; /* Center-align the text */
 }
