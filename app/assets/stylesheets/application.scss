@@ -10,3 +10,12 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+@import "components/navbar";
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+  background-color: #170f23;
+  margin-top: 50px;
+}
