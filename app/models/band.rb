@@ -3,4 +3,6 @@ class Band < ApplicationRecord
   has_many :users, through: :user_bands
   has_many :events
   has_many :band_messages
+  has_one_attached :photo
+
 end
