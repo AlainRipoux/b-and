@@ -1,6 +1,6 @@
 class BandsController < ApplicationController
   def index
-    @bands = policy_scope()
+    @bands = policy_scope(Band)
   end
 
   def show
@@ -34,6 +34,7 @@ class BandsController < ApplicationController
     @band = Band.find(params[:id])
     @band.destroy
     redirect_to mybands_path
+    authorize @band
   end
 
   private
