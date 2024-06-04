@@ -31,13 +31,9 @@ class BandsController < ApplicationController
   end
 
   def destroy
-    raise
     @band = Band.find(params[:id])
-    if @band.destroy
-      redirect_to mybands_path
-    else
-      render :new, status: :see_other
-    end
+    @band.destroy
+    redirect_to mybands_path
   end
 
   private
