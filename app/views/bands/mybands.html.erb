@@ -1,11 +1,12 @@
 <h1>My bands</h1>
 
-<%# modal de creation de band %>
-
-<%= render "form-create"  %>
+<%= render "bands/form-create", band: Band.new %>
 
   <% if @bands.any? %>
-  <%# affichage des bands ou "pas encore de band"%>
+    <% @bands.each do |band| %>
+    <%= band.name %>
+    <%= band.photo %>
+    <% end %>
   <% else %>
-  <p>Sorry, you don't have any band yet.</p>
+    <p>Sorry, you don't have any band yet.</p>
   <% end %>
