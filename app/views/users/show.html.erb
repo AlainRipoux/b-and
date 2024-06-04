@@ -63,5 +63,7 @@
       <%= render "users/modal" %>
       <% if @user == current_user %>
         <%= link_to "Edit your profil", '#', {:remote => true, 'data-bs-toggle' =>  "modal", 'data-bs-target' => '#edituser' } %>
+      <% if policy(@user).edit? %>
+        <%= link_to "Edit your profil", edit_user_path(@user) %>
       <% end %>
   </div>

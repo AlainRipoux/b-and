@@ -10,10 +10,16 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   get "/users/:id", to: "users#show", as: :user
+
   resources :invites, only: %i[ create ]
 
-
-  get "/mybands", to: "bands#mybands", as: :mybands
-
   resources :bands, except: [ :index ]
+
+  get "/users/:id/edit", to: "users#edit", as: :edit_user
+  patch "/users/:id", to: "users#update"
+  get "/mybands", to: "bands#mybands", as: :mybands
+  resources :bands
+
+  resources :user_bands, only: :show
+
 end

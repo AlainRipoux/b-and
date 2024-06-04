@@ -1,11 +1,16 @@
 <h1>My bands</h1>
 
-<%= render "bands/form-create", band: Band.new %>
+<%= link_to "Create my band", new_band_path %>
+
 
   <% if @bands.any? %>
     <% @bands.each do |band| %>
-    <%= band.name %>
-    <%= band.photo %>
+    <li><% if band.photo.attached? %>
+      <%= cl_image_tag band.photo.key, alt: "#{band.name}", height: 50, width: 50, crop: :fill %>
+      <% end %>
+      <%= band.name %>
+      <%= link_to "View my band", band_path(band) %>
+      <%= link_to "Delete", band_path(band), data: {turbo_method: :delete, turbo_confirm: "Delete #{band.name}?"} %></li>
     <% end %>
   <% else %>
     <p>Sorry, you don't have any band yet.</p>
