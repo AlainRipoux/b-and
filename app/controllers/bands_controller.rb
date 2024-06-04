@@ -41,7 +41,7 @@ class BandsController < ApplicationController
   private
 
   def band_params
-    params.require(:band).permit(:name, :photo, :user_id)
+    params.require(:band).permit(:name, :photo)
   end
 
 end
