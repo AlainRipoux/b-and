@@ -4,56 +4,56 @@
       <%= link_to "Back to list", root_path %>
 
       <h1><%= @user.firstname %> aka "<%= @user.nickname %>"</h1>
-              <% if @user.photo.attached? == true %>
-                <%= cl_image_tag user.photo.key, alt: "user picture" %>
-              <% end %>
+      <% if @user.photo.attached? == true %>
+        <%= cl_image_tag user.photo.key, alt: "user picture" %>
+      <% end %>
 
-        <%= link_to "Invite", invites_path(user_id: @user), data: { turbo_method: :post } %>
+      <%= link_to "Invite", invites_path(user_id: @user), data: { turbo_method: :post } %>
 
-            <div>
-              <h3>Instrument</h3>
-              <p><%= @user.instrument %></p>
-            </div>
+      <div>
+        <h3>Instrument</h3>
+        <p><%= @user.instrument %></p>
+      </div>
 
-            <div>
-              <h3>Bio</h3>
-              <p><%= @user.biography %></p>
-            </div>
+      <div>
+        <h3>Bio</h3>
+        <p><%= @user.biography %></p>
+      </div>
 
-            <div>
-              <h3>Genre</h3>
-              <p><%= @user.style %></p>
-            </div>
+      <div>
+        <h3>Genre</h3>
+        <p><%= @user.style %></p>
+      </div>
 
-            <div>
-              <h3>What I want to play</h3>
-              <p> cover / compo / impro</p>
-            </div>
+      <div>
+        <h3>What I want to play</h3>
+        <p> cover / compo / impro</p>
+      </div>
 
-            <div>
-              <h3>How I want to play</h3>
-              <p> concert / jam / records / just for fun</p>
-            </div>
+      <div>
+        <h3>How I want to play</h3>
+        <p> concert / jam / records / just for fun</p>
+      </div>
 
-            <div>
-              <h3>Availability</h3>
-              <p> ajouter les availabities au model de user</p>
-            </div>
+      <div>
+        <h3>Availability</h3>
+        <p> ajouter les availabities au model de user</p>
+      </div>
 
-            <div>
-              <h3>Frequency</h3>
-              <p> ajouter les frequencies au model de user</p>
-            </div>
+      <div>
+        <h3>Frequency</h3>
+        <p> ajouter les frequencies au model de user</p>
+      </div>
 
-            <div>
-              <h3>Recordings</h3>
-              <p> ajouter les Recordings au model de user</p>
-            </div>
+      <div>
+        <h3>Recordings</h3>
+        <p> ajouter les Recordings au model de user</p>
+      </div>
 
-            <div>
-              <h3>Playlist</h3>
-              <p> add embedded playlist</p>
-            </div>
+      <div>
+        <h3>Playlist</h3>
+        <p> add embedded playlist</p>
+      </div>
 
     </div>
   </div>
@@ -66,4 +66,5 @@
       <% if policy(@user).edit? %>
         <%= link_to "Edit your profil", edit_user_path(@user) %>
       <% end %>
+    <% end %>
   </div>

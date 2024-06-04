@@ -11,13 +11,15 @@ Rails.application.routes.draw do
   # root "posts#index"
   get "/users/:id", to: "users#show", as: :user
 
-  resources :invites, only: %i[ create ]
+  # resources :invites, only: %i[ create ]
+  post "/invites", to: "invites#create", as: :invites
 
   resources :bands, except: [ :index ]
 
   get "/users/:id/edit", to: "users#edit", as: :edit_user
   patch "/users/:id", to: "users#update"
   get "/mybands", to: "bands#mybands", as: :mybands
+
   resources :bands
 
   resources :user_bands, only: :show
