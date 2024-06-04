@@ -20,6 +20,13 @@
                   <p><i class="fa-solid fa-location-dot"></i> <%= @user.address %></p>
                   <p><i class="fa-solid fa-money-bill-wave"></i> <%= @user.style %></p>
                   <p><i class="fa-solid fa-brain"></i> <%= @user.instrument %></p>
+                  <%# <% if @user.user_bands.any? %>
+                    <%# <ul>
+                      <% @users.user_bands.each do |band| %>
+                      <%# <%= link_to band.name, band_path(band) %>
+                      <%# <% end %>
+                      <%# </ul>
+                  <% end %>
                 </div>
             </div>
           </div>

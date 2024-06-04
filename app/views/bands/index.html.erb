@@ -1,0 +1,26 @@
+<div class="content">
+  <div class="cards-container">
+    <% if @bands.any? %>
+      <ul>
+        <% @bands.each do |band| %>
+          <li class="card">
+            <%= link_to band_path(band), class: 'card-link' do %>
+              <div class="card">
+                <%# <% if band.photo.attached? %>
+                  <%# <%= cl_image_tag band.photo.key, alt: "text" %>
+                <%# <% else %>
+                  <%# <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg", alt: user.name, class: 'card-img'  %>
+                <%# <% end %>
+                <div class="card-info">
+                  <h3><%= band.name %></h3>
+                  <p>Owned by <%= band.user.firstname %> "<%= band.user.nickname %>"</p>
+                  </p>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </li>
+      </ul>
+    <% else %>
+      <p class="text-center"><%= "Sorry, '#{params[:query]}' is not available" %> <i class="fa-regular fa-face-sad-cry"></i></p>
+    <% end %>

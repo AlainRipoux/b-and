@@ -1,6 +1,6 @@
 class BandsController < ApplicationController
   def index
-    @bands = policy_scope()
+    @bands = policy_scope(Band)
   end
 
   def show

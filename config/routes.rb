@@ -13,5 +13,5 @@ Rails.application.routes.draw do
   get "/users/:id/edit", to: "users#edit", as: :edit_user
   patch "/users/:id", to: "users#update"
   get "/mybands", to: "bands#mybands", as: :mybands
-  resources :bands, except: [ :index ]
+  resources :bands
 end
