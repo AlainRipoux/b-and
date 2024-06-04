@@ -18,5 +18,4 @@ Rails.application.routes.draw do
   end
 
   resources :user_bands, only: :show
-
 end
