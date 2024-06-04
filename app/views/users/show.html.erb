@@ -4,6 +4,7 @@
       <%= link_to "Back to list", root_path %>
 
       <h1><%= @user.firstname %> aka "<%= @user.nickname %>"</h1>
+      <%= @user.email %>
       <% if @user.photo.attached? == true %>
         <%= cl_image_tag @user.photo.key, alt: "user picture" %>
       <% end %>
@@ -30,7 +31,6 @@
             </div>
           </div>
       </div>
-
       <div>
         <h3>Bio</h3>
         <p><%= @user.biography %></p>
