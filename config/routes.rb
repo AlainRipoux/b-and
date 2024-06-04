@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get "/users/:id", to: "users#show", as: :user
 
   # resources :invites, only: %i[ create ]
-  post "/invites", to: "invites#create", as: :invites
+  get "/invites", to: "invites#create", as: :create_invites
 
   resources :bands, except: [ :index ]
 

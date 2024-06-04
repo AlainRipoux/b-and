@@ -5,10 +5,10 @@
 
       <h1><%= @user.firstname %> aka "<%= @user.nickname %>"</h1>
       <% if @user.photo.attached? == true %>
-        <%= cl_image_tag user.photo.key, alt: "user picture" %>
+        <%= cl_image_tag @user.photo.key, alt: "user picture" %>
       <% end %>
 
-      <%= link_to "Invite", invites_path(user_id: @user), data: { turbo_method: :post } %>
+        <%= link_to "Invite", create_invites_path(user_id: @user) %>
 
       <div>
         <h3>Instrument</h3>
