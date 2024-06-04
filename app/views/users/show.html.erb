@@ -33,8 +33,8 @@
 
   <div class="col mx-auto mb-3">
       <%= render "users/modal" %>
-      <% if @user == current_user %>
-        <%= link_to "Edit your profil", '#', {:remote => true, 'data-bs-toggle' =>  "modal", 'data-bs-target' => '#edituser', class: "col btn btn-large"} %>
+      <% if policy(@user).edit? %>
+        <%= link_to "Edit your profil", edit_user_path(@user), class: "col btn btn-large" %>
       <% else %>
         <div class="d-flex justify-content-center">
         <%= link_to "Add review", '#', {:remote => true, 'data-bs-toggle' =>  "modal", 'data-bs-target' => '#addreview', class: "btn btn-large btn-large:hover"} %>
