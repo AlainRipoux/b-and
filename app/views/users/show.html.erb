@@ -13,6 +13,22 @@
       <div>
         <h3>Instrument</h3>
         <p><%= @user.instrument %></p>
+            <div class="d-flex ms-4 mt-3 align-items-center">
+                <div class="mt-25">
+                  <p>
+                    <% if @user.bands.any? %>
+                      <% @user.bands.each do |band| %>
+                      <li>
+                      <%= link_to band.name, band_path(band) %>
+                      </li>
+                      <% end %>
+                    <% else %>
+                    No band
+                    <% end %>
+                  </p>
+                </div>
+            </div>
+          </div>
       </div>
 
       <div>

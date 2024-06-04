@@ -5,6 +5,7 @@ class BandsController < ApplicationController
 
   def show
     @band = Band.find(params[:id])
+    @tasks = @band.tasks
     authorize @band
   end
 
@@ -40,7 +41,7 @@ class BandsController < ApplicationController
   private
 
   def band_params
-    params.require(:band).permit(:name, :photo, :user_id)
+    params.require(:band).permit(:name, :photo)
   end
 
 end

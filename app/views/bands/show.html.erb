@@ -31,6 +31,13 @@
     </div>
   </div>
 
+  <h2>Tasks</h2>
+  <ul>
+    <% @tasks.each do |task| %>
+      <li> <%= task.content %> </li>
+    <% end %>
+  </ul>
+
   <div class="col mx-auto mb-3">
       <% if policy(@band).edit? %>
         <%= link_to "Edit your band", edit_band_path(@band), class: "col btn btn-large" %>
