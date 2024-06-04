@@ -14,7 +14,4 @@ Rails.application.routes.draw do
   patch "/users/:id", to: "users#update"
   get "/mybands", to: "bands#mybands", as: :mybands
   resources :bands
-
-  resources :user_bands, only: :show
-
 end
