@@ -1,0 +1,5 @@
+<%= simple_form_for [ @band, @task ] do |f| %>
+  <%= f.input :content %>
+  <%= f.association :user, collection: @band.users, label_method: :firstname, value_method: :id %>
+  <%= f.submit %>
+<% end %>
