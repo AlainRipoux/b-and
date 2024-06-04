@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   get "/users/:id/edit", to: "users#edit", as: :edit_user
   patch "/users/:id", to: "users#update"
   get "/mybands", to: "bands#mybands", as: :mybands
-  resources :bands
+  resources :bands do
+    resources :tasks, only: [:new, :create]
+  end
 
   resources :user_bands, only: :show
 
