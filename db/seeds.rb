@@ -10,37 +10,47 @@ User.destroy_all
 Band.destroy_all
 UserBand.destroy_all
 
+puts "Creating users..."
 # Create Users
 users = 30.times.map do
-  User.create!(
+  user = User.new(
     firstname: Faker::Name.first_name,
     lastname: Faker::Name.last_name,
     nickname: Faker::Internet.username,
     email: Faker::Internet.email,
     password: "azerty",
-    photo: Faker::Avatar.image,
     instrument: Faker::Music.instrument,
     biography: Faker::Lorem.paragraph(sentence_count: 3),
     style: Faker::Music.genre,
     address: Faker::Address.full_address
   )
+  file = URI.open(Faker::Avatar.image)
+  user.photo.attach(io: file, filename: "#{user.nickname}-avatar.png", content_type: "image/png")
+  user.save!
+  user
 end
 
-User.create!(
+user = User.new(
   firstname: "Admin",
   lastname: "Test",
   nickname: "Admin",
   email: "admin@band.com",
   password: "azerty",
-  photo: Faker::Avatar.image,
   instrument: Faker::Music.instrument,
   biography: Faker::Lorem.paragraph(sentence_count: 3),
   style: Faker::Music.genre,
   address: Faker::Address.full_address
 )
+file = URI.open(Faker::Avatar.image)
+user.photo.attach(io: file, filename: "#{user.nickname}-avatar.png", content_type: "image/png")
+user.save!
 
-puts "Created 30 users"
+users << user
+
+puts "Created #{User.count} users"
 # Create Bands
+
+puts "Creating bands..."
 bands = 10.times.map do
   band = Band.new(
     name: Faker::Music.band,
@@ -48,15 +58,17 @@ bands = 10.times.map do
   )
   band.photo.attach(io: file, filename: band.name)
   band.save!
+  band
 end
 
-puts "Created 10 bands"
+puts "Created #{Band.count} bands"
 
 # Create UserBands
+puts "Creating user_bands..."
 bands.each do |band|
   rand(1..5).times do
     UserBand.create!(user: users.sample, band: band)
   end
 end
 
-puts "Created user-band associations"
+puts "Created #{UserBand.count} user-band associations"
