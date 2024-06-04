@@ -5,12 +5,12 @@
 
   <% if @bands.any? %>
     <% @bands.each do |band| %>
-    <li><%= band.name %>
-      <% if band.photo.attached? %>
-        <%= cl_image_tag band.photo.key, alt: "#{band.name}", height: 50, width: 50 %>
+    <li><% if band.photo.attached? %>
+      <%= cl_image_tag band.photo.key, alt: "#{band.name}", height: 50, width: 50, crop: :fill %>
       <% end %>
+      <%= band.name %>
       <%= link_to "View my band", band_path(band) %>
-      <%= link_to "Delete", mybands_path, data: {turbo_method: :delete, turbo_confirm: "Delete #{band.name}?"} %></li>
+      <%= link_to "Delete", band_path(band), data: {turbo_method: :delete, turbo_confirm: "Delete #{band.name}?"} %></li>
     <% end %>
   <% else %>
     <p>Sorry, you don't have any band yet.</p>
