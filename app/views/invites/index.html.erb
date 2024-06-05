@@ -6,7 +6,7 @@
 
     <% @current_user.invites.where.not(status:'declined').each do |invite| %>
       <p><li><%= cl_image_tag invite.second_user.photo.key, height: 50, width: 50, crop: :fill %>
-        <strong><%= invite.second_user.firstname %></strong> sends you an invite
+        <strong><%= link_to invite.second_user.firstname, user_path(invite.second_user) %></strong> sends you an invite
 
         <% if invite.status == "pending"  %>
           <%= link_to "Accept", accept_path(invite), data: {turbo_method: :patch} %>

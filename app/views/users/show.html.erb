@@ -17,14 +17,14 @@
             <div class="d-flex ms-4 mt-3 align-items-center">
                 <div class="mt-25">
                   <p>
-                    <% if @user.bands.any? %>
-                      <% @user.bands.each do |band| %>
+                    <% if @user.user_bands.any? %>
+                      <% @user.user_bands.each do |user_band| %>
                       <li>
-                      <%= link_to band.name, band_path(band) %>
+                      <%= link_to user_band.band.name, band_path(user_band.band) %>
                       </li>
                       <% end %>
                     <% else %>
-                    No band
+                      No band
                     <% end %>
                   </p>
                 </div>
