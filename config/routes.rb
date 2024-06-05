@@ -11,7 +11,10 @@ Rails.application.routes.draw do
   # root "posts#index"
   get "/users/:id", to: "users#show", as: :user
 
-  resources :invites, only: %i[ create ]
+  resources :invites, only: %i[ create ] do
+    resources :messages, only: :create, as: :messages
+    get :messages, to: "messages#show"
+  end
   # get "/invites", to: "invites#create", as: :create_invites
 
   resources :bands, except: [:index]

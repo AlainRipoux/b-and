@@ -6,7 +6,7 @@
     <li><%= link_to mybands_path, class: controller_name == "bands" && action_name == "mybands" ? "active" : "" do %>
       <i class="fas fa-music"></i>
     <% end %></li>
-    <li><%= link_to mybands_path do %>
+    <li><%= link_to messages_path, class: controller_name == "messages" && action_name == "index" ? "active" : "" do %>
       <i class="fa-solid fa-comments"></i>
     <% end %></li>
     <li><%= link_to mybands_path do %>

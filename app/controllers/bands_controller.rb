@@ -27,6 +27,18 @@ class BandsController < ApplicationController
     end
   end
 
+  def edit
+    @band = Band.find(params[:id])
+    authorize @band
+  end
+
+  def update
+    @band = Band.find(params[:id])
+    @band.update(band_params)
+    redirect_to band_path(@band)
+    authorize @band
+  end
+
   def mybands
     @band = Band.new
     @bands = Band.where(user: current_user)

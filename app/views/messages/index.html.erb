@@ -1,0 +1,19 @@
+<h1>Messages</h1>
+
+<div class="container" >
+  <% if @invites.any? %>
+    <ul>
+      <% @invites.each do |band| %>
+        <li>
+          <% if invite.first_user == current_user %>
+            <%= link_to invite.second_user.nickname, user_path(invite.second_user) %>
+          <% else %>
+            <%= link_to invite.first_user.nickname, user_path(invite.first_user) %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+      <p class="text-center"><%= "Sorry, '#{params[:query]}' is not available" %> <i class="fa-regular fa-face-sad-cry"></i></p>
+  <% end %>
+</div>
