@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
   resources :bands, except: [:index]
 
+  get "/messages", to: "messages#index", as: :messages
+
   get "/users/:id/edit", to: "users#edit", as: :edit_user
   patch "/users/:id", to: "users#update"
   get "/mybands", to: "bands#mybands", as: :mybands

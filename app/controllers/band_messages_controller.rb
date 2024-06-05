@@ -4,6 +4,7 @@ class BandMessagesController < ApplicationController
     @band_message = BandMessage.new(band_message_params)
     @band_message.band = @band
     @band_message.user = current_user
+    authorize @band_message
     if @band_message.save
       redirect_to band_path(@band)
     else

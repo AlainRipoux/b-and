@@ -18,6 +18,7 @@ class BandsController < ApplicationController
   def create
     @band = Band.new(band_params)
     @band.user = current_user
+    UserBand.create(band: @band, user: current_user)
     authorize @band
     if @band.save
       redirect_to mybands_path
