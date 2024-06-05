@@ -31,13 +31,40 @@
     </div>
   </div>
 
-  <h2>Tasks</h2>
-  <ul>
-    <% @tasks.each do |task| %>
-      <li> <%= task.content %> </li>
-    <% end %>
-  </ul>
+<h2>Tasks</h2>
 
+<%= link_to new_band_task_path(@band) do %>
+  <i class="fa-solid fa-square-plus"></i> Add task
+<% end %>
+
+<div>
+  <div>
+    <h6>To do</h6>
+    <% @tasks.where(done: false).each do |task| %>
+        <div>
+          <%= link_to change_status_path(task) do %>
+            <i class="fa-regular fa-square"></i>
+          <% end %>
+          <%= task.content %> - <%= task.user.firstname %>
+          <%= link_to edit_task_path(task) do %>
+            <i class="fa-solid fa-pen-to-square"></i>
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div>
+    <h6>Done</h6>
+    <% @tasks.where(done: true).each do |task| %>
+    <div>
+      <%= task.content %> - <%= task.user.firstname %>
+          <%= link_to task_path(task), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+            <i class="fa-solid fa-trash"></i>
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
   <div class="col mx-auto mb-3">
       <% if policy(@band).edit? %>
         <%= link_to "Edit your band", edit_band_path(@band), class: "col btn btn-large" %>
@@ -47,3 +74,21 @@
         </div>
       <% end %>
   </div>
+
+<div class="container chatroom">
+  <h1>#<%= @band.name %></h1>
+
+  <div class="messages">
+    <% @band.band_messages.each do |message| %>
+      <div id="message-<%= message.id %>">
+        <small>
+          <strong><%= message.user.nickname %></strong>
+          <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+        </small>
+        <p><%= message.content %></p>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= render 'band_messages/form', band: @band, user: current_user, band_message: @band_messages %>
