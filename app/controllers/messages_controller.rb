@@ -1,14 +1,19 @@
 class MessagesController < ApplicationController
+  def index
+    @messages = policy_scope(Message)
+    @invites = Invite.where(user: current_user)
+  end
+
   def create
     @invite = Invite.find(params[:invite_id])
     @message = Message.new(message_params)
-    @message.band = @band
+    @message.invite = @invite
     @message.user = current_user
     authorize @message
     if @message.save
-      redirect_to band_path(@band)
+      redirect_to invite_messages(@invite)
     else
-      render "bands/show", status: :unprocessable_entity
+      render "invites/show", status: :unprocessable_entity
     end
   end
 

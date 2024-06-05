@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user.update(params_user)
+    @user.update(user_params)
     redirect_to user_path(@user)
     authorize @user
   end
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     authorize @user
   end
 
-  def params_user
+  def user_params
     params.require(:user).permit(:firstname, :lastname, :nickname, :instrument, :biography, :style, :photo, :address)
   end
 end
