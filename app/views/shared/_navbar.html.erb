@@ -12,9 +12,13 @@
     <li><%= link_to notifications_path do %>
       <i class="fas fa-bell"></i>
     <% end %></li>
-    <li><%= link_to mybands_path do %>
+    <% if user_signed_in? %>
+    <li><%= link_to user_path(current_user) do %>
       <i class="fas fa-user"></i>
     <% end %></li>
-    <li><%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: { turbo_method: :delete } %></li>
+    <% end %>
+    <li><%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
+      <i class="fas fa-user"></i>
+    <% end %></li>
   </ul>
 </nav>
