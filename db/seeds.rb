@@ -59,9 +59,8 @@ bands = 10.times.map do
   band.photo.attach(io: file, filename: band.name)
   band.save!
   UserBand.create!(user: user, band: band)
-  puts "Created #{Band.count} bands"
-
-  puts "Creating user_bands..."
+end
+puts "Created #{Band.count} bands"
 
 puts "Creating user_bands..."
 bands.each do |band|

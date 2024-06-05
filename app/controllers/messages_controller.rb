@@ -1,7 +1,7 @@
 class MessagesController < ApplicationController
   def index
     @messages = policy_scope(Message)
-    @invites = Invite.where(user: current_user)
+    @invites = Invite.where("first_user_id = ? OR second_user_id = ?", current_user.id,  current_user.id)
   end
 
   def create
