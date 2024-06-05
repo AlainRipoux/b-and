@@ -9,12 +9,12 @@
     <li><%= link_to messages_path, class: controller_name == "messages" && action_name == "index" ? "active" : "" do %>
       <i class="fa-solid fa-comments"></i>
     <% end %></li>
-    <li><%= link_to mybands_path do %>
+    <li><%= link_to notifications_path do %>
       <i class="fas fa-bell"></i>
     <% end %></li>
     <li><%= link_to mybands_path do %>
       <i class="fas fa-user"></i>
     <% end %></li>
-    <li><%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></li>
+    <li><%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: { turbo_method: :delete } %></li>
   </ul>
 </nav>
