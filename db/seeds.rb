@@ -52,22 +52,23 @@ puts "Created #{User.count} users"
 
 puts "Creating bands..."
 bands = 10.times.map do
+  user = users.sample
   band = Band.new(
     name: Faker::Music.band,
-    user: users.sample
+    user: user
   )
   band.photo.attach(io: file, filename: band.name)
   band.save!
-  band
-end
+  UserBand.create!(user: user, band: band)
+  puts "Created #{Band.count} bands"
 
-puts "Created #{Band.count} bands"
+  puts "Creating user_bands..."
 
-# Create UserBands
-puts "Creating user_bands..."
-bands.each do |band|
   rand(1..5).times do
-    UserBand.create!(user: users.sample, band: band)
+    user = users.sample
+    if !band.users.include?(user)
+      UserBand.create!(user: user, band: band)
+    end
   end
 end
 

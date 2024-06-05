@@ -9,18 +9,21 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
-  get "/ddd/:id", to: "users#show", as: :user
+  get "/users/:id", to: "users#show", as: :user
 
-  # resources :invites, only: %i[ create ]
-  get "/invites", to: "invites#create", as: :create_invites
+  resources :invites, only: %i[ create ]
+  # get "/invites", to: "invites#create", as: :create_invites
 
-  resources :bands, except: [ :index ]
+  resources :bands, except: [:index]
 
-  # get "/users/:id/edit", to: "users#edit", as: :edit_user
-  # patch "/users/:id", to: "users#update"
+  get "/messages", to: "messages#index", as: :messages
+
+  get "/users/:id/edit", to: "users#edit", as: :edit_user
+  patch "/users/:id", to: "users#update"
   get "/mybands", to: "bands#mybands", as: :mybands
   resources :bands do
     resources :tasks, only: [:new, :create, :edit, :update, :destroy]
+    resources :band_messages, only: :create
   end
 
   resources :user_bands, only: :show
