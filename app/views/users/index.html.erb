@@ -2,7 +2,33 @@
   <h1>Browse Musicians</h1>
 </div>
 <div class="filters">
-
+  <%= form_with(url: root_path, method: "get", class: "filter-form", data: { controller: "filter", action: "change->filter#submitForm" }) do |f| %>
+    <div class="filter-group">
+      <%= label_tag 'instrument', 'Select Instrument' %>
+      <%= select_tag 'instrument[]', options_for_select(User.pluck(:instrument).uniq.flat_map { |c| c.split(',') }.uniq), multiple: true, class: 'form-control' %>
+    </div>
+    <div class="filter-group">
+      <%= label_tag 'genre', 'Select Genre' %>
+      <%= select_tag 'style[]', options_for_select(User.pluck(:style).uniq.flat_map { |c| c.split(',') }.uniq), multiple: true, class: 'form-control' %>
+    </div>
+    <div class="filter-group">
+      <%= label_tag 'availability', 'Select Availability' %>
+      <%= select_tag 'availability[]', options_for_select(User.pluck(:availability).uniq.flat_map { |c| c.split(',') }.uniq), multiple: true, class: 'form-control' %>
+    </div>
+    <div class="filter-group">
+      <%= label_tag 'frequency', 'Select Frequency' %>
+      <%= select_tag 'frequency[]', options_for_select(User.pluck(:frequency).uniq.flat_map { |c| c.split(',') }.uniq), multiple: true, class: 'form-control' %>
+    </div>
+    <div class="filter-group">
+      <%= label_tag 'objectives', 'Select Objectives' %>
+      <%= select_tag 'objectives[]', options_for_select(User.pluck(:objectives).uniq.flat_map { |c| c.split(',') }.uniq), multiple: true, class: 'form-control' %>
+    </div>
+    <div class="filter-group">
+      <%= label_tag 'projects', 'Select Projects' %>
+      <%= select_tag 'projects[]', options_for_select(User.pluck(:projects).uniq.flat_map { |c| c.split(',') }.uniq), multiple: true, class: 'form-control' %>
+    </div>
+    <%= f.submit "Filter"%>
+  <% end %>
 </div>
 <div class="content">
   <div class="cards-container">
@@ -21,10 +47,14 @@
                   <h3><%= user.nickname %></h3>
                   <p><%= user.address %></p>
                   <%= user.instrument %></p>
-                  <p class="price">
+                  <p>
                     <i class="fa-solid fa-square-poll-vertical"></i>
                     <%= user.style %>
                   </p>
+                  <p><%= user.availability %></p>
+                  <p><%= user.frequency %></p>
+                  <p><%= user.objectives %></p>
+                  <p><%= user.projects %></p>
                 </div>
               </div>
             <% end %>
