@@ -2,26 +2,23 @@
 
 
 <% if @current_user.invites.any? %>
+  <p>You have <%= pluralize @current_user.invites.count, "match" %></p>
 
-    <p>You have <%= pluralize @current_user.invites.count, "match" %></p>
+    <% @current_user.invites.where.not(status:'declined').each do |invite| %>
+      <p><li><%= cl_image_tag invite.second_user.photo.key, height: 50, width: 50, crop: :fill %>
+        <strong><%= invite.second_user.firstname %></strong> sends you an invite
 
-    <% @current_user.invites.each do |invite| %>
-    <p><li><%= cl_image_tag invite.second_user.photo.key, height: 50, width: 50, crop: :fill %>
-      <strong><%= invite.second_user.firstname %></strong> sends you an invite
-
-      <% if invite.status == "pending"  %>
-        <%= link_to "Accept", accept_path(invite), data: {turbo_method: :patch, turbo_confirm: "Are you sure you want to accept?"} %>
-        <%= link_to "Decline", decline_path(invite), data: {turbo_method: :patch, turbo_confirm: "Are you sure you want to decline?" } %>
-      <% elsif invite.status == "accepted" %>
-        <%= link_to "#" do %>
-        <i class="fa-solid fa-envelope"></i>
+        <% if invite.status == "pending"  %>
+          <%= link_to "Accept", accept_path(invite), data: {turbo_method: :patch} %>
+          <%= link_to "Decline", decline_path(invite), data: {turbo_method: :patch} %>
+        <% elsif invite.status == "accepted" %>
+          <%= link_to "#" do %>
+          <i class="fa-solid fa-envelope"></i>
+          <% end %>
         <% end %>
-      <% else %>
-        
-      <% end %>
-    </li></p>
-  <% end %>
+      </li></p>
+    <% end %>
 
-  <% else %>
-    <p>Waiting for a match <i class="fa-solid fa-fire"></i></p>
+<% else %>
+  <p>Waiting for a match <i class="fa-solid fa-fire"></i></p>
 <% end %>
