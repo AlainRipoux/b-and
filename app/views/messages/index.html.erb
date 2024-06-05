@@ -4,16 +4,18 @@
   <% if @invites.any? %>
     <ul>
       <% @invites.each do |band| %>
-        <li>
+        <li class="card">
           <% if invite.first_user == current_user %>
             <%= link_to invite.second_user.nickname, user_path(invite.second_user) %>
+            <%= invite.messages.last %>
           <% else %>
             <%= link_to invite.first_user.nickname, user_path(invite.first_user) %>
+            <%= invite.messages.last %>
           <% end %>
         </li>
       <% end %>
     </ul>
   <% else %>
-      <p class="text-center"><%= "Sorry, '#{params[:query]}' is not available" %> <i class="fa-regular fa-face-sad-cry"></i></p>
+      <p class="text-center"><%= "Sorry, there is no message" %> <i class="fa-regular fa-face-sad-cry"></i></p>
   <% end %>
 </div>
