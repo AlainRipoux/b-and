@@ -20,12 +20,20 @@ class TaskPolicy < ApplicationPolicy
     true
   end
 
+  def edit?
+    true
+  end
+
   def update?
-    record.user == user
+    true
+  end
+
+  def change_task_status?
+    true
   end
 
   def destroy?
-    record.user == user
+    true
   end
 
 end
