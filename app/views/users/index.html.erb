@@ -1,3 +1,9 @@
+<div>
+  <h1>Browse Musicians</h1>
+</div>
+<div class="filters">
+
+</div>
 <div class="content">
   <div class="cards-container">
     <% if @users.any? %>
@@ -12,7 +18,7 @@
                   <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg", alt: user.nickname, class: 'card-img'  %>
                 <% end %>
                 <div class="card-info">
-                  <h3><%= user.firstname %> "<%= user.nickname %>"</h3>
+                  <h3><%= user.nickname %></h3>
                   <p><%= user.address %></p>
                   <%= user.instrument %></p>
                   <p class="price">

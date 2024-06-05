@@ -9,7 +9,7 @@
         <%= cl_image_tag @user.photo.key, alt: "user picture" %>
       <% end %>
 
-        <%= link_to "Invite", create_invites_path(user_id: @user) %>
+        <%= link_to "Invite", create_invites_path(user_id: @user.id) %>
 
       <div>
         <h3>Instrument</h3>

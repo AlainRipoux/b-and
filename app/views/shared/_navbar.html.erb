@@ -1,9 +1,9 @@
-<nav class="navbar">
+<nav class="navbar" data-controller="hello">
   <ul>
-    <li><%= link_to root_path do %>
+    <li><%= link_to root_path, class: controller_name == "users" && action_name == "index" ? "active" : "" do %>
       <i class="fa-solid fa-users"></i>
     <% end %></li>
-    <li><%= link_to mybands_path do %>
+    <li><%= link_to mybands_path, class: controller_name == "bands" && action_name == "mybands" ? "active" : "" do %>
       <i class="fas fa-music"></i>
     <% end %></li>
     <li><%= link_to mybands_path do %>
@@ -15,5 +15,6 @@
     <li><%= link_to mybands_path do %>
       <i class="fas fa-user"></i>
     <% end %></li>
+    <li><%= link_to "Log out", destroy_user_session_path, class: "dropdown-item", data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></li>
   </ul>
 </nav>

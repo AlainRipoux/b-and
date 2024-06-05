@@ -11,17 +11,17 @@ Rails.application.routes.draw do
   # root "posts#index"
   get "/users/:id", to: "users#show", as: :user
 
-  # resources :invites, only: %i[ create ]
-  get "/invites", to: "invites#create", as: :create_invites
+  resources :invites, only: %i[ create ]
+  # get "/invites", to: "invites#create", as: :create_invites
 
-  resources :bands, except: [ :index ]
+  resources :bands, except: [:index]
 
   get "/users/:id/edit", to: "users#edit", as: :edit_user
   patch "/users/:id", to: "users#update"
   get "/mybands", to: "bands#mybands", as: :mybands
   resources :bands do
-    resources :tasks, only: [:new, :create]
-    resources :messages, only: :create
+    resources :tasks, only: [:new, :create, :edit, :update, :destroy]
+    resources :band_messages, only: :create
   end
 
   resources :user_bands, only: :show

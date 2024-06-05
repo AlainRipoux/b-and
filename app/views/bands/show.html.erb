@@ -31,12 +31,23 @@
     </div>
   </div>
 
-  <h2>Tasks</h2>
-  <ul>
-    <% @tasks.each do |task| %>
-      <li> <%= task.content %> </li>
-    <% end %>
-  </ul>
+<div class="container">
+  <div class="m-5">
+    <div class="col">
+      <h2>Tasks</h2>
+      <ul>
+        <% @tasks.each do |task| %>
+          <li> <%= task.content %> - <%= task.user.firstname %>  </li>
+          <div>
+            <%= link_to edit_band_task_path(task) do %>
+              <i class="fa-solid fa-pen-to-square"></i>
+            <% end %>
+          </div>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
 
   <div class="col mx-auto mb-3">
       <% if policy(@band).edit? %>
