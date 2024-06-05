@@ -21,12 +21,14 @@ before_action :set_invite, only: %i[update accept decline]
 
   def accept
     @invite.update(status: "accepted")
+    @invite.save!
     authorize @invite
     redirect_to notifications_path
   end
 
   def decline
     @invite.update(status: "declined")
+    @invite.save!
     authorize @invite
     redirect_to notifications_path
   end
