@@ -8,8 +8,17 @@
     <% @current_user.invites.each do |invite| %>
     <p><li><%= cl_image_tag invite.second_user.photo.key, height: 50, width: 50, crop: :fill %>
       <strong><%= invite.second_user.firstname %></strong> sends you an invite
-      <%= link_to "Accept", accept_path(invite), data: {turbo_method: :patch, turbo_confirm: "Are you sure you want to accept?"} %>
-      <%= link_to "Decline", decline_path(invite), data: {turbo_method: :patch, turbo_confirm: "Are you sure you want to decline?" } %>
+
+      <% if invite.status == "pending"  %>
+        <%= link_to "Accept", accept_path(invite), data: {turbo_method: :patch, turbo_confirm: "Are you sure you want to accept?"} %>
+        <%= link_to "Decline", decline_path(invite), data: {turbo_method: :patch, turbo_confirm: "Are you sure you want to decline?" } %>
+      <% elsif invite.status == "accepted" %>
+        <%= link_to "#" do %>
+        <i class="fa-solid fa-envelope"></i>
+        <% end %>
+      <% else %>
+        
+      <% end %>
     </li></p>
   <% end %>
 
