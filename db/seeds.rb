@@ -11,7 +11,7 @@ Band.destroy_all
 UserBand.destroy_all
 
 puts "Creating users..."
-# Create Users
+
 users = 30.times.map do
   user = User.new(
     firstname: Faker::Name.first_name,
@@ -48,26 +48,27 @@ user.save!
 users << user
 
 puts "Created #{User.count} users"
-# Create Bands
 
 puts "Creating bands..."
 bands = 10.times.map do
+  user = users.sample
   band = Band.new(
     name: Faker::Music.band,
-    user: users.sample
+    user: user
   )
   band.photo.attach(io: file, filename: band.name)
   band.save!
-  band
+  UserBand.create!(user: user, band: band)
 end
-
 puts "Created #{Band.count} bands"
 
-# Create UserBands
 puts "Creating user_bands..."
 bands.each do |band|
   rand(1..5).times do
-    UserBand.create!(user: users.sample, band: band)
+    user = users.sample
+    if !band.users.include?(user)
+      UserBand.create!(user: user, band: band)
+    end
   end
 end
 

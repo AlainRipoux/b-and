@@ -6,6 +6,7 @@ class BandsController < ApplicationController
   def show
     @band = Band.find(params[:id])
     @tasks = @band.tasks
+    @band_message = BandMessage.new
     authorize @band
   end
 
@@ -17,12 +18,25 @@ class BandsController < ApplicationController
   def create
     @band = Band.new(band_params)
     @band.user = current_user
+    UserBand.create(band: @band, user: current_user)
     authorize @band
     if @band.save
       redirect_to mybands_path
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def edit
+    @band = Band.find(params[:id])
+    authorize @band
+  end
+
+  def update
+    @band = Band.find(params[:id])
+    @band.update(band_params)
+    redirect_to band_path(@band)
+    authorize @band
   end
 
   def mybands
