@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get "/mybands", to: "bands#mybands", as: :mybands
   resources :bands do
     resources :tasks, only: [:new, :create]
+    resources :messages, only: :create
   end
 
   resources :user_bands, only: :show

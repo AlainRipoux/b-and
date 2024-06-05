@@ -6,6 +6,7 @@ class BandsController < ApplicationController
   def show
     @band = Band.find(params[:id])
     @tasks = @band.tasks
+    @band_message = BandMessage.new
     authorize @band
   end
 
