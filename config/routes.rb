@@ -14,14 +14,17 @@ Rails.application.routes.draw do
   # resources :invites, only: %i[ create ]
   get "/invites", to: "invites#create", as: :create_invites
 
+  get "/tasks/:id", to: "tasks#change_task_status", as: :change_status
+
   resources :bands, except: [ :index ]
 
   # get "/users/:id/edit", to: "users#edit", as: :edit_user
   # patch "/users/:id", to: "users#update"
   get "/mybands", to: "bands#mybands", as: :mybands
   resources :bands do
-    resources :tasks, only: [:new, :create, :edit, :update, :destroy]
+    resources :tasks, only: [:new, :create]
   end
 
+  resources :tasks, only: %i[destroy edit update]
   resources :user_bands, only: :show
 end
