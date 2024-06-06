@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :invites_sent, class_name: "Invite", foreign_key: "first_user_id", dependent: :destroy
   has_many :pending_invites, -> { where status: "pending" }, class_name: "Invite", foreign_key: "second_user_id", dependent: :destroy
   geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
 
   has_one_attached :photo
 
