@@ -2,7 +2,7 @@
   <% @current_user.invites.order(:status).each do |invite| %>
     <div>
       <% if invite.status != "declined"  %>
-        <div data-invites-target="lign"><p><li><%= cl_image_tag invite.first_user.photo.key, height: 50, width: 50, crop: :fill %>
+        <div data-invites-target="lign"><p><%= cl_image_tag invite.first_user.photo.key, height: 50, width: 50, crop: :fill, class:"rounded-circle" %>
           <strong><%= invite.first_user.firstname %></strong> sends you an invite
 
           <% if invite.status == "pending"  %>
@@ -13,7 +13,7 @@
             <i class="fa-solid fa-envelope"></i>
             <% end %>
           <% end %>
-        </li></p>
+        </p>
         </div>
     </div>
     <% end %>
