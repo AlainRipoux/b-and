@@ -32,7 +32,7 @@ users = 30.times.map do
     objectives: ["Jamming", "Recording", "Gigs", "Writing", "Teaching", "Learning", "Just for fun"].sample(rand(1..5)).join(", "),
     projects: ["Covers", "Originals", "Improv"].sample(rand(1..3)).join(", ")
   )
-  file = URI.open(Faker::Avatar.image)
+  file = URI.open(Faker::LoremFlickr.image(search_terms: ['musician']))
   user.photo.attach(io: file, filename: "#{user.nickname}-avatar.png", content_type: "image/png")
   user.save!
   user
@@ -69,7 +69,7 @@ bands = []
     name: Faker::Music.band,
     user: user
   )
-  file = URI.open(Faker::Avatar.image)
+  file = URI.open(Faker::LoremFlickr.image(search_terms: ['band']))
   band.photo.attach(io: file, filename: band.name, content_type: "image/png")
   band.save!
   UserBand.create!(user: user, band: band)
