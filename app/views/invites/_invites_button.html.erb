@@ -3,7 +3,7 @@
     <div>
       <% if invite.status != "declined"  %>
         <div data-invites-target="lign"><p><li><%= cl_image_tag invite.first_user.photo.key, height: 50, width: 50, crop: :fill %>
-          <strong><%= invite.first_user.firstname %></strong> sends you an invite
+          <strong><%= link_to invite.first_user.firstname, user_path(invite.first_user) %></strong> sends you an invite
 
           <% if invite.status == "pending"  %>
             <%= link_to "Accept", accept_path(invite), data: {turbo_method: :patch, invites_target: "accept", action: "click->invites#updateAccept"} %>
