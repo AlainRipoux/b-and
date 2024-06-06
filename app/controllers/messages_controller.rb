@@ -4,6 +4,11 @@ class MessagesController < ApplicationController
     @invites = Invite.where("first_user_id = ? OR second_user_id = ?", current_user.id,  current_user.id)
   end
 
+  def show
+    @message = Message.find(params[:id])
+    authorize @message
+  end
+
   def create
     @invite = Invite.find(params[:invite_id])
     @message = Message.new(message_params)

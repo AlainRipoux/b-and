@@ -9,7 +9,7 @@
           <%= link_to "Accept", accept_path(invite), data: {turbo_method: :patch, invites_target: "accept", action: "click->invites#updateAccept"} %>
           <%= link_to "Decline", decline_path(invite), data: {turbo_method: :patch, invites_target: "decline", action: "click->invites#updateDecline"} %>
         <% elsif invite.status == "accepted" %>
-          <%= link_to "#" do %>
+          <%= link_to invite_messages_path(invite) do %>
           <i class="fa-solid fa-envelope"></i>
           <% end %>
         <% end %>
@@ -17,26 +17,5 @@
       </div>
     </div>
     <% end %>
-  <% end %>
-</div>
-
-<p>Inivites i sent</p>
-<div>
-  <% @current_user.invites_sent.each do |invite| %>
-    <div data-controller="invites">
-      <div data-invites-target="lign"><p><li><%= cl_image_tag invite.second_user.photo.key, height: 50, width: 50, crop: :fill %>
-        <strong><%= invite.second_user.firstname %></strong> sends you an invite
-
-        <% if invite.status == "pending"  %>
-          <%= link_to "Accept", accept_path(invite), data: {turbo_method: :patch, invites_target: "accept", action: "click->invites#updateAccept"} %>
-          <%= link_to "Decline", decline_path(invite), data: {turbo_method: :patch, invites_target: "decline", action: "click->invites#updateDecline"} %>
-        <% elsif invite.status == "accepted" %>
-          <%= link_to "#" do %>
-          <i class="fa-solid fa-envelope"></i>
-          <% end %>
-        <% end %>
-      </li></p>
-      </div>
-    </div>
   <% end %>
 </div>
