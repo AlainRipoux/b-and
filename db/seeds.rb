@@ -58,6 +58,7 @@ users << user
 puts "Created #{User.count} users"
 
 puts "Creating bands..."
+bands = []
 bands = 10.times.map do
   user = users.sample
   band = Band.new(
@@ -67,6 +68,7 @@ bands = 10.times.map do
   band.photo.attach(io: file, filename: band.name)
   band.save!
   UserBand.create!(user: user, band: band)
+  bands << band
 end
 puts "Created #{Band.count} bands"
 
@@ -81,3 +83,7 @@ bands.each do |band|
 end
 
 puts "Created #{UserBand.count} user-band associations"
+
+puts "Creating invites..."
+puts "Creating task..."
+puts "Creating band_messages..."
