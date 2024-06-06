@@ -58,7 +58,8 @@ users << user
 puts "Created #{User.count} users"
 
 puts "Creating bands..."
-bands = 10.times.map do
+bands = []
+10.times do
   user = users.sample
   band = Band.new(
     name: Faker::Music.band,
@@ -67,6 +68,7 @@ bands = 10.times.map do
   band.photo.attach(io: file, filename: band.name)
   band.save!
   UserBand.create!(user: user, band: band)
+  bands << band
 end
 puts "Created #{Band.count} bands"
 
