@@ -59,7 +59,7 @@ puts "Created #{User.count} users"
 
 puts "Creating bands..."
 bands = []
-bands = 10.times.map do
+10.times do
   user = users.sample
   band = Band.new(
     name: Faker::Music.band,
