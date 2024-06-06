@@ -28,7 +28,7 @@ users = 30.times.map do
     style: Faker::Music.genre,
     address: ["53 rue de l'échiquier 75010 Paris", "26 rue de la Félicité 75017 Paris", "54b rue Ordener 75018 Paris"].sample,
     availability: ["Weekdays", "Weekends", "Flexible", "Weekday Evenings", "Evenings", "Mornings", "Afternoons"].sample(rand(1..2)).join(", "),
-    frequency: ["Everyday", "Once a week", "Twice a week", "Three times a week", "Varies", "Once a month", "Twice a month"].sample(rand(1..2)).join(", "),
+    frequency: ["Everyday", "Once a week", "Twice a week", "Three times a week", "Once a month", "Twice a month"].sample(rand(1..2)).join(", "),
     objectives: ["Jamming", "Recording", "Gigs", "Writing", "Teaching", "Learning", "Just for fun"].sample(rand(1..5)).join(", "),
     projects: ["Covers", "Originals", "Improv"].sample(rand(1..3)).join(", ")
   )
