@@ -1,10 +1,12 @@
-<h1>Notifications</h1>
+<div class="container">
+  <h1>Notifications</h1>
 
-  <% if @current_user.invites.any? %>
-    <p>You have <%= pluralize @current_user.invites.count, "match" %></p>
+    <% if @current_user.invites.any? %>
+      <p>You have <%= pluralize @current_user.invites.count, "match" %></p>
 
-    <%= render "invites/invites_button" %>
+      <%= render "invites/invites_button" %>
 
-<% else %>
-  <p>Waiting for a match <i class="fa-solid fa-fire"></i></p>
-<% end %>
+  <% else %>
+    <p>Waiting for a match <i class="fa-solid fa-fire"></i></p>
+  <% end %>
+</div>
