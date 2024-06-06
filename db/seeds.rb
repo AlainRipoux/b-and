@@ -14,7 +14,6 @@ Task.destroy_all
 BandMessage.destroy_all
 Message.destroy_all
 
-
 puts "Creating users..."
 
 users = 30.times.map do
@@ -70,7 +69,7 @@ bands = []
     name: Faker::Music.band,
     user: user
   )
-  band.photo.attach(io: file, filename: band.name)
+  band.photo.attach(io: file, filename: band.name, content_type: "image/png")
   band.save!
   UserBand.create!(user: user, band: band)
   bands << band

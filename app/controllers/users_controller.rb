@@ -36,7 +36,6 @@ class UsersController < ApplicationController
 
     if params[:location].present?
       @close_users = User.near(current_user.address, params[:location].to_i)
-      raise
       @users = @users & @close_users
     end
 

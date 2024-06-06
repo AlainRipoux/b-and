@@ -11,6 +11,11 @@ class MessagesController < ApplicationController
     authorize @message
   end
 
+  def show
+    @message = Message.find(params[:id])
+    authorize @message
+  end
+
   def create
     @invite = Invite.find(params[:invite_id])
     @message = Message.new(message_params)
