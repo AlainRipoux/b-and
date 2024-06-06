@@ -29,8 +29,7 @@ export default class extends Controller {
       .then(response => response.text())
       .then((data) => {
         console.log(data)
-        this.lignTarget.classList.add("d-none")
-        // this.element.style.display = "none"
+        this.element.outerHTML = data
       })
   }
 }
