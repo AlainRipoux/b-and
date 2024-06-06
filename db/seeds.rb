@@ -6,12 +6,12 @@ require 'open-uri'
 file = URI.open("https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/NES-Console-Set.jpg/1200px-NES-Console-Set.jpg")
 
 # Clear existing data
-User.destroy_all
-Band.destroy_all
 UserBand.destroy_all
 Invite.destroy_all
 Task.destroy_all
 BandMessage.destroy_all
+Band.destroy_all
+User.destroy_all
 
 
 puts "Creating users..."
