@@ -13,6 +13,7 @@ Invite.destroy_all
 Task.destroy_all
 BandMessage.destroy_all
 
+
 puts "Creating users..."
 
 users = 30.times.map do
@@ -25,7 +26,7 @@ users = 30.times.map do
     instrument: Faker::Music.instrument,
     biography: Faker::Lorem.paragraph(sentence_count: 3),
     style: Faker::Music.genre,
-    address: Faker::Address.full_address,
+    address: ["53 rue de l'échiquier 75010 Paris", "26 rue de la Félicité 75017 Paris", "54b rue Ordener 75018 Paris"].sample,
     availability: ["Weekdays", "Weekends", "Flexible", "Weekday Evenings", "Evenings", "Mornings", "Afternoons"].sample(rand(1..2)).join(", "),
     frequency: ["Everyday", "Once a week", "Twice a week", "Three times a week", "Varies", "Once a month", "Twice a month"].sample(rand(1..2)).join(", "),
     objectives: ["Jamming", "Recording", "Gigs", "Writing", "Teaching", "Learning", "Just for fun"].sample(rand(1..5)).join(", "),
@@ -46,11 +47,11 @@ user = User.new(
   instrument: Faker::Music.instrument,
   biography: Faker::Lorem.paragraph(sentence_count: 3),
   style: Faker::Music.genre,
-  address: Faker::Address.full_address,
-  availability: ["Weekends","Weekday Evenings"],
+  address: "16 villa Gaudelet 75011 Paris",
+  availability: ["Weekends","Weekday Evenings"].sample,
   frequency: "Varies",
-  objectives: ["Jamming", "Recording", "Gigs",],
-  projects: ["Originals", "Recording projects"]
+  objectives: ["Jamming", "Recording", "Gigs"].sample,
+  projects: ["Originals", "Recording projects"].sample
 )
 file = URI.open(Faker::Avatar.image)
 user.photo.attach(io: file, filename: "#{user.nickname}-avatar.png", content_type: "image/png")
