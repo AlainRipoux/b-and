@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get "/users/:id", to: "users#show", as: :user
 
   resources :invites, only: %i[ create ] do
-    resources :messages, only: :create, as: :messages
+    resources :messages, only: :create
     get :messages, to: "messages#show"
   end
   # get "/invites", to: "invites#create", as: :create_invites
@@ -20,7 +20,6 @@ Rails.application.routes.draw do
 
   resources :bands, except: [ :index ]
   get "/messages", to: "messages#index", as: :messages
-  get "/messages/new", to: "messages#new", as: :new_message
 
   get "/users/:id/edit", to: "users#edit", as: :edit_user
   patch "/users/:id", to: "users#update"
