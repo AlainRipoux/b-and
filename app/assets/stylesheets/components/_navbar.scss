@@ -40,11 +40,12 @@ html {
   display: flex;
   justify-content: center;
   align-items: top;
-  padding-top: 20px;
+  padding-top: 15px;
   text-decoration: none;
   color: #9d9cb5;
-  font-size: 30px;
-  height: 150px;
+  font-size: 15px;
+  height: 30px;
+  background-color: rgba(35, 24, 54, 0.95);
 }
 
 .navbar li a.active {
@@ -52,5 +53,5 @@ html {
 }
 
 .navbar i {
-  font-size: 60px;
+  font-size: 15px;
 }
