@@ -1,23 +1,26 @@
 <h1>Messages</h1>
 
-<%= link_to "New Message", %>
-
 <div class="container" >
   <% if @invites.any? %>
-    <ul>
-      <% @invites.each do |invite| %>
-        <li class="card">
-          <% if invite.first_user == current_user %>
-            <%= link_to invite.second_user.nickname, user_path(invite.second_user) %>
-            <%= invite.messages.last %>
-          <% else %>
-            <%= link_to invite.first_user.nickname, user_path(invite.first_user) %>
-            <%= invite.messages.last %>
+      <% if @invite_messages.any? %>
+        <ul>
+          <% @invites.each do |invite| %>
+          <li class="card">
+            <% if invite.first_user == current_user %>
+              <%= link_to invite.second_user.nickname, user_path(invite.second_user) %>
+              <%= invite.messages.last.content %>
+            <% else %>
+              <%= link_to invite.first_user.nickname, user_path(invite.first_user) %>
+              <%= invite.messages.last.content %>
+            <% end %>
+          </li>
           <% end %>
-        </li>
+
+        </ul>
+      <% else %>
+        <p class="text-center"><%= "Sorry, there is no message" %> <i class="fa-regular fa-face-sad-cry"></i></p>
       <% end %>
-    </ul>
   <% else %>
-      <p class="text-center"><%= "Sorry, there is no message" %> <i class="fa-regular fa-face-sad-cry"></i></p>
+    <p class="text-center"><%= "Sorry, make some connections first" %> <i class="fa-regular fa-face-sad-cry"></i></p>
   <% end %>
 </div>

@@ -6,13 +6,13 @@ require 'open-uri'
 file = URI.open("https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/NES-Console-Set.jpg/1200px-NES-Console-Set.jpg")
 
 # Clear existing data
+User.destroy_all
+Band.destroy_all
 UserBand.destroy_all
 Invite.destroy_all
 Task.destroy_all
 BandMessage.destroy_all
-Band.destroy_all
-User.destroy_all
-
+Message.destroy_all
 
 puts "Creating users..."
 
@@ -88,10 +88,11 @@ end
 
 puts "Created #{UserBand.count} user-band associations"
 
-puts "Creating invites..."
+puts "Creating invites & messages..."
 users.each do |user|
   rand(1..5).times do
-    Invite.create!(first_user: user, second_user: users.sample)
+    invite = Invite.create!(first_user: user, second_user: users.sample)
+    Message.create!(content: "Test", invite: invite, user: user,)
   end
 end
 

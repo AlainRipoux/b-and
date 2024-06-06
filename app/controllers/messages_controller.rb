@@ -2,6 +2,13 @@ class MessagesController < ApplicationController
   def index
     @messages = policy_scope(Message)
     @invites = Invite.where("first_user_id = ? OR second_user_id = ?", current_user.id,  current_user.id)
+    @invite_messages = @invites.map {|invite| invite.messages}
+    @invite_messages = @invite_messages.delete_if {|e| e.empty? }
+  end
+
+  def new
+    @message = Message.new
+    authorize @message
   end
 
   def show
