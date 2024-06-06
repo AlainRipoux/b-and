@@ -63,6 +63,7 @@ puts "Created #{User.count} users"
 
 puts "Creating bands..."
 bands = []
+
 10.times do
   user = users.sample
   band = Band.new(
