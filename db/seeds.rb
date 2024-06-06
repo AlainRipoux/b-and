@@ -53,7 +53,7 @@ user = User.new(
   objectives: ["Jamming", "Recording", "Gigs"].sample,
   projects: ["Originals", "Recording projects"].sample
 )
-file = URI.open(Faker::Avatar.image)
+file = URI.open(Faker::LoremFlickr.image(search_terms: ['musician']))
 user.photo.attach(io: file, filename: "#{user.nickname}-avatar.png", content_type: "image/png")
 user.save!
 

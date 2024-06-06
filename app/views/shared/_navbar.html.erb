@@ -1,37 +1,48 @@
 <nav class="navbar" data-controller="hello">
-  <ul><% if user_signed_in? %>
+  <ul>
+    <% if user_signed_in? %>
     <li><%= link_to root_path, class: controller_name == "users" && action_name == "index" ? "active" : "" do %>
       <i class="fa-solid fa-users"></i>
     <% end %></li>
     <li><%= link_to mybands_path, class: controller_name == "bands" && action_name == "mybands" ? "active" : "" do %>
       <i class="fas fa-music"></i>
     <% end %></li>
+
     <li class="position-relative">
       <%= link_to messages_path, class: controller_name == "messages" && action_name == "index" ? "active" : "" do %>
-      <i class="fa-solid fa-comments"></i>
-            <% if @unanswered_messages.any? %>
-              <span class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-secondary">
-              <%= @unanswered_messages.count %>
-            <% end %>
-      <span class="visually-hidden">unanswered messages</span>
-    <% end %></li>
-    <li class="position-relative">
-    <%= link_to notifications_path, class: controller_name == "invites" && action_name == "index" ? "active" : "" do %>
-      <i class="fas fa-bell"></i>
-        <% if current_user.invites.where(status: "pending").any? %>
-          <span class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-secondary">
-          <%= current_user.invites.where(status: "pending").count %>
-        <% end %>
-      <span class="visually-hidden">unread invites</span>
-    <% end %>
+        <i class="fa-solid fa-comments"></i>
+          <% if @unanswered_messages.any? %>
+            <span class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-secondary"></span>
+            <%= @unanswered_messages.count %>
+          <% end %>
+            <span class="visually-hidden">unanswered messages</span>
+      <% end %>
     </li>
-    <li><%= link_to user_path(current_user), class: controller_name == "users" && action_name == "show" ? "active" : "" do %>
-      <i class="fas fa-user"></i>
-    <% end %></li>
-    <li><%= link_to destroy_user_session_path, data: { turbo_method: :delete } do %>
-      <i class="fas fa-user"></i>
-    <% end %></li>
-    <% end %>
 
-  </ul>
+    <li class="position-relative">
+      <%= link_to notifications_path, class: controller_name == "invites" && action_name == "index" ? "active" : "" do %>
+        <i class="fas fa-bell"></i>
+          <% if current_user.invites.where(status: "pending").any? %>
+            <span class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-secondary"></span>
+            <%= current_user.invites.where(status: "pending").count %>
+          <% end %>
+            <span class="visually-hidden">unread invites</span>
+      <% end %>
+    </li>
+
+    <li class="btn-group dropup">
+      <li class="nav-item dropup" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <% if current_user.photo.attached? %>
+              <%= cl_image_tag current_user.photo.key, alt: "avatar", height: 50, width: 50, class: "rounded-circle object-fit-cover"   %>
+            <% else %>
+              <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" alt="avatar", height= 50, width= 50, class= "rounded-circle object-fit-cover">
+            <% end %>
+        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+          <%= link_to "Profile", user_path(current_user), class: controller_name == "users" && action_name == "show" ? "active" : "" %>
+          <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete } %>
+        </div>
+    </li>
+
+      <% end %>
+    </ul>
 </nav>
