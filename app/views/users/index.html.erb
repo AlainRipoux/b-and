@@ -29,7 +29,7 @@
     </div>
     <div class="filter-group">
       <%= label_tag 'location', 'Select Distance' %>
-      <%= select_tag 'location', options_for_select(["200","300","10000000"]), class: 'form-control' %>
+      <%= select_tag 'location', options_for_select(["1","2","3","4","5"]),prompt: "Select distance", class: 'form-control' %>
     </div>
     <%= f.submit "Filter"%>
   <% end %>
@@ -49,13 +49,13 @@
                 <% end %>
                 <div class="card-info">
                   <h3><%= user.nickname %></h3>
-                  <p><%= user.address %></p>
                   <%= user.instrument %></p>
                   <p>
                     <i class="fa-solid fa-square-poll-vertical"></i>
                     <%= user.style %>
                   </p>
                   <p><%= user.availability %></p>
+                  <p><%= user.address %></p>
                   <p><%= user.frequency %></p>
                   <p><%= user.objectives %></p>
                   <p><%= user.projects %></p>
