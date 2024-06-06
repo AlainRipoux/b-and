@@ -2,10 +2,13 @@ class MessagesController < ApplicationController
   def index
     @messages = policy_scope(Message)
     @invites = Invite.where("first_user_id = ? OR second_user_id = ?", current_user.id,  current_user.id)
+    @invite_messages = @invites.map {|invite| invite.messages}
+    @invite_messages = @invite_messages.delete_if {|e| e.empty? }
   end
 
   def show
-    @message = Message.find(params[:id])
+    @invite = Invite.find(params[:invite_id])
+    @message = Message.new
     authorize @message
   end
 
@@ -16,9 +19,9 @@ class MessagesController < ApplicationController
     @message.user = current_user
     authorize @message
     if @message.save
-      redirect_to invite_messages(@invite)
+      redirect_to invite_messages_path(@invite)
     else
-      render "invites/show", status: :unprocessable_entity
+      render "messages/show", status: :unprocessable_entity
     end
   end
 
