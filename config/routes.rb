@@ -7,26 +7,9 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
 
-
   resources :user_bands, only: :show
 
-  resources :invites, only: %i[ create ] do
-    resources :messages, only: :create, as: :messages
-    get :messages, to: "messages#show"
-  end
-  # get "/invites", to: "invites#create", as: :create_invites
-
-  resources :bands, except: [:index]
-
-  get "/tasks/:id", to: "tasks#change_task_status", as: :change_status
-
-  resources :bands, except: [ :index ]
-  get "/messages", to: "messages#index", as: :messages
   get "/messages/new", to: "messages#new", as: :new_message
-
-  get "/users/:id/edit", to: "users#edit", as: :edit_user
-  patch "/users/:id", to: "users#update"
-  
 
   get "/mybands", to: "bands#mybands", as: :mybands
   resources :bands do
@@ -48,7 +31,7 @@ patch "/users/:id", to: "users#update"
 
 # Routes for notifications / invites
   resources :invites, only: %i[ create ] do
-    resources :messages, only: :create, as: :messages
+    resources :messages, only: :create
     get :messages, to: "messages#show"
   end
   get "/notifications", to: "invites#index", as: :notifications
