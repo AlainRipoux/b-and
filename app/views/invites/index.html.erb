@@ -1,8 +1,9 @@
 <h1>Notifications</h1>
 
+  <% if @current_user.invites.any? %>
+    <p>You have <%= pluralize @current_user.invites.count, "match" %></p>
 
-<% if @current_user.invites.any? %>
-  <p>You have <%= pluralize @current_user.invites.count, "match" %></p>
+    <%= render "invites/invites_button" %>
 
     <% @current_user.invites.where.not(status:'declined').each do |invite| %>
       <p><li><%= cl_image_tag invite.second_user.photo.key, height: 50, width: 50, crop: :fill %>

@@ -16,6 +16,9 @@ Rails.application.routes.draw do
 
   resources :bands, except: [:index]
 
+  get "/tasks/:id", to: "tasks#change_task_status", as: :change_status
+
+  resources :bands, except: [ :index ]
   get "/messages", to: "messages#index", as: :messages
 
   get "/users/:id/edit", to: "users#edit", as: :edit_user
@@ -23,10 +26,11 @@ Rails.application.routes.draw do
 
   get "/mybands", to: "bands#mybands", as: :mybands
   resources :bands do
-    resources :tasks, only: [:new, :create, :edit, :update, :destroy]
+    resources :tasks, only: [:new, :create]
     resources :band_messages, only: :create
   end
 
+  resources :tasks, only: %i[destroy edit update]
   resources :user_bands, only: :show
 
   resources :invites, only: %i[ create ]

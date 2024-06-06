@@ -1,44 +1,61 @@
 <div class="container">
-  <div class="m-5">
-    <div class="col">
-      <%= link_to "Back to list", bands_path, class: "btn btn-ghost mb-3" %>
-        <h1><%= @band.name %></h1>
-              <% if @band.photo.attached? == true %>
-                <%= cl_image_tag @band.photo.key, alt: "text" %>
-              <% else %>
-                <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" alt="<%= @user[:name] %>">
-              <% end %>
-                <div class="mt-25">
-                  <p>Lead by: <%= link_to "#{@band.user.firstname} #{@band.user.lastname}", user_path(@band.user) %></p>
-                  <% if @band.users.any? %>
-                    <ul> Members :
-                      <% @band.users.each do |member| %>
-                      <li>
-                      <%= link_to "#{member.firstname} #{member.lastname}", user_path(member) %><br>
-                      </li>
-                      <% end %>
-                      </ul>
-                  <% end %>
-                </div>
-          </div>
-      </div>
+  <%= link_to bands_path do %>
+    <i class="fa-solid fa-chevron-left"></i>
+  <% end %>
+
+  <div>
+    <div>
+      <% if @band.photo.attached? == true %>
+        <%= cl_image_tag @band.photo.key, alt: "text", class:"rounded-5 mx-auto d-block", width: 150, height: 150 %>
+        <% else %>
+        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" alt="text">
+        <% end %>
+    </div>
+
+    <h1><%= @band.name %></h1>
+
+    <div>
+      <p>Owned by <%= link_to "#{@band.user.firstname} #{@band.user.lastname}", user_path(@band.user) %></p>
+      <p>Members :
+      <% @band.users.each do |member| %>
+        <br><%= link_to "#{member.firstname} #{member.lastname} (#{member.instrument})", user_path(member) %>
+      <% end %>
+      </p>
     </div>
   </div>
 
-<div class="container">
-  <div class="m-5">
-    <div class="col">
-      <h2>Tasks</h2>
-      <ul>
-        <% @tasks.each do |task| %>
-          <li> <%= task.content %> - <%= task.user.firstname %>  </li>
-          <div>
-            <%= link_to edit_band_task_path(task) do %>
-              <i class="fa-solid fa-pen-to-square"></i>
-            <% end %>
-          </div>
-        <% end %>
-      </ul>
+  <div>
+    <h2>Tasks <%= link_to new_band_task_path(@band) do %>
+      <i class="fa-solid fa-square-plus"></i>
+    <% end %></h2>
+
+    <div class="d-flex">
+      <div>
+        <h6>To do</h6>
+        <% @tasks.where(done: false).each do |task| %>
+            <div>
+              <%= link_to change_status_path(task) do %>
+                <i class="fa-regular fa-square"></i>
+              <% end %>
+              <%= task.content %> - <%= task.user.firstname %>
+              <%= link_to edit_task_path(task) do %>
+                <i class="fa-solid fa-pen-to-square"></i>
+              <% end %>
+          <% end %>
+        </div>
+      </div>
+
+      <div>
+        <h6>Done</h6>
+        <% @tasks.where(done: true).each do |task| %>
+        <div>
+          <%= task.content %> - <%= task.user.firstname %>
+              <%= link_to task_path(task), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                <i class="fa-solid fa-trash"></i>
+              <% end %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -54,7 +71,7 @@
   </div>
 
 <div class="container chatroom">
-  <h1>#<%= @band.name %></h1>
+  <h3>#<%= @band.name %></h3>
 
   <div class="messages">
     <% @band.band_messages.each do |message| %>
