@@ -43,6 +43,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @bands = UserBand.where(user: @user)
     authorize @user
   end
 

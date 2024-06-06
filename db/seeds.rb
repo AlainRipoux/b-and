@@ -9,6 +9,9 @@ file = URI.open("https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/NES-C
 User.destroy_all
 Band.destroy_all
 UserBand.destroy_all
+Invite.destroy_all
+Task.destroy_all
+BandMessage.destroy_all
 
 
 puts "Creating users..."
@@ -84,3 +87,27 @@ bands.each do |band|
 end
 
 puts "Created #{UserBand.count} user-band associations"
+
+puts "Creating invites..."
+users.each do |user|
+  rand(1..5).times do
+    Invite.create!(first_user: user, second_user: users.sample)
+  end
+end
+
+puts "Creating task..."
+bands.each do |band|
+  rand(1..5).times do
+    user = users.sample
+    Task.create!(content: Faker::Lorem.paragraph(sentence_count: 3), band: band, user: user)
+  end
+end
+
+puts "Creating band_messages..."
+
+bands.each do |band|
+  rand(1..5).times do
+    user = users.sample
+    BandMessage.create!(content: Faker::Lorem.paragraph(sentence_count: 3), band: band, user: user)
+  end
+end
