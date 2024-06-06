@@ -9,7 +9,9 @@
         <%= cl_image_tag @user.photo.key, alt: "user picture" %>
       <% end %>
 
+      <% if @user != current_user %>
         <%= link_to "Invite", invites_path(user_id: @user.id), data: { turbo_method: :post } %>
+      <% end %>
 
       <div>
         <h3>Instrument</h3>
