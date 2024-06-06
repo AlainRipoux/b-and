@@ -1,6 +1,8 @@
 <div>
-  <%= simple_form_for(@band) do |f| %>
+  <%= simple_form_for [ @band ] do |f| %>
     <%= f.input :name %>
+    <%= f.association :user, collection: @users, label_method: :firstname, value_method: :id %>
+    <%# <%= f.collection_select(:user, @users, :firstname, :id, {:prompt => "Please Select a Sector"}, {:multiple => true}) %>
     <%= f.input :photo, as: :file %>
     <%= f.submit "Create my band" %>
   <% end %>
