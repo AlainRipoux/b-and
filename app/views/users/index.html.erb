@@ -3,35 +3,61 @@
 </div>
 <div class="filters">
   <%= form_with(url: root_path, method: "get", class: "filter-form", data: { controller: "filter", action: "change->filter#submitForm" }) do |f| %>
-    <div class="filter-group">
-      <%= label_tag 'instrument', 'Select Instrument' %>
-      <%= select_tag 'instrument[]', options_for_select(User.pluck(:instrument).uniq.flat_map { |c| c.split(',') }.uniq), multiple: true, class: 'form-control' %>
+    <div class="dropdown custom-dropdown">
+        <button class="btn dropdown-toggle filter-select" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Instrument
+        </button>
+        <div class="bring-front">
+          <%= select_tag 'instrument[]', options_for_select(User.pluck(:instrument).uniq.flat_map { |c| c.split(',') }.uniq, params[:instrument]), multiple: true, class: 'filter-select dropdown-menu' %>
+        </div>
     </div>
-    <div class="filter-group">
-      <%= label_tag 'genre', 'Select Genre' %>
-      <%= select_tag 'style[]', options_for_select(User.pluck(:style).uniq.flat_map { |c| c.split(',') }.uniq), multiple: true, class: 'form-control' %>
+    <div class="dropdown custom-dropdown">
+      <button class="btn dropdown-toggle filter-select" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Genre
+      </button>
+      <div class="bring-front">
+        <%= select_tag 'style[]', options_for_select(User.pluck(:style).uniq.flat_map { |c| c.split(',') }.uniq, params[:style]), multiple: true, class: 'filter-select dropdown-menu' %>
+      </div>
     </div>
-    <div class="filter-group">
-      <%= label_tag 'availability', 'Select Availability' %>
-      <%= select_tag 'availability[]', options_for_select(User.pluck(:availability).uniq.flat_map { |c| c.split(',') }.uniq), multiple: true, class: 'form-control' %>
+    <div class="dropdown custom-dropdown">
+      <button class="btn dropdown-toggle filter-select" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Availability
+      </button>
+      <div class="bring-front">
+        <%= select_tag 'availability[]', options_for_select(User.pluck(:availability).uniq.flat_map { |c| c.split(',') }.uniq, params[:availability]), multiple: true, class: 'filter-select dropdown-menu' %>
+      </div>
     </div>
-    <div class="filter-group">
-      <%= label_tag 'frequency', 'Select Frequency' %>
-      <%= select_tag 'frequency[]', options_for_select(User.pluck(:frequency).uniq.flat_map { |c| c.split(',') }.uniq), multiple: true, class: 'form-control' %>
+    <div class="dropdown custom-dropdown">
+      <button class="btn dropdown-toggle filter-select" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Frequency
+      </button>
+      <div class="bring-front">
+        <%= select_tag 'frequency[]', options_for_select(User.pluck(:frequency).uniq.flat_map { |c| c.split(',') }.uniq, params[:frequency]), multiple: true, class: 'filter-select dropdown-menu' %>
+      </div>
     </div>
-    <div class="filter-group">
-      <%= label_tag 'objectives', 'Select Objectives' %>
-      <%= select_tag 'objectives[]', options_for_select(User.pluck(:objectives).uniq.flat_map { |c| c.split(',') }.uniq), multiple: true, class: 'form-control' %>
+    <div class="dropdown custom-dropdown">
+      <button class="btn dropdown-toggle filter-select" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Objectives
+      </button>
+      <div class="bring-front">
+        <%= select_tag 'objectives[]', options_for_select(User.pluck(:objectives).uniq.flat_map { |c| c.split(',') }.uniq, params[:objectives]), multiple: true, class: 'filter-select dropdown-menu' %>
+      </div>
     </div>
-    <div class="filter-group">
-      <%= label_tag 'projects', 'Select Projects' %>
-      <%= select_tag 'projects[]', options_for_select(User.pluck(:projects).uniq.flat_map { |c| c.split(',') }.uniq), multiple: true, class: 'form-control' %>
+    <div class="dropdown custom-dropdown">
+      <button class="btn dropdown-toggle filter-select" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Projects
+      </button>
+      <div class="bring-front">
+        <%= select_tag 'projects[]', options_for_select(User.pluck(:projects).uniq.flat_map { |c| c.split(',') }.uniq, params[:projects]), multiple: true, class: 'filter-select dropdown-menu' %>
+      </div>
     </div>
-    <div class="filter-group">
-      <%= label_tag 'location', 'Select Distance' %>
-      <%= select_tag 'location', options_for_select(["1","2","3","4","5"]),prompt: "Select distance", class: 'form-control' %>
+    <div class="dropdown custom-dropdown">
+      <div class="bring-front">
+        <%= select_tag 'location', options_for_select(["1","2","3","4","5","10","20","30","40","50"], params[:location]), prompt: "Distance", class: 'filter-select' %>
+      </div>
     </div>
-    <%= f.submit "Filter"%>
+    <%= f.submit "Filter", class: "filter-button" %>
+    <%= link_to "Clear", root_path, class: "filter-button" %>
   <% end %>
 </div>
 <div class="content">
@@ -42,11 +68,13 @@
           <li class="card">
             <%= link_to user_path(user), class: 'card-link' do %>
               <div class="card">
+                <div class="card-image img">
                 <% if user.photo.attached? %>
                   <%= cl_image_tag user.photo.key, alt: "text" %>
                 <% else %>
                   <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg", alt: user.nickname, class: 'card-img'  %>
                 <% end %>
+                </div>
                 <div class="card-info">
                   <h3><%= user.nickname %></h3>
                   <%= user.instrument %></p>
@@ -68,3 +96,5 @@
     <% else %>
       <p class="text-center"><%= "Sorry, '#{params[:query]}' is not available" %> <i class="fa-regular fa-face-sad-cry"></i></p>
     <% end %>
+  </div>
+</div>
