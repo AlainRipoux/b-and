@@ -9,13 +9,11 @@
     <li class="position-relative">
       <%= link_to messages_path, class: controller_name == "messages" && action_name == "index" ? "active" : "" do %>
       <i class="fa-solid fa-comments"></i>
-          <% current_user.invites.each do |invite| %>
-            <% if invite.messages.any? %>
+            <% if @unanswered_messages.any? %>
               <span class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-secondary">
-              <%= invite.messages.count %>
+              <%= @unanswered_messages.count %>
             <% end %>
-          <% end %>
-      <span class="visually-hidden">unread invites</span>
+      <span class="visually-hidden">unanswered messages</span>
     <% end %></li>
     <li class="position-relative">
     <%= link_to notifications_path, class: controller_name == "invites" && action_name == "index" ? "active" : "" do %>

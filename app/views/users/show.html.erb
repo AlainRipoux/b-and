@@ -8,9 +8,13 @@
       <% if @user.photo.attached? == true %>
         <%= cl_image_tag @user.photo.key, alt: "user picture" %>
       <% end %>
-      <div data-controller="invite-button" data-action="click->invite-button#disable">
-        <%= link_to "Invite", invites_path(user_id: @user.id), data: { turbo_method: :post } %>
-      </div>
+
+      <% if @user != current_user %>
+        <div data-controller="invite-button" data-action="click->invite-button#disable">
+          <%= link_to "Invite", invites_path(user_id: @user.id), data: { turbo_method: :post } %>
+        </div>
+     <% end %>
+
       <div>
         <h3>Instrument</h3>
         <p><%= @user.instrument %></p>

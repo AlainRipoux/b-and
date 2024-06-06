@@ -12,6 +12,7 @@ class BandsController < ApplicationController
 
   def new
     @band = Band.new
+    @users = current_user.invites_sent.where(status: "accepted").map { |invite| invite.second_user }
     authorize @band
   end
 
