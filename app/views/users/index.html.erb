@@ -27,6 +27,10 @@
       <%= label_tag 'projects', 'Select Projects' %>
       <%= select_tag 'projects[]', options_for_select(User.pluck(:projects).uniq.flat_map { |c| c.split(',') }.uniq), multiple: true, class: 'form-control' %>
     </div>
+    <div class="filter-group">
+      <%= label_tag 'location', 'Select Distance' %>
+      <%= select_tag 'location', options_for_select(["200","300","10000000"]), class: 'form-control' %>
+    </div>
     <%= f.submit "Filter"%>
   <% end %>
 </div>

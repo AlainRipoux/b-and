@@ -6,36 +6,44 @@ class UsersController < ApplicationController
 
     if params[:instrument].present?
       selected_instrument = params[:instrument].reject(&:blank?)
-      @users = policy_scope(User).where(selected_instrument.map { |instrument| "instrument LIKE ?" }.join(' AND '), *selected_instrument.map { |instrument| "%#{instrument}%" })
+      @users = @users.where(instrument: selected_instrument)
     end
 
     if params[:style].present?
       selected_style = params[:style].reject(&:blank?)
-      @users = policy_scope(User).where(selected_style.map { |style| "style LIKE ?" }.join(' AND '), *selected_style.map { |style| "%#{style}%" })
+      @users = @users.where(style: selected_style)
     end
 
     if params[:availability].present?
       selected_availability = params[:availability].reject(&:blank?)
-      @users = policy_scope(User).where(selected_availability.map { |availability| "availability LIKE ?" }.join(' AND '), *selected_availability.map { |availability| "%#{availability}%" })
+      @users = @users.where(availability: selected_availability)
     end
 
     if params[:frequency].present?
       selected_frequency = params[:frequency].reject(&:blank?)
-      @users = policy_scope(User).where(selected_frequency.map { |frequency| "frequency LIKE ?" }.join(' AND '), *selected_frequency.map { |frequency| "%#{frequency}%" })
+      @users = @users.where(frequency: selected_frequency)
     end
 
     if params[:objectives].present?
       selected_objectives = params[:objectives].reject(&:blank?)
-      @users = policy_scope(User).where(selected_objectives.map { |objectives| "objectives LIKE ?" }.join(' AND '), *selected_objectives.map { |objectives| "%#{objectives}%" })
+      @users = @users.where(objectives: selected_objectives)
     end
 
     if params[:projects].present?
       selected_projects = params[:projects].reject(&:blank?)
-      @users = policy_scope(User).where(selected_projects.map { |projects| "projects LIKE ?" }.join(' AND '), *selected_projects.map { |projects| "%#{projects}%" })
+      @users = @users.where(projects: selected_projects)
     end
+
+    if params[:location].present?
+      @close_users = User.near(current_user.address, params[:location].to_i)
+      raise
+      @users = @users & @close_users
+    end
+
   end
 
   def show
+    @bands = UserBand.where(user: @user)
     authorize @user
   end
 

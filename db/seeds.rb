@@ -9,6 +9,10 @@ file = URI.open("https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/NES-C
 User.destroy_all
 Band.destroy_all
 UserBand.destroy_all
+Invite.destroy_all
+Task.destroy_all
+BandMessage.destroy_all
+
 
 puts "Creating users..."
 
@@ -22,7 +26,7 @@ users = 30.times.map do
     instrument: Faker::Music.instrument,
     biography: Faker::Lorem.paragraph(sentence_count: 3),
     style: Faker::Music.genre,
-    address: Faker::Address.full_address,
+    address: ["53 rue de l'échiquier 75010 Paris", "26 rue de la Félicité 75017 Paris", "54b rue Ordener 75018 Paris"].sample,
     availability: ["Weekdays", "Weekends", "Flexible", "Weekday Evenings", "Evenings", "Mornings", "Afternoons"].sample(rand(1..2)).join(", "),
     frequency: ["Everyday", "Once a week", "Twice a week", "Three times a week", "Varies", "Once a month", "Twice a month"].sample(rand(1..2)).join(", "),
     objectives: ["Jamming", "Recording", "Gigs", "Writing", "Teaching", "Learning", "Just for fun"].sample(rand(1..5)).join(", "),
@@ -43,11 +47,11 @@ user = User.new(
   instrument: Faker::Music.instrument,
   biography: Faker::Lorem.paragraph(sentence_count: 3),
   style: Faker::Music.genre,
-  address: Faker::Address.full_address,
-  availability: ["Weekends","Weekday Evenings"],
+  address: "16 villa Gaudelet 75011 Paris",
+  availability: ["Weekends","Weekday Evenings"].sample,
   frequency: "Varies",
-  objectives: ["Jamming", "Recording", "Gigs",],
-  projects: ["Originals", "Recording projects"]
+  objectives: ["Jamming", "Recording", "Gigs"].sample,
+  projects: ["Originals", "Recording projects"].sample
 )
 file = URI.open(Faker::Avatar.image)
 user.photo.attach(io: file, filename: "#{user.nickname}-avatar.png", content_type: "image/png")
@@ -83,3 +87,27 @@ bands.each do |band|
 end
 
 puts "Created #{UserBand.count} user-band associations"
+
+puts "Creating invites..."
+users.each do |user|
+  rand(1..5).times do
+    Invite.create!(first_user: user, second_user: users.sample)
+  end
+end
+
+puts "Creating task..."
+bands.each do |band|
+  rand(1..5).times do
+    user = users.sample
+    Task.create!(content: Faker::Lorem.paragraph(sentence_count: 3), band: band, user: user)
+  end
+end
+
+puts "Creating band_messages..."
+
+bands.each do |band|
+  rand(1..5).times do
+    user = users.sample
+    BandMessage.create!(content: Faker::Lorem.paragraph(sentence_count: 3), band: band, user: user)
+  end
+end
