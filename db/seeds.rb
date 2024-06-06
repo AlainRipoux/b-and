@@ -69,6 +69,7 @@ bands = []
     name: Faker::Music.band,
     user: user
   )
+  file = URI.open(Faker::Avatar.image)
   band.photo.attach(io: file, filename: band.name, content_type: "image/png")
   band.save!
   UserBand.create!(user: user, band: band)
