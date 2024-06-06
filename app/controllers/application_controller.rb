@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :navbar
   include Pundit::Authorization
 
   # Pundit: allow-list approach
@@ -12,9 +12,15 @@ class ApplicationController < ActionController::Base
   #   flash[:alert] = "You are not authorized to perform this action."
   #   redirect_to(root_path)
   # end
+  def navbar
+    @invites = Invite.where("first_user_id = ? OR second_user_id = ?", current_user.id,  current_user.id)
+    @invite_messages = @invites.map { |invite| invite.messages }
+    @invite_messages = @invite_messages.delete_if { |e| e.empty? }
+    @unanswered_messages = []
+    @unanswered_messages << @invite_messages.last if @invite_messages.last.first.user_id == current_user.id
+  end
 
   private
-
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
   end

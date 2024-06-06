@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   # Routes for notifications / invites
   resources :invites, only: %i[ create ] do
     resources :messages, only: :create
-    get :messages, to: "messages#show"
+    get :messages, to: "messages#show", as: :invite_messages
   end
 
   get "/notifications", to: "invites#index", as: :notifications

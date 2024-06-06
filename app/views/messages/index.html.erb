@@ -5,13 +5,13 @@
       <% if @invite_messages.any? %>
         <ul>
           <% @invites.each do |invite| %>
-          <li class="card">
+          <li class="border">
             <% if invite.first_user == current_user %>
-              <%= link_to invite.second_user.nickname, user_path(invite.second_user) %>
-              <%= invite.messages.last.content %>
+              <p><%= link_to invite.second_user.nickname, invite_invite_messages_path(invite) %>
+              <%= invite.messages.last.content %></p>
             <% else %>
-              <%= link_to invite.first_user.nickname, user_path(invite.first_user) %>
-              <%= invite.messages.last.content %>
+              <p><%= link_to invite.first_user.nickname, invite_invite_messages_path(invite) %>
+              <%= invite.messages.last.content %></p>
             <% end %>
           </li>
           <% end %>
