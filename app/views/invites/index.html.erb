@@ -2,8 +2,8 @@
   <h1>Notifications</h1>
 
     <% if @current_user.invites.any? %>
-      <p>You have <%= pluralize @current_user.invites.count, "match" %></p>
-
+      <p>Your invitations </p>
+      <%# <%= pluralize @current_user.invites.count, "match" %>
       <%= render "invites/invites_button" %>
 
   <% else %>

@@ -1,22 +1,27 @@
 <div class="container">
   <div class="m-5">
     <div class="col">
-      <%= link_to "Back to list", root_path %>
+      <%= link_to root_path do %>
+      <i class="fa-solid fa-chevron-left"></i>
+      <% end %>
 
-      <h1><%= @user.firstname %> aka "<%= @user.nickname %>"</h1>
+      <h3><%= @user.firstname %> aka "<%= @user.nickname %>"</h3>
       <%= @user.email %>
       <% if @user.photo.attached? == true %>
         <%= cl_image_tag @user.photo.key, alt: "user picture" %>
       <% end %>
 
       <% if @user != current_user %>
+
+      <div class="d-grid gap-2 m-3 justify-content-center">
         <div data-controller="invite-button" data-action="click->invite-button#disable">
-          <%= link_to "Invite", invites_path(user_id: @user.id), data: { turbo_method: :post } %>
+          <%= link_to "Invite", invites_path(user_id: @user.id), data: { turbo_method: :post }, class:"btn btn-primary" %>
         </div>
+      </div>
      <% end %>
 
       <div>
-        <h3>Instrument</h3>
+        <h4>Instrument</h4>
         <p><%= @user.instrument %></p>
             <div class="d-flex ms-4 mt-3 align-items-center">
                 <div class="mt-25">
@@ -36,42 +41,42 @@
           </div>
       </div>
       <div>
-        <h3>Bio</h3>
+        <h4>Bio</h4>
         <p><%= @user.biography %></p>
       </div>
 
       <div>
-        <h3>Genre</h3>
+        <h4>Genre</h4>
         <p><%= @user.style %></p>
       </div>
 
       <div>
-        <h3>What I want to play</h3>
+        <h4>What I want to play</h4>
         <p><%= @user.projects %></p>
       </div>
 
       <div>
-        <h3>How I want to play</h3>
+        <h4>How I want to play</h4>
         <p><%= @user.objectives %></p>
       </div>
 
       <div>
-        <h3>Availability</h3>
+        <h4>Availability</h4>
         <p><%= @user.availability %></p>
       </div>
 
       <div>
-        <h3>Frequency</h3>
+        <h4>Frequency</h4>
         <p><%= @user.frequency %></p>
       </div>
 
       <div>
-        <h3>Recordings</h3>
+        <h4>Recordings</h4>
         <p> ajouter les Recordings au model de user</p>
       </div>
 
       <div>
-        <h3>Playlist</h3>
+        <h4>Playlist</h4>
         <p> add embedded playlist</p>
       </div>
 
