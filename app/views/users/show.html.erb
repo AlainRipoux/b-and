@@ -17,7 +17,6 @@
     <% end %>
 
     <% if @user != current_user %>
-
       <div class="d-flex">
         <% if @first_user || @second_user %>
           <%= link_to "Chat", invite_invite_messages_path(@invite.first), class: "btn btn-primary btn-large" %>
@@ -51,11 +50,8 @@
                 </div>
             </div>
 
-          </div>
-          <% end %>
-        </div>
-      <% end %>
-
+      </div>
+    </div>
     <div class="mt-5">
       <h4>Instrument</h4>
       <p class="tag"><%= @user.instrument %></p>
@@ -156,12 +152,4 @@
 
   </div>
 </div>
-    <%# <div class="col mx-auto mb-3">
-        <%= render "users/modal" %>
-        <%# <% if @user == current_user %>
-          <%# <%= link_to "Edit your profil", '#', {:remote => true, 'data-bs-toggle' =>  "modal", 'data-bs-target' => '#edituser' } %>
-        <%# <% if policy(@user).edit? %>
-          <%# <%= link_to "Edit your profil", edit_user_path(@user) %>
-        <%# <% end %>
-      <%# <% end %>
-    <%# </div> %>
+</div>
