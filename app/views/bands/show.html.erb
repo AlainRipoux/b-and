@@ -8,19 +8,19 @@
       <% if @band.photo.attached? == true %>
         <%= cl_image_tag @band.photo.key, alt: "text", class:"rounded-circle mx-auto d-block", width: 150, height: 150 %>
         <% else %>
-        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" alt="text">
+        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" alt="text", width="150", height="150" >
         <% end %>
     </div>
 
     <h1><%= @band.name %></h1>
 
-    <div>
-      <p>Owned by <%= link_to "#{@band.user.firstname} #{@band.user.lastname}", user_path(@band.user) %></p>
-      <p>Members :
+    <div class="list-unstyled">
+      <li> <strong>Owned by :</strong><%= link_to "#{@band.user.firstname} #{@band.user.lastname}", user_path(@band.user) %></li>
+      <li> <strong>Members :</strong>
       <% @band.users.each do |member| %>
         <br><%= link_to "#{member.firstname} #{member.lastname} (#{member.instrument})", user_path(member) %>
       <% end %>
-      </p>
+      </li>
     </div>
   </div>
 
@@ -30,8 +30,8 @@
     <% end %></h2>
 
     <div class="mt-3">
-      <div class="me-4">
-        <h6>To do</h6>
+      <div class="ms-2 ">
+        <h6><strong>To do</strong></h6>
         <% @tasks.where(done: false).each do |task| %>
             <div>
               <li class="list-unstyled">
@@ -47,11 +47,12 @@
         </div>
       </div>
 
-      <div>
-        <h6>Done</h6>
+      <div class="ms-2 mt-2">
+        <h6><strong>Done</strong></h6>
         <% @tasks.where(done: true).each do |task| %>
         <div>
             <li class="list-unstyled">
+              <i class="fa-solid fa-square-check"></i>
               <%= task.content %></li>
             <li class="list-unstyled">
               <%= task.user.firstname %>

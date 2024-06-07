@@ -18,13 +18,39 @@
 
     <% if @user != current_user %>
 
+      <div class="d-flex">
+        <% if @first_user || @second_user %>
+          <%= link_to "Chat", invite_invite_messages_path(@invite.first), class: "btn btn-primary btn-large" %>
+        <% else %>
+          <div class="d-grid gap-2 m-3 justify-content-center align-items-start">
+            <%= link_to "Invite", invites_path(user_id: @user.id),
+              data: {
+                controller: "invite-button",
+                action: "click->invite-button#disable",
+                turbo_method: :post
+              },
+              class:"btn btn-primary" %>
+          </div>
+        <% end %>
+     <% end %>
 
-      <% if @first_user || @second_user %>
-        <%= link_to "Chat", invite_invite_messages_path(@invite.first), class: "btn btn-primary" %>
-      <% else %>
-        <div class="d-grid gap-2 m-3 justify-content-center">
-          <div data-controller="invite-button" data-action="click->invite-button#disable">
-            <%= link_to "Invite", invites_path(user_id: @user.id), data: { turbo_method: :post }, class:"btn btn-primary" %>
+      <div>
+        <h4>Instrument</h4>
+        <p><%= @user.instrument %></p>
+            <div class="d-flex ms-4 mt-3 align-items-center">
+                <div class="mt-25">
+                  <p>
+                    <% if @user.user_bands.any? %>
+                      <% @user.user_bands.each do |user_band| %>
+                        <li><%= link_to user_band.band.name, band_path(user_band.band) %></li>
+                      <% end %>
+                    <% else %>
+                      No band
+                    <% end %>
+                  </p>
+                </div>
+            </div>
+
           </div>
           <% end %>
         </div>

@@ -2,41 +2,66 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 90vw; /* Make the card take up 90% of the viewport width */
-  margin: 20px auto; /* Center the card and add some vertical margin */
+  width: 90vw;
+  max-width: 350px; /* Ensure max width for larger screens */
+  margin: 20px auto;
   padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-  background-color: #fff; /* Add a background color */
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #30214b;
+  color: #ffffff;
 }
 
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .card-image {
   width: 100%;
+  height: auto;
   margin-bottom: 15px;
+  border-radius: 15px;
+  overflow: hidden;
 }
 
 .card-image img {
   width: 100%;
-  height: auto; /* Ensure the image maintains its aspect ratio */
-  border-radius: 50px; /* Adjust border radius if needed */
+  height: auto;
+  border-radius: 15px;
+}
+
+.card-info {
+  text-align: center;
 }
 
 .card-name {
   margin-bottom: 10px;
-  font-size: 6vw; /* Use viewport units for responsive font size */
+  font-size: 1.5em; /* Use em for better scalability */
   font-weight: bold;
-  text-align: center; /* Center-align the text */
+  color: #ffffff;
 }
 
-.card-info {
-  margin-bottom: 10px;
-  font-size: 4.5vw; /* Use viewport units for responsive font size */
-  text-align: center; /* Center-align the text */
+.card-info p {
+  margin-bottom: 8px;
+  font-size: 1em;
+  color: #9d9cb5;
+}
+
+.cards-container ul {
+  list-style: none;
+  padding: 0;
+}
+
+.cards-container li {
+  margin-bottom: 20px;
+}
+
+.cards-container .card-link {
+  text-decoration: none;
+}
+
+.card p {
+  text-align: left;
 }
