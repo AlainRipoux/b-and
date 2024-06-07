@@ -14,7 +14,7 @@
                 </div>
                 <div>
                   <span><%=invite.second_user.nickname %></span><br>
-                  <span class="opacity-50"><%= invite.messages.last.user == current_user ? "You: " : "" %><%= invite.messages.last.content.truncate(40) %></span>
+                  <span class="opacity-50"><%= invite.messages.last.user == current_user ? "You: " : "" %><%= invite.messages.last.content.truncate(25) %></span>
                 </div>
               </div>
             <% else %>
@@ -24,7 +24,7 @@
                 </div>
                 <div>
                   <span><%= link_to invite.first_user.nickname, invite_invite_messages_path(invite) %></span><br>
-                  <span class="opacity-50"><%= invite.messages.last.content.truncate(40) %></span>
+                  <span class="opacity-50"><%= invite.messages.last.content.truncate(25) %></span>
                 </div>
               </div>
             <% end %>
