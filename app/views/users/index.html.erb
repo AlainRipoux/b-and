@@ -65,7 +65,7 @@
     <% if @users.any? %>
       <ul>
         <% @users.each do |user| %>
-          <li class="card">
+          <li>
             <%= link_to user_path(user), class: 'card-link' do %>
               <div class="card">
                 <div class="card-image img">
