@@ -8,7 +8,7 @@ export default class extends Controller {
 
   disable(event) {
     event.preventDefault()
-    this.element.innerText = "Invited!";
+    this.element.innerText = "Invited !";
     this.element.setAttribute("disabled", "");
   }
 }

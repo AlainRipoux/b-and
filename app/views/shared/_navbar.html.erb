@@ -2,10 +2,10 @@
   <ul>
     <% if user_signed_in? %>
     <li><%= link_to root_path, class: controller_name == "users" && action_name == "index" ? "active" : "" do %>
-      <i class="fa-solid fa-users"></i>
+      <i class="fa-solid fa-magnifying-glass"></i>
     <% end %></li>
     <li><%= link_to mybands_path, class: controller_name == "bands" && action_name == "mybands" ? "active" : "" do %>
-      <i class="fas fa-music"></i>
+      <i class="fa-solid fa-users"></i>
     <% end %></li>
 
     <li class="position-relative">
