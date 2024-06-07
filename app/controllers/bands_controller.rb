@@ -12,7 +12,9 @@ class BandsController < ApplicationController
 
   def new
     @band = Band.new
-    @users = current_user.invites_sent.where(status: "accepted").map { |invite| invite.second_user }
+    @second_users = current_user.invites_sent.where(status: "accepted").map { |invite| invite.second_user }
+    @first_users = current_user.invites.where(status: "accepted").map { |invite| invite.first_user }
+    @mates = @second_users + @first_users
     authorize @band
   end
 
@@ -20,6 +22,7 @@ class BandsController < ApplicationController
     @band = Band.new(band_params)
     @band.user = current_user
     UserBand.create(band: @band, user: current_user)
+    params[:band][:user_id].reject{|u| u == ""}.each {|user_id| UserBand.create(band: @band, user: User.find(user_id.to_i))}
     authorize @band
     if @band.save
       redirect_to mybands_path
