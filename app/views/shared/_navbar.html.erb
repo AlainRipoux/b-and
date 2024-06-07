@@ -30,19 +30,17 @@
       <% end %>
     </li>
 
-    <li class="btn-group dropup">
-      <li class="nav-item dropup" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <% if current_user.photo.attached? %>
-              <%= cl_image_tag current_user.photo.key, alt: "avatar", height: 50, width: 50, class: "rounded-circle object-fit-cover"   %>
-            <% else %>
-              <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" alt="avatar", height= 50, width= 50, class= "rounded-circle object-fit-cover">
-            <% end %>
-        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-          <%= link_to "Profile", user_path(current_user), class: controller_name == "users" && action_name == "show" ? "active" : "" %>
-          <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete } %>
-        </div>
+    <li class="nav-item dropup">
+      <% if current_user.photo.attached? %>
+        <%= cl_image_tag current_user.photo.key, alt: "avatar", height: 50, width: 50, data: {bs_toggle: "dropdown"}, id: "navbarDropdown", class: "rounded-circle object-fit-cover"   %>
+      <% else %>
+        <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" alt="avatar", height= 50, width= 50, class= "rounded-circle object-fit-cover" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <% end %>
+      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+        <%= link_to "Profile", user_path(current_user), class: controller_name == "users" && action_name == "show" ? "active" : "" %>
+        <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete } %>
+      </div>
     </li>
-
       <% end %>
     </ul>
 </nav>
