@@ -38,26 +38,47 @@ users = 30.times.map do
   user
 end
 
-user = User.new(
-  firstname: "Admin",
-  lastname: "Test",
-  nickname: "Admin",
+user1 = User.new(
+  firstname: "Lenny",
+  lastname: "Kravitz",
+  nickname: "Len",
   email: "admin@band.com",
   password: "azerty",
-  instrument: Faker::Music.instrument,
-  biography: Faker::Lorem.paragraph(sentence_count: 3),
-  style: Faker::Music.genre,
+  instrument: "Guitar",
+  biography: "Born in New York, I was exposed to the entertainment industry at a young age and grew up in a musically diverse environment. I released my debut album 'Let Love Rule' in 1989 characterized by a blend of rock, funk, reggae, hard rock, soul, and R&B.",
+  style: "Rock",
   address: "16 villa Gaudelet 75011 Paris",
   availability: ["Weekends","Weekday Evenings"].sample,
   frequency: "Varies",
   objectives: ["Jamming", "Recording", "Gigs"].sample,
   projects: ["Originals", "Recording projects"].sample
 )
-file = URI.open(Faker::LoremFlickr.image(search_terms: ['musician']))
-user.photo.attach(io: file, filename: "#{user.nickname}-avatar.png", content_type: "image/png")
-user.save!
+file1 = URI.open("https://cdn-s-www.ledauphine.com/images/7AA4896A-D560-4953-B824-A6AC2C138B40/NW_raw/lenny-kravitz-1519895037.jpg")
+user1.photo.attach(io: file1, filename: "#{user1.nickname}-avatar.jpg", content_type: "image/jpg")
+user1.save!
 
-users << user
+users << user1
+
+user2 = User.new(
+  firstname: "Patti",
+  lastname: "Smith",
+  nickname: "Pat",
+  email: "admin2@band.com",
+  password: "azerty",
+  instrument: "Voice",
+  biography: "I am an American singer, songwriter, poet, painter, and author. I love to fuse rock and poetry in my work. You might know my song, 'Because the Night', co-written with Bruce Springsteen.",
+  style: "Rock",
+  address: "15 villa Gaudelet 75011 Paris",
+  availability: ["Weekends","Weekday Evenings"].sample,
+  frequency: "Varies",
+  objectives: ["Jamming", "Recording", "Gigs"].sample,
+  projects: ["Originals", "Recording projects"].sample
+)
+file2 = URI.open("https://cdns-images.dzcdn.net/images/artist/14b440783a197d1eeff45d3ad32bfdf0/500x500.jpg")
+user2.photo.attach(io: file2, filename: "#{user2.nickname}-avatar.jpg", content_type: "image/jpg")
+user2.save!
+
+users << user2
 
 puts "Created #{User.count} users"
 
@@ -94,7 +115,7 @@ puts "Creating invites & messages..."
 users.each do |user|
   rand(1..5).times do
     invite = Invite.create!(first_user: user, second_user: users.sample)
-    Message.create!(content: "Test", invite: invite, user: user,)
+    Message.create!(content: Faker::Lorem.paragraph(sentence_count: 2), invite: invite, user: user,)
   end
 end
 
@@ -102,7 +123,7 @@ puts "Creating task..."
 bands.each do |band|
   rand(1..5).times do
     user = users.sample
-    Task.create!(content: Faker::Lorem.paragraph(sentence_count: 3), band: band, user: user)
+    Task.create!(content: Faker::Lorem.paragraph(sentence_count: 1), band: band, user: user)
   end
 end
 
@@ -111,6 +132,6 @@ puts "Creating band_messages..."
 bands.each do |band|
   rand(1..5).times do
     user = users.sample
-    BandMessage.create!(content: Faker::Lorem.paragraph(sentence_count: 3), band: band, user: user)
+    BandMessage.create!(content: Faker::Lorem.paragraph(sentence_count: 2), band: band, user: user)
   end
 end
