@@ -1,11 +1,16 @@
 <div class="container chatroom">
-  <h3><%= @invite.first_user == current_user ? @invite.second_user.nickname : @invite.first_user.nickname %></h3>
-
+  <h3>
+  <% if @invite.first_user == current_user %>
+    <%= link_to @invite.second_user.nickname, user_path(@invite.second_user) %>
+  <% else %>
+    <%= link_to @invite.first_user.nickname, user_path(@invite.first_user) %>
+  <% end %>
+  </h3>
   <div class="messages">
     <% @invite.messages.each do |message| %>
       <div id="message-<%= message.id %>">
         <small>
-          <strong><%= message.user.nickname %></strong>
+          <strong><%= link_to message.user.nickname, user_path(message.user) %></strong>
           <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
         </small>
         <p><%= message.content %></p>
