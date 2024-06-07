@@ -12,18 +12,19 @@
 @import "pages/index";
 @import "components/navbar";
 @import "components/filters";
+@import "components/card";
 
 body,
 html {
   width: 100%;
   height: 100%;
   background-color: #170f23;
-  margin-top: 50px;
-  color: white;
+  margin-top: 30px;
+  color: $text-color;
 }
 
 h1 {
-  font-size: 3em;
+  font-size: 2.5em;
   color: white;
 }
 
