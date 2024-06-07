@@ -43,6 +43,11 @@ class UsersController < ApplicationController
 
   def show
     @bands = UserBand.where(user: @user)
+    @usermates = Invite.where("first_user_id = ? OR second_user_id = ?", @user.id,  @user.id)
+    @mymates = Invite.where("first_user_id = ? OR second_user_id = ?", @current_user.id,  @current_user.id)
+    @first_user = @mymates.map {|mate| mate.first_user }.include?(@user)
+    @second_user = @mymates.map {|mate| mate.second_user }.include?(@user)
+    @invite = @mymates.where("first_user_id = ? OR second_user_id = ?", @user.id,  @user.id)
     authorize @user
   end
 
