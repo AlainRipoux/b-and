@@ -1,3 +1,26 @@
 .tag-link {
-  color: grey!important;
+  color: white!important;
+}
+
+.long-btn {
+  background-color: #D01FE5;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.accept {
+  color: #2FD132;
+}
+
+.decline {
+  color:#D01FE5;
+}
+
+.tabs-line {
+  border-bottom: solid grey!important;
+}
+
+.nav-item .active {
+  border-bottom: solid #D01FE5!important;
+  font-weight: bolder;
 }

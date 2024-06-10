@@ -100,22 +100,36 @@ user2.save!
 
 puts "Created #{User.count} users"
 
+photos_band = [
+  "https://images.unsplash.com/photo-1632054553195-bfd7034fee25?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1478800907959-cd1621fbd465?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1526478806334-5fd488fcaabc?q=80&w=2716&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1499364615650-ec38552f4f34?q=80&w=2804&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1614247912229-26a7e2114c0a?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1506091403742-e3aa39518db5?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1565103420311-8cbbc3cd87b8?q=80&w=2938&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1566808907623-51b8fc382454?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1512407507877-d618bd91d4fb?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+]
+
 puts "Creating bands..."
 bands = []
 users = User.all
 
-10.times do
+10.times do |index|
   user = users.sample
-  band = Band.new(
+  band = Band.create!(
     name: Faker::Music.band,
     user: user
   )
-  file = URI.open(Faker::LoremFlickr.image(search_terms: ['band']))
+  file = URI.open(photos_band[index])
   band.photo.attach(io: file, filename: band.name, content_type: "image/png")
-  band.save!
   UserBand.create!(user: user, band: band)
   bands << band
 end
+
+
 puts "Created #{Band.count} bands"
 
 puts "Creating user_bands..."
@@ -134,7 +148,7 @@ puts "Creating invites & messages..."
 users.each do |user|
   rand(1..5).times do
     invite = Invite.create!(first_user: user, second_user: users.sample)
-    Message.create!(content: Faker::Lorem.paragraph(sentence_count: 2), invite: invite, user: user,)
+    Message.create!(content: Faker::Music::Prince.lyric, invite: invite, user: user,)
   end
 end
 
@@ -142,15 +156,14 @@ puts "Creating task..."
 bands.each do |band|
   rand(1..5).times do
     user = users.sample
-    Task.create!(content: Faker::Lorem.paragraph(sentence_count: 1), band: band, user: user)
+    Task.create!(content: ["Book studio for saturday", "Buy guitar strings", "Share sheets music", "Work on a new setlist", "Recruit another guitarist", "Call festival for sound check"].sample, band: band, user: user)
   end
 end
 
 puts "Creating band_messages..."
-
 bands.each do |band|
   rand(1..5).times do
     user = users.sample
-    BandMessage.create!(content: Faker::Lorem.paragraph(sentence_count: 2), band: band, user: user)
+    BandMessage.create!(content: Faker::Music::Prince.lyric, band: band, user: user)
   end
 end
