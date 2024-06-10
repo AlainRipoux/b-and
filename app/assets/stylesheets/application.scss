@@ -14,12 +14,11 @@
 @import "components/filters";
 @import "components/card";
 
-body,
-html {
+body {
   width: 100%;
   height: 100%;
   background-color: #170f23;
-  margin-top: 30px;
+  padding-top: 60px;
   color: $text-color;
 }
 

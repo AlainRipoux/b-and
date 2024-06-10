@@ -2,10 +2,17 @@
   padding: 20px;
 }
 
+.filter-form::-webkit-scrollbar {
+  display: none;
+}
+
 .filter-form {
   display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  white-space: nowrap;
 }
 
 .bring-front {
