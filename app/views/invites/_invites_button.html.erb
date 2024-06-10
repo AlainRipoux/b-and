@@ -9,10 +9,10 @@
 
           <% if invite.status == "pending"  %>
             <%= link_to accept_path(invite), data: {turbo_method: :patch, invites_target: "accept", action: "click->invites#updateAccept"} do %>
-              <i class="fa-regular fa-circle-check"></i>
+              <i class="fa-regular fa-circle-check accept"></i>
             <% end %>
             <%= link_to decline_path(invite), data: {turbo_method: :patch, invites_target: "decline", action: "click->invites#updateDecline"} do %>
-              <i class="fa-regular fa-circle-xmark"></i>
+              <i class="fa-regular fa-circle-xmark decline"></i>
             <% end %>
           <% elsif invite.status == "accepted" %>
             <%= link_to invite_messages_path(invite) do %>
