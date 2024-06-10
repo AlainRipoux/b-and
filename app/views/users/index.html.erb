@@ -1,100 +1,100 @@
-<%# <%= cl_video_tag("VIDEO_HOMEPAGE") %>
-
-
-<div>
-  <%= video_tag "video_homepage.mp4", size: "390", autoplay: true, loop: true, muted: true, crop: :true %>
-  <h1><strong>B&nd</strong></h1>
-</div>
-<div class="filters">
-  <%= form_with(url: root_path, method: "get", class: "filter-form", data: { controller: "filter", action: "change->filter#submitForm" }) do |f| %>
-    <div class="dropdown custom-dropdown">
+<div data-controller="home-screen">
+  <div class="home-screen" data-home-screen-target="animation">
+    <%= image_tag "logo_band_shadowed.png", alt: "logo Band", id: "logo-home" %>
+    <%= video_tag "video_homepage.mp4", size: "100vw 100vh", autoplay: true, loop: true, muted: true, crop: :true %>
+  </div>
+  <h1>Browse Musicians</h1>
+  <div class="filters" data-home-screen-target="filters">
+    <%= form_with(url: root_path, method: "get", class: "filter-form", data: { controller: "filter", action: "change->filter#submitForm" }) do |f| %>
+      <div class="dropdown custom-dropdown">
+          <button class="btn dropdown-toggle filter-select" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Instrument
+          </button>
+          <div class="bring-front">
+            <%= select_tag 'instrument[]', options_for_select(User.pluck(:instrument).uniq.flat_map { |c| c.strip }.flat_map {|c| c.split(", ")}.uniq, params[:instrument]), multiple: true, class: 'filter-select dropdown-menu' %>
+          </div>
+      </div>
+      <div class="dropdown custom-dropdown">
         <button class="btn dropdown-toggle filter-select" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Instrument
+          Genre
         </button>
         <div class="bring-front">
-          <%= select_tag 'instrument[]', options_for_select(User.pluck(:instrument).uniq.flat_map { |c| c.strip }.flat_map {|c| c.split(", ")}.uniq, params[:instrument]), multiple: true, class: 'filter-select dropdown-menu' %>
+          <%= select_tag 'style[]', options_for_select(User.pluck(:style).uniq.flat_map { |c| c.strip }.flat_map {|c| c.split(", ")}.uniq, params[:style]), multiple: true, class: 'filter-select dropdown-menu' %>
         </div>
-    </div>
-    <div class="dropdown custom-dropdown">
-      <button class="btn dropdown-toggle filter-select" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Genre
-      </button>
-      <div class="bring-front">
-        <%= select_tag 'style[]', options_for_select(User.pluck(:style).uniq.flat_map { |c| c.strip }.flat_map {|c| c.split(", ")}.uniq, params[:style]), multiple: true, class: 'filter-select dropdown-menu' %>
       </div>
-    </div>
-    <div class="dropdown custom-dropdown">
-      <button class="btn dropdown-toggle filter-select" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Availability
-      </button>
-      <div class="bring-front">
-        <%= select_tag 'availability[]', options_for_select(User.pluck(:availability).uniq.flat_map { |c| c.strip }.flat_map {|c| c.split(", ")}.uniq, params[:availability]), multiple: true, class: 'filter-select dropdown-menu' %>
+      <div class="dropdown custom-dropdown">
+        <button class="btn dropdown-toggle filter-select" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Availability
+        </button>
+        <div class="bring-front">
+          <%= select_tag 'availability[]', options_for_select(User.pluck(:availability).uniq.flat_map { |c| c.strip }.flat_map {|c| c.split(", ")}.uniq, params[:availability]), multiple: true, class: 'filter-select dropdown-menu' %>
+        </div>
       </div>
-    </div>
-    <div class="dropdown custom-dropdown">
-      <button class="btn dropdown-toggle filter-select" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Frequency
-      </button>
-      <div class="bring-front">
-        <%= select_tag 'frequency[]', options_for_select(User.pluck(:frequency).uniq.flat_map { |c| c.strip }.flat_map {|c| c.split(", ")}.uniq, params[:frequency]), multiple: true, class: 'filter-select dropdown-menu' %>
+      <div class="dropdown custom-dropdown">
+        <button class="btn dropdown-toggle filter-select" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Frequency
+        </button>
+        <div class="bring-front">
+          <%= select_tag 'frequency[]', options_for_select(User.pluck(:frequency).uniq.flat_map { |c| c.strip }.flat_map {|c| c.split(", ")}.uniq, params[:frequency]), multiple: true, class: 'filter-select dropdown-menu' %>
+        </div>
       </div>
-    </div>
-    <div class="dropdown custom-dropdown">
-      <button class="btn dropdown-toggle filter-select" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Objectives
-      </button>
-      <div class="bring-front">
-        <%= select_tag 'objectives[]', options_for_select(User.pluck(:objectives).uniq.flat_map { |c| c.strip }.flat_map {|c| c.split(", ")}.uniq, params[:objectives]), multiple: true, class: 'filter-select dropdown-menu' %>
+      <div class="dropdown custom-dropdown">
+        <button class="btn dropdown-toggle filter-select" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Objectives
+        </button>
+        <div class="bring-front">
+          <%= select_tag 'objectives[]', options_for_select(User.pluck(:objectives).uniq.flat_map { |c| c.strip }.flat_map {|c| c.split(", ")}.uniq, params[:objectives]), multiple: true, class: 'filter-select dropdown-menu' %>
+        </div>
       </div>
-    </div>
-    <div class="dropdown custom-dropdown">
-      <button class="btn dropdown-toggle filter-select" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Projects
-      </button>
-      <div class="bring-front">
-        <%= select_tag 'projects[]', options_for_select(User.pluck(:projects).uniq.flat_map { |c| c.strip }.flat_map {|c| c.split(", ")}.uniq, params[:projects]), multiple: true, class: 'filter-select dropdown-menu' %>
+      <div class="dropdown custom-dropdown">
+        <button class="btn dropdown-toggle filter-select" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          Projects
+        </button>
+        <div class="bring-front">
+          <%= select_tag 'projects[]', options_for_select(User.pluck(:projects).uniq.flat_map { |c| c.strip }.flat_map {|c| c.split(", ")}.uniq, params[:projects]), multiple: true, class: 'filter-select dropdown-menu' %>
+        </div>
       </div>
-    </div>
-    <div class="dropdown custom-dropdown">
-      <div class="bring-front">
-        <%= select_tag 'location', options_for_select(["1","2","3","4","5","10","20","30","40","50"], params[:location]), prompt: "Distance", class: 'filter-select' %>
+      <div class="dropdown custom-dropdown">
+        <div class="bring-front">
+          <%= select_tag 'location', options_for_select(["1","2","3","4","5","10","20","30","40","50"], params[:location]), prompt: "Distance", class: 'filter-select' %>
+        </div>
       </div>
-    </div>
-    <%= f.submit "Filter", class: "filter-button" %>
-    <%= link_to "Clear", root_path, class: "filter-button" %>
-  <% end %>
-</div>
-<div class="content">
-  <div class="cards-container">
-    <% if @users.any? %>
-      <ul>
-        <% @users.each do |user| %>
-          <li>
-            <%= link_to user_path(user), class: 'card-link' do %>
-              <div class="card">
-                <div class="card-image">
-                  <% if user.photo.attached? %>
-                    <%= cl_image_tag user.photo.key, alt: user.nickname, class: 'card-img' %>
-                  <% else %>
-                    <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg", alt: user.nickname, class: 'card-img' %>
-                  <% end %>
-                </div>
-                <div class="card-info">
-                  <h3 class="card-name"><%= user.nickname %></h3>
-                  <p><i class="fas fa-music"></i> <%= user.instrument %></p>
-                  <p><i class="fa-solid fa-square-poll-vertical"></i> <%= user.style %></p>
-                  <p><i class="fa-solid fa-clock"></i> <%= user.availability %></p>
-                  <p><i class="fa-solid fa-calendar-days"></i> <%= user.frequency %></p>
-                  <p><i class="fa-regular fa-circle-dot"></i> <%= user.objectives %></p>
-                  <p><i class="fa-solid fa-question"></i> <%= user.projects %></p>
-                </div>
-              </div>
-            <% end %>
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <p class="text-center"><%= "Sorry, no musician found" %> <i class="fa-regular fa-face-sad-cry"></i></p>
+      <%= f.submit "Filter", class: "filter-button" %>
+      <%= link_to "Clear", root_path, class: "filter-button" %>
     <% end %>
+  </div>
+  <div class="content" data-home-screen-target="content">
+    <div class="cards-container">
+      <% if @users.any? %>
+        <ul>
+          <% @users.each do |user| %>
+            <li>
+              <%= link_to user_path(user), class: 'card-link' do %>
+                <div class="card">
+                  <div class="card-image">
+                    <% if user.photo.attached? %>
+                      <%= cl_image_tag user.photo.key, alt: user.nickname, class: 'card-img' %>
+                    <% else %>
+                      <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg", alt: user.nickname, class: 'card-img' %>
+                    <% end %>
+                  </div>
+                  <div class="card-info">
+                    <h3 class="card-name"><%= user.nickname %></h3>
+                    <p><i class="fas fa-music"></i> <%= user.instrument %></p>
+                    <p><i class="fa-solid fa-square-poll-vertical"></i> <%= user.style %></p>
+                    <p><i class="fa-solid fa-clock"></i> <%= user.availability %></p>
+                    <p><i class="fa-solid fa-calendar-days"></i> <%= user.frequency %></p>
+                    <p><i class="fa-regular fa-circle-dot"></i> <%= user.objectives %></p>
+                    <p><i class="fa-solid fa-question"></i> <%= user.projects %></p>
+                  </div>
+                </div>
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="text-center"><%= "Sorry, no musician found" %> <i class="fa-regular fa-face-sad-cry"></i></p>
+      <% end %>
+    </div>
   </div>
 </div>
