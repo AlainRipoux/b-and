@@ -12,10 +12,10 @@
       <%= link_to messages_path, class: controller_name == "messages" && action_name == "index" ? "active" : "" do %>
         <i class="fa-solid fa-comments"></i>
           <% if @unanswered_messages.any? %>
-            <span class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-secondary"></span>
+            <span class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-danger">
             <%= @unanswered_messages.count %>
+            <span class="visually-hidden">unanswered messages</span></span>
           <% end %>
-            <span class="visually-hidden">unanswered messages</span>
       <% end %>
     </li>
 
@@ -23,10 +23,11 @@
       <%= link_to notifications_path, class: controller_name == "invites" && action_name == "index" ? "active" : "" do %>
         <i class="fas fa-bell"></i>
           <% if current_user.invites.where(status: "pending").any? %>
-            <span class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-secondary"></span>
+            <span class="position-absolute top-10 start-100 translate-middle badge rounded-pill bg-danger">
             <%= current_user.invites.where(status: "pending").count %>
-          <% end %>
             <span class="visually-hidden">unread invites</span>
+            </span>
+          <% end %>
       <% end %>
     </li>
 

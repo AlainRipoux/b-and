@@ -13,8 +13,11 @@
                   <%= cl_image_tag invite.second_user.photo.key, alt: "avatar", height: 50, width: 50, crop: :fill, class:"rounded-circle" %>
                 </div>
                 <div>
-                  <span><%=invite.second_user.nickname %></span><br>
-                  <span class="opacity-50"><%= invite.messages.last.user == current_user ? "You: " : "" %><%= invite.messages.last.content.truncate(25) %></span>
+                  <span><%= link_to invite.first_user.nickname, invite_invite_messages_path(invite) %></span><br>
+                  <div class="d-flex">
+                    <span class="opacity-50"><%= invite.messages.last.user == current_user ? "You: " : "" %><%= invite.messages.last.content.truncate(25) %></span>
+                    <i class="justify-content-between"><%= invite.messages.last.created_at < 24.hours.ago.to_time ? invite.messages.last.created_at.strftime("%a %b %e at %l:%M %p") : "#{(Time.current - invite.messages.last.created_at).round.modulo(24)} hours ago" %></i>
+                  </div>
                 </div>
               </div>
             <% else %>
@@ -24,7 +27,10 @@
                 </div>
                 <div>
                   <span><%= link_to invite.first_user.nickname, invite_invite_messages_path(invite) %></span><br>
-                  <span class="opacity-50"><%= invite.messages.last.content.truncate(25) %></span>
+                  <div class="d-flex">
+                    <span class="opacity-50"><%= invite.messages.last.user == current_user ? "You: " : "" %><%= invite.messages.last.content.truncate(25) %></span>
+                    <i class="justify-content-between"><%= invite.messages.last.created_at < 24.hours.ago.to_time ? invite.messages.last.created_at.strftime("%a %b %e at %l:%M %p") : "#{(Time.current - invite.messages.last.created_at).round.modulo(24)} hours ago" %></i>
+                  </div>
                 </div>
               </div>
             <% end %>
