@@ -1,17 +1,16 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["animation", "content", "filters"];
+  static targets = ["animation"];
 
   connect() {
     setTimeout(() => {
       this.animationTarget.classList.add("hidden");
-      this.contentTarget.classList.add("visible");
-      this.filtersTarget.classList.add("visible");
-    }, 3000);
+    }, 5000);
 
     setTimeout(() => {
       this.animationTarget.remove();
-    }, 4000);
+      window.location.replace("/users");
+    }, 5500);
   }
 }

@@ -1,14 +1,13 @@
-<nav class="navbar" data-controller="hello">
+<nav class="navbar">
   <ul>
     <% if user_signed_in? %>
     <li>
-    <%= link_to root_path, class: controller_name == "users" && action_name == "index" ? "active" : "" do %>
+    <%= link_to users_path, class: controller_name == "users" && action_name == "index" ? "active" : "" do %>
       <i class="fa-solid fa-magnifying-glass"></i>
     <% end %></li>
     <li><%= link_to mybands_path, class: controller_name == "bands" && action_name == "mybands" ? "active" : "" do %>
       <i class="fa-solid fa-users"></i>
     <% end %></li>
-
     <li class="position-relative">
       <%= link_to messages_path, class: controller_name == "messages" && action_name == "index" ? "active" : "" do %>
         <i class="fa-solid fa-comments">
@@ -22,7 +21,6 @@
           <% end %>
       <% end %>
     </li>
-
     <li class="position-relative">
       <%= link_to notifications_path, class: controller_name == "invites" && action_name == "index" ? "active" : "" do %>
         <i class="fas fa-bell"></i>
@@ -36,7 +34,6 @@
           <% end %>
       <% end %>
     </li>
-
     <li class="nav-item dropup">
       <% if current_user.photo.attached? %>
         <%= cl_image_tag current_user.photo.key, alt: "avatar", height: 50, width: 50, data: {bs_toggle: "dropdown"}, id: "navbarDropdown", class: "rounded-circle object-fit-cover"   %>
