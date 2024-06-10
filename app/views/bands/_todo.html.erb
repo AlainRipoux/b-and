@@ -1,0 +1,20 @@
+<div class="mt-3">
+  <div class="ms-2 ">
+    <% @tasks.where(done: false).each do |task| %>
+      <div>
+        <div class="list-unstyled">
+          <%= link_to change_status_path(task) do %>
+            <i class="fa-regular fa-square"></i>
+          <% end %>
+          <%= task.content %>
+        </div>
+        <div class="list-unstyled">
+          <%= task.user.firstname %>
+            <%= link_to edit_task_path(task) do %>
+            <i class="fa-solid fa-pen-to-square"></i>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

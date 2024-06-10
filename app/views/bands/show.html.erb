@@ -14,83 +14,32 @@
 
     <h1><%= @band.name %></h1>
 
-    <div class="list-unstyled">
-      <li> <strong>Owned by :</strong><%= link_to "#{@band.user.firstname} #{@band.user.lastname}", user_path(@band.user) %></li>
-      <li> <strong>Members :</strong>
-      <% @band.users.each do |member| %>
-        <br><%= link_to "#{member.firstname} #{member.lastname} (#{member.instrument})", user_path(member) %>
-      <% end %>
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#tasks" type="button" role="tab" aria-controls="home" aria-selected="true">Tasks</button>
       </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false">Messages</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#members" type="button" role="tab" aria-controls="members" aria-selected="false">Members</button>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="tasks" role="tabpanel" aria-labelledby="home-tab"><%= render "tasks" %></div>
+      <div class="tab-pane fade" id="messages" role="tabpanel" aria-labelledby="messages-tab"><%= render "messages" %></div>
+      <div class="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab"><%= render "members" %></div>
     </div>
-  </div>
 
-  <div class="mt-5">
-    <h2>Tasks <%= link_to new_band_task_path(@band) do %>
-      <i class="fa-solid fa-square-plus"></i>
-    <% end %></h2>
-
-    <div class="mt-3">
-      <div class="ms-2 ">
-        <h6><strong>To do</strong></h6>
-        <% @tasks.where(done: false).each do |task| %>
-            <div>
-              <li class="list-unstyled">
-              <%= link_to change_status_path(task) do %>
-                <i class="fa-regular fa-square"></i>
-              <% end %>
-              <%= task.content %></li>
-              <li class="list-unstyled"><%= task.user.firstname %><%= link_to edit_task_path(task) do %>
-                <i class="fa-solid fa-pen-to-square"></i>
-              <% end %>
-              </li>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="ms-2 mt-2">
-        <h6><strong>Done</strong></h6>
-        <% @tasks.where(done: true).each do |task| %>
-        <div>
-            <li class="list-unstyled">
-              <i class="fa-solid fa-square-check"></i>
-              <%= task.content %></li>
-            <li class="list-unstyled">
-              <%= task.user.firstname %>
-              <%= link_to task_path(task), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
-                <i class="fa-solid fa-trash"></i>
-              <% end %>
-            </li>
-          <% end %>
-        </div>
-      </div>
+    <div class="col mx-auto mb-3">
+        <% if policy(@band).edit? %>
+          <%= link_to "Edit your band", edit_band_path(@band), class: "col btn btn-large" %>
+        <% else %>
+          <div class="d-flex justify-content-center">
+          <%= link_to "Add review", '#', {:remote => true, 'data-bs-toggle' =>  "modal", 'data-bs-target' => '#addreview', class: "btn btn-large btn-large:hover"} %>
+          </div>
+        <% end %>
     </div>
+
   </div>
 </div>
-
-  <div class="col mx-auto mb-3">
-      <% if policy(@band).edit? %>
-        <%= link_to "Edit your band", edit_band_path(@band), class: "col btn btn-large" %>
-      <% else %>
-        <div class="d-flex justify-content-center">
-        <%= link_to "Add review", '#', {:remote => true, 'data-bs-toggle' =>  "modal", 'data-bs-target' => '#addreview', class: "btn btn-large btn-large:hover"} %>
-        </div>
-      <% end %>
-  </div>
-
-<div class="container chatroom">
-  <h3>#<%= @band.name %></h3>
-
-  <div class="messages">
-    <% @band.band_messages.each do |message| %>
-      <div id="message-<%= message.id %>">
-        <small>
-          <strong><%= message.user.nickname %></strong>
-          <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
-        </small>
-        <p><%= message.content %></p>
-      </div>
-    <% end %>
-  </div>
-</div>
-
-<%= render 'band_messages/form', band: @band, user: current_user, band_message: @band_messages %>
