@@ -72,9 +72,9 @@
           <li>
             <%= link_to user_path(user), class: 'card-link' do %>
               <div class="card">
-                <div class="card-image">
+                <div class="img">
                   <% if user.photo.attached? %>
-                    <%= cl_image_tag user.photo.key, alt: user.firstname, class: 'card-img' %>
+                    <%= cl_image_tag user.photo.key, alt: user.firstname, height: "304" %>
                   <% else %>
                     <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg", alt: user.firstname, class: 'card-img' %>
                   <% end %>
