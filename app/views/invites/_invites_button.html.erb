@@ -1,9 +1,11 @@
 <div data-controller="invites">
-  <% @current_user.invites.order(:status).each do |invite| %>
+  <% @current_user.invites.order(:created_at).each do |invite| %>
     <div>
       <% if invite.status != "declined"  %>
-        <div data-invites-target="lign"><p><%= cl_image_tag invite.first_user.photo.key, height: 50, width: 50, crop: :fill, class:"rounded-circle" %>
-          <strong><%= invite.first_user.firstname %></strong> sends you an invite
+        <div data-invites-target="lign">
+        <p><%= link_to user_path(invite.first_user) do %>
+        <%= cl_image_tag invite.first_user.photo.key, height: 50, width: 50, crop: :fill, class:"rounded-circle" %>
+          <strong><%= invite.first_user.firstname %></strong> <% end %> sends you an invite
 
           <% if invite.status == "pending"  %>
             <%= link_to "Accept", accept_path(invite), data: {turbo_method: :patch, invites_target: "accept", action: "click->invites#updateAccept"} %>

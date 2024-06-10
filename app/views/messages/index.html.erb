@@ -2,43 +2,43 @@
 
   <h1>Messages</h1>
 
-  <% if @invites.any? %>
-    <% if @invite_messages.any? %>
-      <% @invites.each do |invite| %>
+  <% if !@invites.empty? %>
+    <% @invites.each do |invite| %>
+      <% if invite.messages.any? %>
         <%= link_to invite_invite_messages_path(invite) do %>
           <div>
             <% if invite.first_user == current_user %>
-              <div class="d-flex m-2 my-4 align-items-center">
-                <div class="me-3">
+              <div class="d-flex m-2 my-4">
+                <div class="me-3 align-items-center">
                   <%= cl_image_tag invite.second_user.photo.key, alt: "avatar", height: 50, width: 50, crop: :fill, class:"rounded-circle" %>
                 </div>
-                <div>
-                  <span><%= link_to invite.first_user.nickname, invite_invite_messages_path(invite) %></span><br>
-                  <div class="d-flex">
-                    <span class="opacity-50"><%= invite.messages.last.user == current_user ? "You: " : "" %><%= invite.messages.last.content.truncate(25) %></span>
-                    <i class="justify-content-between"><%= invite.messages.last.created_at < 24.hours.ago.to_time ? invite.messages.last.created_at.strftime("%a %b %e at %l:%M %p") : "#{(Time.current - invite.messages.last.created_at).round.modulo(24)} hours ago" %></i>
+                <div style="width:100%" <%= invite.messages.last.user == current_user ? "" : 'class=fw-bold' %>>
+                  <span><%= invite.first_user.nickname %></span><br>
+                  <div class="d-flex justify-content-between small">
+                    <span class="opacity-50 text-truncate"><%= invite.messages.last.user == current_user ? "You: " : "" %><%= invite.messages.last.content.truncate(30, separator: /\s/) %></span>
+                    <span class="opacity-75"><%= invite.messages.last.created_at < 24.hours.ago.to_time ? invite.messages.last.created_at.strftime("%d/%m/%Y") : TimeDifference.between(Time.now, invite.messages.last.created_at).in_hours.round > 1 ? "#{TimeDifference.between(Time.now, invite.messages.last.created_at).in_hours.round} hours ago" : "Less than 1 hour ago" %></span>
                   </div>
                 </div>
               </div>
             <% else %>
-              <div class="d-flex m-2 my-4 align-items-center">
-                <div class="me-3">
+              <div class="d-flex m-2 my-4">
+                <div class="me-3 align-items-center">
                   <%= cl_image_tag invite.first_user.photo.key, alt: "avatar", height: 50, width: 50, crop: :fill, class:"rounded-circle" %>
                 </div>
-                <div>
-                  <span><%= link_to invite.first_user.nickname, invite_invite_messages_path(invite) %></span><br>
-                  <div class="d-flex">
-                    <span class="opacity-50"><%= invite.messages.last.user == current_user ? "You: " : "" %><%= invite.messages.last.content.truncate(25) %></span>
-                    <i class="justify-content-between"><%= invite.messages.last.created_at < 24.hours.ago.to_time ? invite.messages.last.created_at.strftime("%a %b %e at %l:%M %p") : "#{(Time.current - invite.messages.last.created_at).round.modulo(24)} hours ago" %></i>
+                <div style="width:100%" <%= invite.messages.last.user == current_user ? "" : 'class=fw-bold' %>>
+                  <span><%= invite.first_user.nickname %></span><br>
+                  <div class="d-flex justify-content-between small">
+                    <span class="opacity-50 text-truncate"><%= invite.messages.last.user == current_user ? "You: " : "" %><%= invite.messages.last.content.truncate(30, separator: /\s/) %></span>
+                    <span class="opacity-75"><%= invite.messages.last.created_at < 24.hours.ago.to_time ? invite.messages.last.created_at.strftime("%d/%m/%Y") : TimeDifference.between(Time.now, invite.messages.last.created_at).in_hours.round > 1 ? "#{TimeDifference.between(Time.now, invite.messages.last.created_at).in_hours.round} hours ago" : "Less than 1 hour ago" %></span>
                   </div>
                 </div>
               </div>
             <% end %>
           </div>
         <% end %>
+      <% else %>
+        <p class="text-center"><%= "Sorry, there is no message" %> <i class="fa-regular fa-face-sad-cry"></i></p>
       <% end %>
-    <% else %>
-      <p class="text-center"><%= "Sorry, there is no message" %> <i class="fa-regular fa-face-sad-cry"></i></p>
     <% end %>
   <% else %>
     <p class="text-center"><%= "Sorry, make some connections first" %> <i class="fa-regular fa-face-sad-cry"></i></p>

@@ -32,7 +32,7 @@ html {
 }
 
 .navbar ul li {
-  flex: 1;
+  // flex: 1;
   text-align: center;
 }
 
@@ -52,7 +52,7 @@ html {
 }
 
 .navbar i {
-  font-size: 15px;
+  font-size: 40px;
 }
 
 .space-navbar {
@@ -65,4 +65,8 @@ html {
   border-radius: 12px;
   padding: 10px 20px;
   font-size: 1rem;
+}
+
+.badge {
+  font-size: 50%;
 }
