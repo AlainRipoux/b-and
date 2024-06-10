@@ -3,23 +3,19 @@
 
     <ul class="nav nav-pills" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="todo-tab" data-bs-toggle="tab" data-bs-target="#todo" type="button" role="tab" aria-controls="todo" aria-selected="true">To Do</button>
+        <button class="nav-link active tag-link" id="todo-tab" data-bs-toggle="tab" data-bs-target="#todo" type="button" role="tab" aria-controls="todo" aria-selected="true">To Do</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="done-tab" data-bs-toggle="tab" data-bs-target="#done" type="button" role="tab" aria-controls="done" aria-selected="false">Done</button>
+        <button class="nav-link tag-link" id="done-tab" data-bs-toggle="tab" data-bs-target="#done" type="button" role="tab" aria-controls="done" aria-selected="false">Done</button>
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade show active" id="todo" role="tabpanel" aria-labelledby="todo-tab"> <%= render "todo"  %></div>
       <div class="tab-pane fade" id="done" role="tabpanel" aria-labelledby="done-tab"> <%= render "done" %></div>
     </div>
+  </div>
 
-    <h3 class= "mt-3">
-      <%= link_to new_band_task_path(@band) do %>
-        <i class="fa-solid fa-square-plus"></i>
-      <% end %>
-      New task
-    </h3>
-
+  <div class="d-grid gap-2 m-5">
+    <%= link_to "New task", new_band_task_path(@band), class:"btn btn-primary"%>
   </div>
 </div>

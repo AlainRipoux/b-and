@@ -1,22 +1,44 @@
 <div class="container chatroom">
-  <h3>
-  <% if @invite.first_user == current_user %>
-    <%= link_to @invite.second_user.nickname, user_path(@invite.second_user) %>
-  <% else %>
-    <%= link_to @invite.first_user.nickname, user_path(@invite.first_user) %>
-  <% end %>
-  </h3>
-  <div class="messages">
-    <% @invite.messages.each do |message| %>
-      <div id="message-<%= message.id %>">
-        <small>
-          <strong><%= link_to message.user.nickname, user_path(message.user) %></strong>
-          <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
-        </small>
-        <p><%= message.content %></p>
-      </div>
+  <h3 class="text-center">
+    <% if @invite.first_user == current_user %>
+      <%= link_to user_path(@invite.second_user) do %>
+        <%= cl_image_tag @invite.second_user.photo.key, alt: "avatar", width: 90, height: 90, crop: :fill, class:"rounded-circle" %><br>
+        <span><%= @invite.second_user.nickname %></span>
+      <% end %>
+    <% else %>
+      <%= link_to user_path(@invite.first_user) do %>
+        <%= cl_image_tag @invite.first_user.photo.key, alt: "avatar", width: 90, height: 90, crop: :fill, class:"rounded-circle" %><br>
+        <span><%= @invite.first_user.nickname %>
+      <% end %>
     <% end %>
+  </h3>
+
+
+    <div class="messages">
+      <% @invite.messages.each do |message| %>
+        <% if message.user != current_user %>
+          <div class="d-flex flex-row justify-content-start">
+            <%= cl_image_tag message.user.photo.key, alt: "avatar", width: 45, height: 45, crop: :fill, class:"rounded-circle" %>
+            <div id="message-<%= message.id %>">
+              <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;"> <%= message.content %></p>
+              <p class="small ms-3 mb-3 rounded-3 float-end"><%= message.created_at.strftime("%H:%M | %b %d") %></p>
+            </div>
+          </div>
+        <% else %>
+          <div class="d-flex flex-row justify-content-end">
+            <div id="message-<%= message.id %>">
+              <p class="p-2 me-3 mb-1 text-white rounded-3 bg-primary"><%= message.content %></p>
+              <p class="small me-3 mb-3 rounded-3 "><%= message.created_at.strftime("%H:%M | %b %d") %></p>
+            </div>
+              <%= cl_image_tag message.user.photo.key, alt: "avatar", width: 45, height: 45, crop: :fill, class:"rounded-circle" %>
+          </div>
+        <% end %>
+      <% end %>
+
+
+      <div class="pe-3 pb-5 mb-5 position-absolute position-fixed bottom-0" style="width:100%">
+        <%= render 'messages/form', invite: @invite, user: current_user, band_message: @band_messages %>
+      </div>
+
   </div>
 </div>
-
-<%= render 'messages/form', invite: @invite, user: current_user, band_message: @band_messages %>

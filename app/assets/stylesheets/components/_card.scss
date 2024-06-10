@@ -11,6 +11,7 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   background-color: #30214b;
   color: #ffffff;
+  border: solid #549F55;
 }
 
 .card:hover {
@@ -24,16 +25,19 @@
   margin-bottom: 15px;
   border-radius: 15px;
   overflow: hidden;
+  border: solid #D01FE5;
 }
 
 .card-image img {
-  width: 100%;
-  height: auto;
+  // width: 100%;
+  // height: auto;
   border-radius: 15px;
+  // width: 304;
+  // height: 456;
 }
 
 .card-info {
-  text-align: center;
+  text-align: start;
 }
 
 .card-name {
