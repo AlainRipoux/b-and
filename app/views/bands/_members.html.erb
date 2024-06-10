@@ -1,9 +1,14 @@
 <div class="container mt-3">
   <div class="list-unstyled">
-    <li> <strong>Owner</strong><br><%= link_to "#{@band.user.firstname} #{@band.user.lastname}", user_path(@band.user) %></li>
-    <li class="mt-3"> <strong>Members </strong>
+    <li> <h5><strong>Owner</strong></h5>
+      <li><%= cl_image_tag @band.user.photo.key, alt: "avatar", height: 50, width: 50, crop: :fill, class:"rounded-circle mb-3 me-2" %>
+      <%= link_to "#{@band.user.firstname} #{@band.user.lastname}", user_path(@band.user) %>
+    </li>
+    <li class="mt-4"> <h5><strong>Members </strong></h5>
       <% @band.users.each do |member| %>
-        <br><%= link_to "#{member.firstname} #{member.lastname} (#{member.instrument})", user_path(member) %>
+        <li><%= cl_image_tag member.photo.key, alt: "avatar", height: 50, width: 50, crop: :fill, class:"rounded-circle mb-3 me-2" %>
+          <%= link_to "#{member.firstname} #{member.lastname} (#{member.instrument})", user_path(member) %>
+        </li>
       <% end %>
     </li>
   </div>

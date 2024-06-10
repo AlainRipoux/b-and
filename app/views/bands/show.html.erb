@@ -1,7 +1,21 @@
 <div class="container">
-  <%= link_to bands_path do %>
-    <i class="fa-solid fa-chevron-left"></i>
-  <% end %>
+
+  <div class="d-flex">
+    <%= link_to bands_path do %>
+      <i class="fa-solid fa-chevron-left"></i>
+    <% end %>
+
+    <div class="col mx-auto mb-3 text-end">
+      <% if policy(@band).edit? %>
+        <%= link_to edit_band_path(@band) do%>
+          <i class="fa-solid fa-pen-to-square"></i>
+        <% end %>
+      <% else %>
+        <%= link_to "Add review", '#', {:remote => true, 'data-bs-toggle' =>  "modal", 'data-bs-target' => '#addreview', class: "btn btn-large btn-large:hover"} %>
+          <i class="fa-regular fa-star"></i>
+      <% end %>
+    </div>
+  </div>
 
   <div>
     <div>
@@ -16,13 +30,13 @@
 
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#tasks" type="button" role="tab" aria-controls="home" aria-selected="true">Tasks</button>
+        <button class="nav-link active tag-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#tasks" type="button" role="tab" aria-controls="home" aria-selected="true">Tasks</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false">Messages</button>
+        <button class="nav-link tag-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false">Messages</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#members" type="button" role="tab" aria-controls="members" aria-selected="false">Members</button>
+        <button class="nav-link tag-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#members" type="button" role="tab" aria-controls="members" aria-selected="false">Members</button>
       </li>
     </ul>
     <div class="tab-content" id="myTabContent">
@@ -31,15 +45,7 @@
       <div class="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab"><%= render "members" %></div>
     </div>
 
-    <div class="col mx-auto mb-3">
-        <% if policy(@band).edit? %>
-          <%= link_to "Edit your band", edit_band_path(@band), class: "col btn btn-large" %>
-        <% else %>
-          <div class="d-flex justify-content-center">
-          <%= link_to "Add review", '#', {:remote => true, 'data-bs-toggle' =>  "modal", 'data-bs-target' => '#addreview', class: "btn btn-large btn-large:hover"} %>
-          </div>
-        <% end %>
-    </div>
+
 
   </div>
 </div>
