@@ -9,7 +9,7 @@
   <div class="m-3">
     <% if @bands.any? %>
       <% @bands.each do |band| %>
-      <li class="list-unstyled mb-2">
+      <li class="list-unstyled my-4">
         <% if band.photo.attached? %>
           <%= cl_image_tag band.photo.key, alt: "#{band.name}", height: 50, width: 50, crop: :fill, class:"rounded-circle" %>
           <% end %>

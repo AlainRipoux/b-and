@@ -13,10 +13,9 @@
       <div class="tab-pane fade show active" id="todo" role="tabpanel" aria-labelledby="todo-tab"> <%= render "todo"  %></div>
       <div class="tab-pane fade" id="done" role="tabpanel" aria-labelledby="done-tab"> <%= render "done" %></div>
     </div>
+  </div>
 
-    <div class="d-grid gap-2 m-5">
-      <%= link_to "New task", new_band_task_path(@band), class:"btn btn-primary"%>
-    </div>
-
+  <div class="d-grid gap-2 m-5">
+    <%= link_to "New task", new_band_task_path(@band), class:"btn btn-primary"%>
   </div>
 </div>
