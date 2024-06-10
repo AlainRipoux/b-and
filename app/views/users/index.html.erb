@@ -74,13 +74,13 @@
               <div class="card">
                 <div class="card-image">
                   <% if user.photo.attached? %>
-                    <%= cl_image_tag user.photo.key, alt: user.nickname, class: 'card-img' %>
+                    <%= cl_image_tag user.photo.key, alt: user.firstname, class: 'card-img' %>
                   <% else %>
-                    <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg", alt: user.nickname, class: 'card-img' %>
+                    <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg", alt: user.firstname, class: 'card-img' %>
                   <% end %>
                 </div>
+                <h3 class="card-name"><%= user.firstname %></h3>
                 <div class="card-info">
-                  <h3 class="card-name"><%= user.nickname %></h3>
                   <p><i class="fas fa-music"></i> <%= user.instrument %></p>
                   <p><i class="fa-solid fa-square-poll-vertical"></i> <%= user.style %></p>
                   <p><i class="fa-solid fa-clock"></i> <%= user.availability %></p>
