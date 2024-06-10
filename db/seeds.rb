@@ -16,27 +16,48 @@ Message.destroy_all
 
 puts "Creating users..."
 
-users = 30.times.map do
-  user = User.new(
-    firstname: Faker::Name.first_name,
-    lastname: Faker::Name.last_name,
-    nickname: Faker::Internet.username,
-    email: Faker::Internet.email,
-    password: "azerty",
-    instrument: Faker::Music.instrument,
-    biography: Faker::Lorem.paragraph(sentence_count: 3),
-    style: Faker::Music.genre,
-    address: ["53 rue de l'échiquier 75010 Paris", "26 rue de la Félicité 75017 Paris", "54b rue Ordener 75018 Paris"].sample,
-    availability: ["Weekdays", "Weekends", "Flexible", "Weekday Evenings", "Evenings", "Mornings", "Afternoons"].sample(rand(1..2)).join(", "),
-    frequency: ["Everyday", "Once a week", "Twice a week", "Three times a week", "Once a month", "Twice a month"].sample(rand(1..2)).join(", "),
-    objectives: ["Jamming", "Recording", "Gigs", "Writing", "Teaching", "Learning", "Just for fun"].sample(rand(1..5)).join(", "),
-    projects: ["Covers", "Originals", "Improv"].sample(rand(1..3)).join(", ")
-  )
-  file = URI.open(Faker::LoremFlickr.image(search_terms: ['musician']))
-  user.photo.attach(io: file, filename: "#{user.nickname}-avatar.png", content_type: "image/png")
-  user.save!
-  user
-end
+users = [
+    { firstname: "Devon", lastname: "Bonner", nickname: "DevonD", email: "devon.bonner@example.com", password: "azerty", instrument: "Guitar", biography: "I play guitar and I sing since ten years. I'm looking for a new band to write songs", style: "#{Faker::Music.genre}", address: "53 rue de l'échiquier 75010 Paris", availability: "Weekdays, Evenings", frequency: "Once a week, Twice a week", objectives: "Jamming, Recording", projects: "Covers, Originals" },
+    { firstname: "John", lastname: "Doe", nickname: "JohnD", email: "john.doe@example.com", password: "azerty", instrument: "Drums", biography: "Drumming for 5 years. Love to play funk and jazz. Looking for a band !", style: "#{Faker::Music.genre}", address: "21 rue de la paix 75002 Paris", availability: "Weekends, Mornings", frequency: "Once a week", objectives: "Recording, Gigs", projects: "Improv, Originals" },
+    { firstname: "Emily", lastname: "Clark", nickname: "EmilyC", email: "emily.clark@example.com", password: "azerty", instrument: "Piano", biography: "Self-taught pianist, looking for a cool band", style: "#{Faker::Music.genre}", address: "10 avenue de l'opéra 75001 Paris", availability: "Flexible", frequency: "Twice a week", objectives: "Writing, Teaching", projects: "Originals, Covers" },
+    { firstname: "Michael", lastname: "Smith", nickname: "MikeS", email: "mike.smith@example.com", password: "azerty", instrument: "Bass", biography: "Bassist looking to join a funk band", style: "funk", address: "34 rue des arts 75003 Paris", availability: "Weekdays, Afternoons", frequency: "Three times a week", objectives: "Jamming, Gigs", projects: "Improv, Covers" },
+    { firstname: "Sarah", lastname: "Johnson", nickname: "SarahJ", email: "sarah.johnson@example.com", password: "azerty", instrument: "Violin", biography: "Violinist with 15 years experience, looking for string quartet", style: "#{Faker::Music.genre}", address: "56 rue de l'université 75007 Paris", availability: "Evenings", frequency: "Once a month", objectives: "Teaching, Learning", projects: "Originals, Covers" },
+    { firstname: "David", lastname: "Brown", nickname: "DaveB", email: "david.brown@example.com", password: "azerty", instrument: "Saxophone", biography: "Saxophonist looking for a jazz ensemble", style: "jazz", address: "78 rue de la victoire 75009 Paris", availability: "Mornings", frequency: "Twice a month", objectives: "Just for fun, Recording", projects: "Improv, Originals" },
+    { firstname: "Laura", lastname: "Williams", nickname: "LauraW", email: "laura.williams@example.com", password: "azerty", instrument: "Sing", biography: "Flutist looking for chamber music group", style: "#{Faker::Music.genre}", address: "45 rue de paradis 75010 Paris", availability: "Weekdays, Evenings", frequency: "Twice a week", objectives: "Jamming, Writing", projects: "Originals, Covers" },
+    { firstname: "James", lastname: "Taylor", nickname: "JamesT", email: "james.taylor@example.com", password: "azerty", instrument: "Trumpet", biography: "Trumpeter with 10 years experience, looking for big band", style: "#{Faker::Music.genre}", address: "67 rue de la pompe 75016 Paris", availability: "Weekends, Afternoons", frequency: "Three times a week", objectives: "Gigs, Teaching", projects: "Improv, Covers" },
+    { firstname: "Sophia", lastname: "Martinez", nickname: "SophiaM", email: "sophia.martinez@example.com", password: "azerty", instrument: "Bass", biography: "Self-taught cellist looking for string ensemble. Love to play on stage !", style: "#{Faker::Music.genre}", address: "89 rue du bac 75007 Paris", availability: "Flexible", frequency: "Once a week", objectives: "Learning, Writing", projects: "Originals, Improv" },
+    { firstname: "Robert", lastname: "Anderson", nickname: "RobA", email: "robert.anderson@example.com", password: "azerty", instrument: "Guitar", biography: "Guitarist. I didn't play music since a few years, but I'd like to play in a rock band ", style: "rock", address: "12 rue de la roquette 75011 Paris", availability: "Weekdays, Evenings", frequency: "Twice a week", objectives: "Jamming, Recording", projects: "Originals, Covers" },
+    { firstname: "Anna", lastname: "Thompson", nickname: "AnnaT", email: "anna.thompson@example.com", password: "azerty", instrument: "DJ", biography: "DJ for 5 years, I'd like to play with other musicians", style: "#{Faker::Music.genre}", address: "23 rue des martyrs 75009 Paris", availability: "Mornings", frequency: "Once a month", objectives: "Teaching, Learning", projects: "Originals, Covers" },
+    { firstname: "Christopher", lastname: "White", nickname: "ChrisW", email: "christopher.white@example.com", password: "azerty", instrument: "Violin", biography: "Violinist looking for duet partner", style: "#{Faker::Music.genre}", address: "34 avenue de l'opéra 75002 Paris", availability: "Afternoons", frequency: "Twice a month", objectives: "Jamming, Writing", projects: "Improv, Originals" },
+    { firstname: "Jessica", lastname: "Harris", nickname: "JessH", email: "jessica.harris@example.com", password: "azerty", instrument: "Sing", biography: "Fun drummer looking for a band", style: "#{Faker::Music.genre}", address: "56 boulevard saint-germain 75005 Paris", availability: "Weekdays, Evenings", frequency: "Three times a week", objectives: "Recording, Gigs", projects: "Originals, Covers" },
+    { firstname: "Daniel", lastname: "Martin", nickname: "DanM", email: "daniel.martin@example.com", password: "azerty", instrument: "Guitar", biography: "Guitarist looking for a blues band", style: "blues", address: "78 rue du cherche-midi 75006 Paris", availability: "Weekends, Mornings", frequency: "Once a week", objectives: "Just for fun, Recording", projects: "Improv, Originals" },
+    { firstname: "Patricia", lastname: "Lee", nickname: "PatL", email: "patricia.lee@example.com", password: "azerty", instrument: "Piano", biography: "Pianist looking for a trio", style: "#{Faker::Music.genre}", address: "90 rue de grenelle 75007 Paris", availability: "Flexible", frequency: "Twice a week", objectives: "Jamming, Writing", projects: "Originals, Covers" }
+  ]
+
+photos = [
+  "https://images.unsplash.com/photo-1621784166258-c6fdfff31879?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" ,
+  "https://images.unsplash.com/photo-1681572128413-31f0d60f8709?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" ,
+  "https://images.unsplash.com/photo-1541528728921-3dd702496228?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" ,
+  "https://images.unsplash.com/photo-1484876065684-b683cf17d276?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" ,
+  "https://images.unsplash.com/photo-1676326037845-b03c0ccb8c13?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" ,
+  "https://images.unsplash.com/photo-1707944496017-7c98f626ca78?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" ,
+  "https://images.unsplash.com/photo-1535732850099-99177944f4c5?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" ,
+  "https://images.unsplash.com/photo-1528074294466-4773b006386e?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" ,
+  "https://images.unsplash.com/photo-1528489496900-d841974f5290?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" ,
+  "https://images.unsplash.com/photo-1517305542662-2dd61accb41d?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" ,
+  "https://images.unsplash.com/photo-1682289385881-a3c13fc3f1b4?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" ,
+  "https://images.unsplash.com/photo-1484972759836-b93f9ef2b293?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" ,
+  "https://images.unsplash.com/photo-1531463368359-151247409561?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" ,
+  "https://images.unsplash.com/photo-1495651779359-881fde1808a6?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" ,
+  "https://images.unsplash.com/photo-1645095908528-c2687f63732a?q=80&w=2034&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+ ]
+
+users.each_with_index do |user, index|
+    user = User.new(user)
+    file = URI.open(photos[index])
+    user.photo.attach(io: file, filename: "#{user.firstname}-avatar.png", content_type: "image/png")
+    user.save!
+  end
 
 user1 = User.new(
   firstname: "Lenny",
@@ -57,15 +78,13 @@ file1 = URI.open("https://cdn-s-www.ledauphine.com/images/7AA4896A-D560-4953-B82
 user1.photo.attach(io: file1, filename: "#{user1.nickname}-avatar.jpg", content_type: "image/jpg")
 user1.save!
 
-users << user1
-
 user2 = User.new(
   firstname: "Patti",
   lastname: "Smith",
   nickname: "Pat",
   email: "admin2@band.com",
   password: "azerty",
-  instrument: "Voice",
+  instrument: "Sing",
   biography: "I am an American singer, songwriter, poet, painter, and author. I love to fuse rock and poetry in my work. You might know my song, 'Because the Night', co-written with Bruce Springsteen.",
   style: "Rock",
   address: "15 villa Gaudelet 75011 Paris",
@@ -78,12 +97,12 @@ file2 = URI.open("https://cdns-images.dzcdn.net/images/artist/14b440783a197d1eef
 user2.photo.attach(io: file2, filename: "#{user2.nickname}-avatar.jpg", content_type: "image/jpg")
 user2.save!
 
-users << user2
 
 puts "Created #{User.count} users"
 
 puts "Creating bands..."
 bands = []
+users = User.all
 
 10.times do
   user = users.sample

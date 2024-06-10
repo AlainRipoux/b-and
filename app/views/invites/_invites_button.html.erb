@@ -1,4 +1,4 @@
-<div data-controller="invites">
+<div data-controller="invites" class="my-4">
   <% @current_user.invites.order(:created_at).each do |invite| %>
     <div>
       <% if invite.status != "declined"  %>
@@ -8,8 +8,12 @@
           <strong><%= invite.first_user.firstname %></strong> <% end %> sends you an invite
 
           <% if invite.status == "pending"  %>
-            <%= link_to "Accept", accept_path(invite), data: {turbo_method: :patch, invites_target: "accept", action: "click->invites#updateAccept"} %>
-            <%= link_to "Decline", decline_path(invite), data: {turbo_method: :patch, invites_target: "decline", action: "click->invites#updateDecline"} %>
+            <%= link_to accept_path(invite), data: {turbo_method: :patch, invites_target: "accept", action: "click->invites#updateAccept"} do %>
+              <i class="fa-regular fa-circle-check"></i>
+            <% end %>
+            <%= link_to decline_path(invite), data: {turbo_method: :patch, invites_target: "decline", action: "click->invites#updateDecline"} do %>
+              <i class="fa-regular fa-circle-xmark"></i>
+            <% end %>
           <% elsif invite.status == "accepted" %>
             <%= link_to invite_messages_path(invite) do %>
             <i class="fa-solid fa-envelope"></i>
