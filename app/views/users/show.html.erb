@@ -7,15 +7,13 @@
       <% end %>
 
       <div class="ms-5">
-        <h3><%= @user.nickname %></h3>
+        <h3><%= @user.firstname %></h3>
       </div>
     </div>
 
-    <%# <%= @user.email %>
-
     <div class="justify-content-center">
       <% if @user.photo.attached? == true %>
-        <%= cl_image_tag @user.photo.key, alt: "user picture", class:"rounded-circle mx-auto d-block mt-4", width: 150, height: 150 %>
+        <%= cl_image_tag @user.photo.key, alt: "user picture", class:"rounded-circle mx-auto d-block mt-4", width: 150, height: 150, crop: :fill %>
       <% end %>
     </div>
 
