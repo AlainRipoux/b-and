@@ -1,0 +1,10 @@
+<div class="container mt-3">
+  <div class="list-unstyled">
+    <li> <strong>Owner</strong><br><%= link_to "#{@band.user.firstname} #{@band.user.lastname}", user_path(@band.user) %></li>
+    <li class="mt-3"> <strong>Members </strong>
+      <% @band.users.each do |member| %>
+        <br><%= link_to "#{member.firstname} #{member.lastname} (#{member.instrument})", user_path(member) %>
+      <% end %>
+    </li>
+  </div>
+</div>

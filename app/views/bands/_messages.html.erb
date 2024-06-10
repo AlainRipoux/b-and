@@ -1,0 +1,19 @@
+<div class="container chatroom mt-3">
+  <h3>#<%= @band.name %></h3>
+
+  <div class="messages">
+    <% @band.band_messages.each do |message| %>
+      <div id="message-<%= message.id %>">
+        <small>
+          <strong><%= message.user.nickname %></strong>
+          <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
+        </small>
+        <p><%= message.content %></p>
+      </div>
+    <% end %>
+  </div>
+
+
+  <%= render 'band_messages/form', band: @band, user: current_user, band_message: @band_messages %>
+
+</div>
