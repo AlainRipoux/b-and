@@ -1,2 +1,7 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<body class="homepage">
+  <div data-controller="home-screen">
+    <div class="home-screen" data-home-screen-target="animation">
+      <%= image_tag "logo_band_shadowed.png", alt: "logo Band", id: "logo-home" %>
+      <%= video_tag "video_homepage.mp4", size: "100vw 100vh", autoplay: true, loop: true, muted: true, crop: :true %>
+    </div>
+</body>

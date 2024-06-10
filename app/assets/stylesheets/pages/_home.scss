@@ -44,23 +44,6 @@ html {
   transition: opacity 1s ease-out;
 }
 
-.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.filters {
-  display: none;
-}
-
-.content {
-  display: none;
-}
-
-.visible {
-  display: block;
-}
-
-.navbar {
+.homepage .navbar {
   display: none;
 }
