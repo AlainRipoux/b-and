@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :bands do
     resources :tasks, only: [:new, :create]
     resources :band_messages, only: :create
+    resources :documents, only: [:new, :create]
   end
 
   # Routes for users
