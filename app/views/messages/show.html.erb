@@ -1,4 +1,7 @@
 <div class="container chatroom">
+  <%= link_to :back do %>
+      <i class="fa-solid fa-chevron-left"></i>
+    <% end %>
   <h3 class="text-center mb-5">
     <% if @invite.first_user == current_user %>
       <%= link_to user_path(@invite.second_user) do %>
