@@ -6,3 +6,4 @@
 //= link popper.js
 //= link bootstrap.min.js
 //= link video_homepage.mp4
+//= link manifest.json
