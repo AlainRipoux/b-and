@@ -64,7 +64,7 @@
 <div class="content">
   <div class="cards-container">
     <% if @users.any? %>
-    
+
       <ul>
         <% @users.excluding(current_user).each do |user| %>
           <li>
