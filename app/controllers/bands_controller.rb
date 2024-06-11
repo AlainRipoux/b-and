@@ -33,6 +33,9 @@ class BandsController < ApplicationController
 
   def edit
     @band = Band.find(params[:id])
+    @second_users = current_user.invites_sent.where(status: "accepted").map { |invite| invite.second_user }
+    @first_users = current_user.invites.where(status: "accepted").map { |invite| invite.first_user }
+    @mates = @second_users + @first_users
     authorize @band
   end
 
