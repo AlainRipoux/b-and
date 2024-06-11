@@ -147,7 +147,7 @@ puts "Created #{UserBand.count} user-band associations"
 puts "Creating invites & messages..."
 users.each do |user|
   rand(1..5).times do
-    invite = Invite.create!(first_user: user, second_user: users.sample)
+    invite = Invite.create!(first_user: user, second_user: users.excluding(user).sample)
     Message.create!(content: Faker::Music::Prince.lyric, invite: invite, user: user,)
   end
 end

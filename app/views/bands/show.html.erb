@@ -29,6 +29,8 @@
 
     <h1><%= @band.name %></h1>
 
+    <% if @band.users.include?(current_user) %>
+
     <ul class="nav tabs-line" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
         <button class="nav-link tag-link <%= "active" unless params[:message] %>" id="home-tab" data-bs-toggle="tab" data-bs-target="#tasks" type="button" role="tab" aria-controls="home" aria-selected="true">Tasks</button>
@@ -46,6 +48,15 @@
       <div class="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab"><%= render "members" %></div>
     </div>
 
+    <% else %>
+      <ul class="nav tabs-line" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link tag-link active" id="contact-tab" data-bs-toggle="tab" data-bs-target="#members" type="button" role="tab" aria-controls="members" aria-selected="false">Members</button>
+      </li>
+      </ul>
+        <div class="tab-pane fade show active" id="members" role="tabpanel" aria-labelledby="members-tab"><%= render "members" %></div>
+
+    <% end %>
 
 
   </div>
