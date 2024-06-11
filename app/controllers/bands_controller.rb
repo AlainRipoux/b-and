@@ -6,7 +6,12 @@ class BandsController < ApplicationController
   def show
     @band = Band.find(params[:id])
     @tasks = @band.tasks
+    @documents = @band.documents
+    @document = Document.new
     @band_message = BandMessage.new
+    @second_users = current_user.invites_sent.where(status: "accepted").map { |invite| invite.second_user }
+    @first_users = current_user.invites.where(status: "accepted").map { |invite| invite.first_user }
+    @mates = @second_users + @first_users
     authorize @band
   end
 
