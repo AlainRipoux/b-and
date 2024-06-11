@@ -61,7 +61,7 @@
   <div class="cards-container">
     <% if @users.any? %>
       <ul>
-        <% @users.each do |user| %>
+        <% @users.excluding(current_user).each do |user| %>
           <li>
             <%= link_to user_path(user), class: 'card-link' do %>
               <div class="card">

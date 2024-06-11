@@ -13,10 +13,10 @@
                   <%= cl_image_tag invite.second_user.photo.key, alt: "avatar", height: 50, width: 50, crop: :fill, class:"rounded-circle" %>
                 </div>
                 <div <%= invite.messages.last.user == current_user ? "" : 'class=fw-bold' %>>
-                  <span><%= invite.first_user.nickname %></span><br>
+                  <span><%= invite.second_user.nickname %></span><br>
                   <div class="d-flex justify-content-between small me-3" style="width:80vw">
                     <span class="opacity-50 text-truncate"><%= invite.messages.last.user == current_user ? "You: " : "" %><%= invite.messages.last.content.truncate(30, separator: /\s/) %></span>
-                    <span class="opacity-75 text-nowrap"><%= invite.messages.last.created_at < 24.hours.ago.to_time ? invite.messages.last.created_at.strftime("%d/%m/%Y") : TimeDifference.between(Time.now, invite.messages.last.created_at).in_hours.round > 1 ? "#{TimeDifference.between(Time.now, invite.messages.last.created_at).in_hours.round} hours ago" : "Less than 1 hour ago" %></span>
+                    <span class="opacity-75 text-nowrap"><%= invite.messages.last.created_at < 24.hours.ago.to_time ? invite.messages.last.created_at.strftime("%d/%m/%Y") : TimeDifference.between(Time.now, invite.messages.last.created_at).in_hours.round > 1 ? "#{TimeDifference.between(Time.now, invite.messages.last.created_at).in_hours.round} hours ago" : "#{TimeDifference.between(Time.now, invite.messages.last.created_at).in_minutes.round} minutes ago" %></span>
                   </div>
                 </div>
               </div>
