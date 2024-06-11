@@ -1,15 +1,11 @@
 <div class="container">
   <div class="mx-4">
 
-    <div class="d-flex">
-      <%= link_to :back do %>
+    <%= link_to :back do %>
       <i class="fa-solid fa-chevron-left"></i>
     <% end %>
 
-      <div class="ms-5">
-        <h1><%= @user.firstname %></h1>
-      </div>
-    </div>
+    <h1><%= @user.firstname %></h1>
 
     <div class="justify-content-center">
       <% if @user.photo.attached? == true %>
@@ -49,18 +45,16 @@
 
     <div class="mt-4">
       <h4>Bio</h4>
-      <p><%= @user.biography %></p>
+      <p><%= @user.biography %>
+      <% if @user.user_bands.any? %>
+        <br>Checkout my bands :
+        <% @user.user_bands.each_with_index do |user_band, index| %>
+          <%= link_to user_band.band.name, band_path(user_band.band) %>
+          <%= @user.user_bands.length == index + 1 ? '' : ',' %>
+        <% end %>
+      <% end %>
+      <p>
     </div>
-
-    <% if @user.user_bands.any? %>
-      <div class="mt-4">
-        <h4> Bands </h4>
-          <% @user.user_bands.each_with_index do |user_band, index| %>
-            <span><%= link_to user_band.band.name, band_path(user_band.band) %></span>
-            <%= @user.user_bands.length == index + 1 ? '' : ',' %>
-          <% end %>
-      </div>
-    <% end %>
 
     <div class="mt-4">
       <h4>What I want to play</h4>
@@ -124,7 +118,7 @@
 
     <div class="mt-3 mb-5">
       <h4>Playlist</h4>
-      <div class="d-flex justify-content-evenly fs-5">
+      <div class="d-flex justify-content-evenly fs-5 mt-3">
       <i class="fa-brands fa-spotify"></i>
       <i class="fa-brands fa-deezer"></i>
       <i class="fa-brands fa-soundcloud"></i>
