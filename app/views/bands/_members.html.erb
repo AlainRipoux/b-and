@@ -11,5 +11,13 @@
         </li>
       <% end %>
     </li>
+    <%= render 'bands/modal', band: @band %>
+
+    <% if policy(@band).edit? %>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#invite">
+        Invite
+      </button>
+    <% end %>
+
   </div>
 </div>

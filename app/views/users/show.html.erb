@@ -1,14 +1,24 @@
 <div class="container">
   <div class="mx-4">
 
-    <%= link_to :back do %>
-      <i class="fa-solid fa-chevron-left"></i>
-    <% end %>
+    <div class="d-flex">
+      <%= link_to :back do %>
+        <i class="fa-solid fa-chevron-left"></i>
+      <% end %>
+
+      <div class="col mx-auto mb-3 text-end">
+        <% if policy(@user).edit? %>
+          <%= link_to edit_user_path(@user) do%>
+            <i class="fa-solid fa-pen-to-square"></i>
+          <% end %>
+        <% else %>
+          <%= link_to "Add review", '#', {:remote => true, 'data-bs-toggle' =>  "modal", 'data-bs-target' => '#addreview', class: "btn btn-large btn-large:hover"} %>
+            <i class="fa-regular fa-star"></i>
+        <% end %>
+      </div>
+    </div>
 
     <h1><%= @user.firstname %></h1>
-
-    
-
 
     <div class="justify-content-center">
       <% if @user.photo.attached? == true %>

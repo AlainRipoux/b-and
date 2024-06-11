@@ -53,20 +53,20 @@
       </div>
     </div>
     <div class="dropdown custom-dropdown">
-      <div class="bring-front">
+      <div class="">
         <%= select_tag 'location', options_for_select(["1","2","3","4","5","10","20","30","40","50"], params[:location]), prompt: "Distance", class: 'filter-select' %>
       </div>
     </div>
-  <%= f.submit "Filter", class: "filter-button" %>
-  <%= link_to "Clear", users_path, class: "filter-button" %>
-<% end %>
+    <%= f.submit "Filter", class: "filter-button" %>
+    <%= link_to "Clear", users_path, class: "filter-button" %>
+  <% end %>
 </div>
 <div class="content">
   <div class="cards-container">
     <% if @users.any? %>
-    
+
       <ul>
-        <% @users.each do |user| %>
+        <% @users.excluding(current_user).each do |user| %>
           <li>
             <%= link_to user_path(user), class: 'card-link' do %>
               <div class="card">

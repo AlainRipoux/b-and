@@ -1,8 +1,27 @@
 <div class ="container">
   <%= simple_form_for [ @band ] do |f| %>
     <%= f.input :name %>
-    <%= f.association :user, collection: @mates.sort_by(&:firstname), label_method: :firstname, value_method: :id, multiple: true %>
     <%= f.input :photo, as: :file %>
-    <%= f.submit "New band" %>
+
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      invite
+    </button>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <%= f.association :user, as: :check_boxes, collection: @mates.sort_by(&:firstname), label_method: :firstname, value_method: :id, multiple: true, class: 'dropdown-menu' %>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+      </div>
+    <%= f.submit "create", class: "btn btn-primary" %>
   <% end %>
 </div>
