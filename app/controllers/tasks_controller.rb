@@ -37,7 +37,7 @@ class TasksController < ApplicationController
     @band = @task.band
     @task.done = true
     @task.save!
-    redirect_to band_path(@band)
+    redirect_to band_path(@band, update: true)
     authorize @task
   end
 

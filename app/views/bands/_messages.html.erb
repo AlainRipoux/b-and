@@ -1,19 +1,30 @@
 <div class="container chatroom mt-3">
-  <h3>#<%= @band.name %></h3>
+    <div class="messages">
+      <% @band.band_messages.each_with_index do |message, index| %>
+        <% if message.user != current_user %>
+          <div class="d-flex flex-row justify-content-start <%= @band.band_messages.length == index + 1 ? 'mb-5' : '' %>" style="width:100%">
+            <%= link_to user_path(message.user) do %>
+              <%= cl_image_tag message.user.photo.key, alt: "avatar", width: 45, height: 45, crop: :fill, class:"rounded-circle" %>
+            <% end %>
+            <div id="message-<%= message.id %>" class="text-break" style="max-width: 85%;" >
+              <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;"> <%= message.content %></p>
+              <p class="small ms-3 mb-3 rounded-3 float-end"><%= message.created_at.strftime("%H:%M | %b %d") %></p>
+            </div>
+          </div>
+        <% else %>
+          <div class="d-flex flex-row justify-content-end <%= @band.band_messages.length == index + 1 ? 'mb-5' : '' %>" style="width:100%">
+            <div id="message-<%= message.id %>" class="text-break" style="max-width: 85%" >
+              <p class="p-2 me-3 mb-1 text-white rounded-3 bg-primary"><%= message.content %></p>
+              <p class="small me-3 mb-3 rounded-3 "><%= message.created_at.strftime("%H:%M | %b %d") %></p>
+            </div>
+              <%= cl_image_tag message.user.photo.key, alt: "avatar", width: 45, height: 45, crop: :fill, class:"rounded-circle" %>
+          </div>
+        <% end %>
+      <% end %>
 
-  <div class="messages">
-    <% @band.band_messages.each do |message| %>
-      <div id="message-<%= message.id %>">
-        <small>
-          <strong><%= message.user.nickname %></strong>
-          <i><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
-        </small>
-        <p><%= message.content %></p>
-      </div>
-    <% end %>
+    <div class="ms-2 pe-3 pb-5 mb-5 position-absolute position-fixed bottom-0 start-0" style="width:100%">
+      <%= render 'band_messages/form', band: @band, user: current_user, band_message: @band_messages %>
+    </div>
+
   </div>
-
-
-  <%= render 'band_messages/form', band: @band, user: current_user, band_message: @band_messages %>
-
 </div>

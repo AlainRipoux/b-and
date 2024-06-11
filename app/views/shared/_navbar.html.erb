@@ -1,9 +1,9 @@
 <nav class="navbar">
-  <ul>
     <% if user_signed_in? %>
+  <ul>
     <li>
     <%= link_to users_path, class: controller_name == "users" && action_name == "index" ? "active" : "" do %>
-      <i class="fa-solid fa-magnifying-glass"></i>
+      <%= image_tag "logo_white.png", height: 35, width: 40 %>
     <% end %></li>
     <li><%= link_to mybands_path, class: controller_name == "bands" && action_name == "mybands" ? "active" : "" do %>
       <i class="fa-solid fa-users"></i>

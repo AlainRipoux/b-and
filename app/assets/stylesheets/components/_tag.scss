@@ -6,4 +6,48 @@
   font-size: 1rem;
   width: 150px;
   text-align: center;
+  margin: 2px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tag-green {
+  background-color: #2FD132 ;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  width: 150px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tag_instru {
+  background-color: #2FD132;
+  border-radius: 12px;
+  font-size: 1rem;
+  width: 90px;
+  text-align: center;
+  color: white;
+  margin-right: 5px;
+  margin-top: 6px;
+  position: absolute;
+  z-index: 20;
+  color: white;
+  top: 3px;
+  right: 4px;
+}
+
+.tag_style {
+  background-color: #D01FE5;
+  border-radius: 12px;
+  font-size: 1rem;
+  width: 90px;
+  text-align: center;
+  color: white;
+  margin-top: 6px;
+  position: absolute;
+  z-index: 20;
+  color: white;
+  top: 33px;
+  right: 10px;
 }
