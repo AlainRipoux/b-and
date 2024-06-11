@@ -7,8 +7,8 @@
             <%= link_to user_path(invite.first_user) do %>
             <%= cl_image_tag invite.first_user.photo.key, height: 50, width: 50, crop: :fill, class:"rounded-circle" %>
           </div>
-          <div class="d-flex justify-content-between align-items-center" style="width:100%">
-            <div><strong><%= invite.first_user.firstname %></strong> sends you an invite</div><% end %>
+          <div class="d-flex justify-content-between align-items-center text-nowrap" style="width:100%">
+            <div class="ms-2"><strong><%= invite.first_user.firstname %></strong> sent you an invite</div><% end %>
             <div class="d-flex">
 
               <% if invite.status == "pending"  %>
