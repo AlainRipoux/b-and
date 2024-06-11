@@ -42,6 +42,7 @@ class BandsController < ApplicationController
   def update
     @band = Band.find(params[:id])
     @band.update(band_params)
+    params[:band][:user_id].reject{|u| u == ""}.each {|user_id| UserBand.create(band: @band, user: User.find(user_id.to_i))}
     redirect_to band_path(@band)
     authorize @band
   end

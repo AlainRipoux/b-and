@@ -12,14 +12,13 @@ html {
 
 .navbar {
   position: fixed;
-  bottom: 30px;
+  bottom: 0px;
+  padding-bottom: 30px;
   left: 0;
   width: 100%;
-  background-color: #D01FE5;
+  background-color: #30214b;
   z-index: 1000;
-  border-radius: 50px;
-  border: solid white;
-  box-shadow: 0 0 20px 4px #D01FE5;
+  border-top: solid #170f23;
   border-width: thin;
 }
 
@@ -43,13 +42,13 @@ html {
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  color: #e8a4ee ;
+  color: white;
   font-size: 30px;
   height: 40px;
 }
 
 .navbar li a.active {
-  color: white;
+  color: #2FD132;
 }
 
 .navbar i {
