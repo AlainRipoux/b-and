@@ -3,17 +3,20 @@
     <% if @bands.any? %>
       <ul>
         <% @bands.each do |band| %>
-          <li class="card">
+          <li>
             <%= link_to band_path(band), class: 'card-link' do %>
               <div class="card">
-                <% if band.photo.attached? %>
-                  <%= cl_image_tag band.photo.key, alt: "text" %>
-                <% else %>
-                  <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg", alt: band.name, class: 'card-img'  %>
-                <% end %>
+                <div class="img">
+                  <% if band.photo.attached? %>
+                    <%= cl_image_tag band.photo.key, alt: "text" %>
+                  <% else %>
+                    <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg", alt: band.name, class: 'card-img'  %>
+                  <% end %>
+                </div>
+                <h3 class="card-name"><%= band.name %></h3>
                 <div class="card-info">
-                  <h3><%= band.name %></h3>
                   <p>Lead by <%= band.user.firstname %> "<%= band.user.nickname %>"</p>
+                  <p><i class="fa-solid fa-users"></i> <%= band.users.count %></p>
                 </div>
               </div>
             <% end %>
