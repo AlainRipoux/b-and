@@ -10,6 +10,7 @@
   background-color: #30214b;
   color: #ffffff;
   border: solid #9d9cb5;
+  border-width: thin;
 }
 
 .user-photo {
@@ -21,7 +22,6 @@
     object-fit: cover;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
-    // background: linear-gradient(#e66465, #9d9cb5);
   }
   h3 {
     position: absolute;
@@ -29,6 +29,7 @@
     color: white;
     bottom: 0;
     left: 10px;
+    text-shadow: grey 2px 1px 10px;
   }
 }
 
