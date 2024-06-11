@@ -1,27 +1,35 @@
 <div data-controller="invites" class="my-4">
   <% @current_user.invites.order(:created_at).each do |invite| %>
-    <div>
+    <div class="my-4">
       <% if invite.status != "declined"  %>
-        <div data-invites-target="lign">
-        <p><%= link_to user_path(invite.first_user) do %>
-        <%= cl_image_tag invite.first_user.photo.key, height: 50, width: 50, crop: :fill, class:"rounded-circle" %>
-          <strong><%= invite.first_user.firstname %></strong> <% end %> sends you an invite
+        <div data-invites-target="lign" class="d-flex" style="width:100%">
+          <div class="ms-2">
+            <%= link_to user_path(invite.first_user) do %>
+            <%= cl_image_tag invite.first_user.photo.key, height: 50, width: 50, crop: :fill, class:"rounded-circle" %>
+          </div>
+          <div class="d-flex justify-content-between align-items-center" style="width:100%">
+            <div><strong><%= invite.first_user.firstname %></strong> sends you an invite</div><% end %>
+            <div class="d-flex">
 
-          <% if invite.status == "pending"  %>
-            <%= link_to accept_path(invite), data: {turbo_method: :patch, invites_target: "accept", action: "click->invites#updateAccept"} do %>
-              <i class="fa-regular fa-circle-check accept"></i>
-            <% end %>
-            <%= link_to decline_path(invite), data: {turbo_method: :patch, invites_target: "decline", action: "click->invites#updateDecline"} do %>
-              <i class="fa-regular fa-circle-xmark decline"></i>
-            <% end %>
-          <% elsif invite.status == "accepted" %>
-            <%= link_to invite_messages_path(invite) do %>
-            <i class="fa-solid fa-envelope"></i>
-            <% end %>
-          <% end %>
-        </p>
+              <% if invite.status == "pending"  %>
+                  <%= link_to accept_path(invite), data: {turbo_method: :patch, invites_target: "accept", action: "click->invites#updateAccept"} do %>
+                    <i class="fa-regular fa-circle-check accept"></i>
+                  <% end %>
+                  <%= link_to decline_path(invite), data: {turbo_method: :patch, invites_target: "decline", action: "click->invites#updateDecline"} do %>
+                    <i class="fa-regular fa-circle-xmark decline"></i>
+                  <% end %>
+
+              <% elsif invite.status == "accepted" %>
+
+                  <%= link_to invite_messages_path(invite) do %>
+                    <i class="fa-solid fa-envelope me-3"></i>
+                  <% end %>
+
+              <% end %>
+          </div>
+              </div>
         </div>
+      <% end %>
     </div>
-    <% end %>
   <% end %>
 </div>
