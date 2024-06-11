@@ -1,6 +1,6 @@
 <nav class="navbar">
-  <ul>
     <% if user_signed_in? %>
+  <ul>
     <li>
     <%= link_to users_path, class: controller_name == "users" && action_name == "index" ? "active" : "" do %>
       <i class="fa-solid fa-magnifying-glass"></i>
