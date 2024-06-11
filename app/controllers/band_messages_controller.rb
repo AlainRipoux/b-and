@@ -6,7 +6,7 @@ class BandMessagesController < ApplicationController
     @band_message.user = current_user
     authorize @band_message
     if @band_message.save
-      redirect_to band_path(@band)
+      redirect_to band_path(@band, message: true)
     else
       render "bands/show", status: :unprocessable_entity
     end
