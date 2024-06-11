@@ -9,6 +9,7 @@ class BandsController < ApplicationController
     @documents = @band.documents
     @document = Document.new
     @band_message = BandMessage.new
+    @unavailabilities = Unavailability.where(user_id: @band.users.pluck(:id))
     @second_users = current_user.invites_sent.where(status: "accepted").map { |invite| invite.second_user }
     @first_users = current_user.invites.where(status: "accepted").map { |invite| invite.first_user }
     @mates = @second_users + @first_users

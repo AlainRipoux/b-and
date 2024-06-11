@@ -13,6 +13,7 @@ Invite.destroy_all
 Task.destroy_all
 BandMessage.destroy_all
 Message.destroy_all
+Unavailability.destroy_all
 
 puts "Creating users..."
 
@@ -115,7 +116,7 @@ photos_band = [
 
 puts "Creating bands..."
 bands = []
-users = User.all
+users = User.all.order(:id)
 
 10.times do |index|
   user = users.sample
@@ -167,3 +168,14 @@ bands.each do |band|
     BandMessage.create!(content: Faker::Music::Prince.lyric, band: band, user: user)
   end
 end
+
+puts "Creating unavailabilities"
+
+unavailabilities = [
+  { start_date: "2024-06-12", end_date: "2024-06-14", user: users[0] },
+  { start_date: "2024-06-23", end_date: "2024-06-24", user: users[1] },
+  { start_date: "2024-06-17", end_date: "2024-06-22", user: users[2] },
+  { start_date: "2024-06-06", end_date: "2024-06-21", user: users[3] }
+]
+
+unavailabilities = Unavailability.create!(unavailabilities)
