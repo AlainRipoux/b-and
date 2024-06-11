@@ -1,0 +1,19 @@
+
+<%= simple_form_for([@band, @document]) do |f| %>
+  <%= f.input :file, as: :file%>
+  <%= f.submit "Upload", class: "btn btn-primary" %>
+<% end %>
+
+<%# <ul>
+  <% @documents.each do |document| %>
+    <%# <li>
+      <% if document.representable? %>
+        <%# <%= image_tag document.representation(resize_to_limit: [100, 100]) %>
+      <%# <% else %>
+        <%# <%= link_to rails_blob_path(document, disposition: "attachment") do %>
+          <%# <%= image_tag "placeholder.png", alt: "Download file" %>
+        <%# <% end %>
+      <%# <% end %>
+    <%# </li>
+  <% end %>
+<%# </ul> %>

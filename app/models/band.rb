@@ -5,5 +5,6 @@ class Band < ApplicationRecord
   has_many :tasks, dependent: :destroy
   has_many :events, dependent: :destroy
   has_many :band_messages, dependent: :destroy
+  has_many :documents, dependent: :destroy
   has_one_attached :photo
 end
