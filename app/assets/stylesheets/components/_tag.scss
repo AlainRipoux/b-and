@@ -7,3 +7,34 @@
   width: 150px;
   text-align: center;
 }
+
+.tag_instru {
+  background-color: #2FD132;
+  border-radius: 12px;
+  font-size: 1rem;
+  width: 90px;
+  text-align: center;
+  color: white;
+  margin-right: 5px;
+  margin-top: 6px;
+  position: absolute;
+  z-index: 20;
+  color: white;
+  top: 0;
+  right: 4px;
+}
+
+.tag_style {
+  background-color: #D01FE5;
+  border-radius: 12px;
+  font-size: 1rem;
+  width: 90px;
+  text-align: center;
+  color: white;
+  margin-top: 6px;
+  position: absolute;
+  z-index: 20;
+  color: white;
+  top: 30px;
+  right: 10px;
+}
