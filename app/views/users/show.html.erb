@@ -11,6 +11,9 @@
       </div>
     </div>
 
+    
+
+
     <div class="justify-content-center">
       <% if @user.photo.attached? == true %>
         <%= cl_image_tag @user.photo.key, alt: "user picture", class:"rounded-circle mx-auto d-block mt-4", width: 150, height: 150, crop: :fill %>

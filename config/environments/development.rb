@@ -18,8 +18,10 @@ Rails.application.configure do
   # Enable server timing
   config.server_timing = true
 
-  # config.assets.paths << "#{Rails.root}/app/assets/videos"
-  # config.assets.enabled = true
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.rails_logger = true
+  end
 
   # Enable/disable caching. By default caching is disabled.
   # Run rails dev:cache to toggle caching.
