@@ -3,14 +3,11 @@
   <ul>
     <li>
     <%= link_to users_path, class: controller_name == "users" && action_name == "index" ? "active" : "" do %>
-      <%= image_tag "logo_white.png", height: 35, width: 40 %>
-    <% end %></li>
-    <li><%= link_to mybands_path, class: controller_name == "bands" && action_name == "mybands" ? "active" : "" do %>
-      <i class="fa-solid fa-users"></i>
+      <i class="fa-solid fa-magnifying-glass"></i>
     <% end %></li>
     <li class="position-relative">
       <%= link_to messages_path, class: controller_name == "messages" && action_name == "index" ? "active" : "" do %>
-        <i class="fa-solid fa-comments">
+        <i class="fa-regular fa-comments"></i>
         </i>
           <% if @unanswered_messages.any? %>
           <div>
@@ -21,9 +18,12 @@
           <% end %>
       <% end %>
     </li>
+    <li><%= link_to mybands_path, class: controller_name == "bands" && action_name == "mybands" ? "active" : "" do %>
+      <%= image_tag "logo_white.png", height: 35, width: 40 %>
+    <% end %></li>
     <li class="position-relative">
       <%= link_to notifications_path, class: controller_name == "invites" && action_name == "index" ? "active" : "" do %>
-        <i class="fas fa-bell"></i>
+        <i class="fa-regular fa-bell"></i>
           <% if current_user.invites.where(status: "pending").any? %>
           <div>
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">

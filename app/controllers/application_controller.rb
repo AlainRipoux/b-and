@@ -14,13 +14,20 @@ class ApplicationController < ActionController::Base
   # end
   def navbar
     if user_signed_in?
-      @invites = Invite.where("first_user_id = ? OR second_user_id = ?", current_user.id,  current_user.id)
-      @invite_messages = @invites.map { |invite| invite.messages }
-      @invite_messages = @invite_messages.delete_if { |e| e.empty? }
+      @invites = Invite.where("first_user_id = ? OR second_user_id = ?", current_user.id,  current_user.id).includes(:messages)
       @unanswered_messages = []
-      @invite_messages.each do |message|
-        @unanswered_messages << message if message.last.user_id != current_user.id
+      @invites.count do |invite|
+        invite.messages.each do |message|
+          @unanswered_messages << message if invite.messages.last.user_id != current_user.id
+        end
       end
+      # raise
+      # @invite_messages = @invites.map { |invite| invite.messages }
+      # @invite_messages = @invite_messages.delete_if { |e| e.empty? }
+      # @unanswered_messages = []
+      # @invite_messages.each do |message|
+      #   @unanswered_messages << message if message.last.user_id != current_user.id
+      # end
 
     end
   end

@@ -4,6 +4,7 @@ skip_before_action :verify_authenticity_token
 
   def index
     @invites = policy_scope(Invite)
+    @invites = @invites.includes(:first_user, :second_user)
   end
 
   def create
