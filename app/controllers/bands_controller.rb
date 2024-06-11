@@ -7,6 +7,7 @@ class BandsController < ApplicationController
     @band = Band.find(params[:id])
     @tasks = @band.tasks
     @band_message = BandMessage.new
+    @unavailabilities = Unavailability.where(user_id: @band.users.pluck(:id))
     authorize @band
   end
 

@@ -2,7 +2,6 @@
   <%= simple_form_for [ @band ] do |f| %>
     <%= f.input :name %>
     <%= f.association :user, collection: @mates.sort_by(&:firstname), label_method: :firstname, value_method: :id, multiple: true %>
-    <%# <%= f.collection_select(:user, @users, :firstname, :id, {:prompt => "Please Select a Sector"}, {:multiple => true}) %>
     <%= f.input :photo, as: :file %>
     <%= f.submit "New band" %>
   <% end %>
