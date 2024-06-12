@@ -18,9 +18,15 @@
           <% end %>
       <% end %>
     </li>
-    <li><%= link_to mybands_path, class: controller_name == "bands" && action_name == "mybands" ? "active" : "" do %>
-      <%= image_tag "logo_white.png", height: 35, width: 40 %>
-    <% end %></li>
+    <li>
+      <%= link_to mybands_path, class: (controller_name == "bands" && action_name == "mybands") ? "active" : "" do %>
+        <% if controller_name == "bands" && action_name == "mybands" %>
+          <%= image_tag "logo_navbar_green.png", height: 35, width: 40 %>
+        <% else %>
+          <%= image_tag "logo_navbar_white.png", height: 35, width: 40 %>
+        <% end %>
+      <% end %>
+    </li>
     <li class="position-relative">
       <%= link_to notifications_path, class: controller_name == "invites" && action_name == "index" ? "active" : "" do %>
         <i class="fa-regular fa-bell"></i>
