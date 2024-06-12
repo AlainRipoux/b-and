@@ -17,13 +17,13 @@
 .accept {
   color: #2FD132;
   font-size: 25px;
-  margin: 2px;
+  margin: 5px;
 }
 
 .decline {
   color:#D01FE5;
   font-size: 25px;
-  margin: 2px;
+  margin: 5px;
 }
 
 .tabs-line {
@@ -33,4 +33,8 @@
 .nav-item .active {
   border-bottom: solid #D01FE5!important;
   font-weight: bolder;
+}
+
+.mail {
+  font-size: 25px;
 }
