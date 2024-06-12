@@ -65,9 +65,9 @@
       <p><%= @user.biography %>
       <% if @user.user_bands.any? %>
         <br>Checkout my bands :
-        <% @user.user_bands.each_with_index do |user_band, index| %>
+        <% @user_bands.each_with_index do |user_band, index| %>
           <%= link_to user_band.band.name, band_path(user_band.band) %>
-          <%= @user.user_bands.length == index + 1 ? '' : ',' %>
+          <%= @user_bands.length == index + 1 ? '' : ',' %>
         <% end %>
       <% end %>
       <p>
