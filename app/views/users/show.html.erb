@@ -29,6 +29,8 @@
       <div class="d-grid gap-2 m-3">
         <% if Invite.find_by(first_user: current_user, second_user: @user, status: "accepted" ) %>
           <%= link_to "Chat", invite_invite_messages_path(@invite.first), class: "btn btn-primary long-btn" %>
+        <% elsif Invite.find_by(first_user: @user, second_user: current_user, status: "accepted" ) %>
+          <%= link_to "Chat", invite_invite_messages_path(@invite.first), class: "btn btn-primary long-btn" %>
         <% elsif Invite.find_by(first_user: current_user, second_user: @user, status: "pending" ) %>
           <div>Invited !</div>
         <% elsif Invite.find_by(first_user: current_user, second_user: @user, status: "declined" ) %>
