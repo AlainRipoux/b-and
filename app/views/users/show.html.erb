@@ -32,8 +32,7 @@
           <%= link_to "Chat", invite_invite_messages_path(@invite.first), class: "btn btn-primary long-btn" %>
         <% else %>
           <div class="d-grid gap-2 m-3">
-            <% if @invite == "decline" %>
-            <% else %>
+            <% if @invite != "decline" %>
             <%= link_to "Invite", invites_path(user_id: @user.id),
               data: {
                 controller: "invite-button",
@@ -42,7 +41,6 @@
               },
               class:"btn btn-primary long-btn" %>
             <% end %>
-
           </div>
         <% end %>
       </div>
@@ -65,9 +63,9 @@
       <p><%= @user.biography %>
       <% if @user.user_bands.any? %>
         <br>Checkout my bands :
-        <% @user.user_bands.each_with_index do |user_band, index| %>
+        <% @user_bands.each_with_index do |user_band, index| %>
           <%= link_to user_band.band.name, band_path(user_band.band) %>
-          <%= @user.user_bands.length == index + 1 ? '' : ',' %>
+          <%= @user_bands.length == index + 1 ? '' : ',' %>
         <% end %>
       <% end %>
       <p>
