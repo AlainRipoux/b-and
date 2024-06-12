@@ -32,6 +32,8 @@
           <%= link_to "Chat", invite_invite_messages_path(@invite.first), class: "btn btn-primary long-btn" %>
         <% else %>
           <div class="d-grid gap-2 m-3">
+            <% if @invite == "decline" %>
+            <% else %>
             <%= link_to "Invite", invites_path(user_id: @user.id),
               data: {
                 controller: "invite-button",
@@ -39,6 +41,8 @@
                 turbo_method: :post
               },
               class:"btn btn-primary long-btn" %>
+            <% end %>
+
           </div>
         <% end %>
       </div>
