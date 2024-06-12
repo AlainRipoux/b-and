@@ -1,14 +1,14 @@
 <div class="container">
-
-  <h1>Messages</h1>
-
+  <div class="m-5 mt-5">
+    <h1>Messages</h1>
+  </div>
   <% if !@invites.empty? %>
     <% @invites.each do |invite| %>
       <% if invite.messages.any? %>
         <%= link_to invite_invite_messages_path(invite) do %>
           <div>
             <% if invite.first_user == current_user %>
-              <div class="d-flex m-2 my-4">
+              <div class="d-flex m-2 my-4" style="width:100%">
                 <div class="me-3 align-items-center">
                   <%= cl_image_tag invite.second_user.photo.key, alt: "avatar", height: 50, width: 50, crop: :fill, class:"rounded-circle" %>
                 </div>
@@ -21,13 +21,13 @@
                 </div>
               </div>
             <% else %>
-              <div class="d-flex m-2 my-4">
+              <div class="d-flex m-2 my-4" style="width:100%">
                 <div class="me-3 align-items-center">
                   <%= cl_image_tag invite.first_user.photo.key, alt: "avatar", height: 50, width: 50, crop: :fill, class:"rounded-circle" %>
                 </div>
-                <div class="me-2 <%= invite.messages.last.user == current_user ? "" : 'fw-bold' %>" style="flex-grow: 1;">
+                <div class="me-2 <%= invite.messages.last.user == current_user ? "" : 'fw-bold' %>" style="flex-grow: 1;" >
                   <span><%= invite.first_user.nickname %></span><br>
-                  <div class="d-flex justify-content-between small">
+                  <div class="d-flex justify-content-between small"">
                     <span class="opacity-50 text-truncate"><%= invite.messages.last.user == current_user ? "You: " : "" %><%= invite.messages.last.content.truncate(20, separator: /\s/) %></span>
                     <span class="opacity-75 text-nowrap"><%= invite.messages.last.created_at < 24.hours.ago.to_time ? invite.messages.last.created_at.strftime("%d/%m/%Y") : TimeDifference.between(Time.now, invite.messages.last.created_at).in_hours.round > 1 ? "#{TimeDifference.between(Time.now, invite.messages.last.created_at).in_hours.round} hours ago" : "#{TimeDifference.between(Time.now, invite.messages.last.created_at).in_minutes.round} minutes ago" %></span>
                   </div>
