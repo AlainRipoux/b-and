@@ -116,8 +116,7 @@ photos_band = [
 
 puts "Creating bands..."
 bands = []
-users = User.all
-# .order(:id)
+users = User.all.order(:id)
 
 10.times do |index|
   user = users.sample
