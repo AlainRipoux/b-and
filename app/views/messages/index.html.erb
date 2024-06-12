@@ -8,7 +8,7 @@
         <%= link_to invite_invite_messages_path(invite) do %>
           <div>
             <% if invite.first_user == current_user %>
-              <div class="d-flex m-2 my-4">
+              <div class="d-flex m-2 my-4" style="width:100%">
                 <div class="me-3 align-items-center">
                   <%= cl_image_tag invite.second_user.photo.key, alt: "avatar", height: 50, width: 50, crop: :fill, class:"rounded-circle" %>
                 </div>
@@ -21,10 +21,11 @@
                 </div>
               </div>
             <% else %>
-              <div class="d-flex m-2 my-4">
+              <div class="d-flex m-2 my-4" style="width:100%">
                 <div class="me-3 align-items-center">
                   <%= cl_image_tag invite.first_user.photo.key, alt: "avatar", height: 50, width: 50, crop: :fill, class:"rounded-circle" %>
                 </div>
+
                 <div class="<%= invite.messages.last.user == current_user ? "" : 'fw-bold' %>" style="flex-grow: 1; max-width:80%">
                   <span><%= invite.first_user.nickname %></span><br>
                   <div class="d-flex justify-content-between small">
