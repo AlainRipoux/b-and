@@ -1,17 +1,31 @@
 
-<%# <%= simple_form_for([@band, @document]) do |f| %>
-  <%# <%= f.input :file, as: :file%>
-  <%# <%= f.submit "Upload", class: "btn btn-primary" %>
-<%# <% end %>
+<%= simple_form_for([@band, @document]) do |f| %>
+  <%= f.input :file, as: :file, class: "input-none" %>
+  <%= f.submit "Upload", class: "btn btn-primary long-btn" %>
+<% end %>
 
-<%# <% if @documents.include? %>
-<%# <ul>
-  <% @documents.each do |document| %>
-    <%# <li>
-      <%= cl_image_tag document.file.key, alt: "avatar", height: 50, width: 50, crop: :fill %>
-    <%# </li>
-  <% end %>
-<%# </ul>
+<% if @documents.any? %>
+  <ul>
+    <% @documents.each do |document| %>
+      <li>
+        <%= link_to "#", data: { bs_toggle: "offcanvas", bs_target: "#offcanvasDocument#{document.id}" } do %>
+          <%= cl_image_tag document.file.key, alt: "avatar", width: 100, height: 100, crop: :fill %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
 <% else %>
-<%#  <%= "no file" %>
-<%# <% end %>
+<%= "No file yet" %>
+<% end %>
+
+<% @documents.each do |document| %>
+  <div class="offcanvas offcanvas-bottom offcanvas-document" tabindex="-1" id="offcanvasDocument<%=document.id%>">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasBottomLabel"></h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body small">
+      <%= cl_image_tag document.file.key, alt: "avatar", width: 300, crop: :fill %>
+    </div>
+  </div>
+<% end %>
