@@ -7,4 +7,6 @@ class Band < ApplicationRecord
   has_many :band_messages, dependent: :destroy
   has_many :documents, dependent: :destroy
   has_one_attached :photo
+
+  # validates :name, uniqueness: true, presence: true
 end

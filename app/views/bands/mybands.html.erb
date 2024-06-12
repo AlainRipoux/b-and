@@ -7,16 +7,20 @@
   </div>
 
   <div class="m-3">
-    <% if @bands.any? %>
-      <% @bands.each do |band| %>
-      <li class="list-unstyled my-4">
-        <% if band.photo.attached? %>
-          <%= cl_image_tag band.photo.key, alt: "#{band.name}", height: 50, width: 50, crop: :fill, class:"rounded-circle" %>
-          <% end %>
-          <%= link_to band.name, band_path(band) %>
-          <%= link_to band_path(band), data: {turbo_method: :delete, turbo_confirm: "Delete #{band.name}?"} do %>
-            <i class="fa-solid fa-trash"></i>
+    <% if current_user.user_bands.any? %>
+      <% current_user.user_bands.sort_by(&:created_at).each do |user_band| %>
+      <li class="list-unstyled my-4 d-flex">
+        <% if user_band.band.photo.attached? %>
+          <%= cl_image_tag user_band.band.photo.key, alt: "#{user_band.band.name}", height: 50, width: 50, crop: :fill, class:"rounded-circle" %>
+        <% else %>
+          <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" alt="text", class="rounded-circle mx-auto d-block", width="50", height="50" >
+        <% end %>
+          <div class="d-flex justify-content-between align-items-center ms-2" style="width:100%">
+            <%= link_to user_band.band.name, band_path(user_band.band) %>
+            <%= link_to band_path(user_band.band), data: {turbo_method: :delete, turbo_confirm: "Delete #{user_band.band.name}?"} do %>
+              <i class="fa-solid fa-trash"></i>
             <% end %>
+          </div>
         <% end %>
         <% else %>
             <p>Sorry, you don't have any band yet.</p>

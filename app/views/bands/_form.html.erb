@@ -1,27 +1,30 @@
-<div class ="container">
-  <%= simple_form_for [ @band ] do |f| %>
+<div class ="container" style="height:80%">
+  <%= simple_form_for [ @band ], html: { class:"m-3", style: "font-size:22px"} do |f| %>
     <%= f.input :name %>
     <%= f.input :photo, as: :file %>
-
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      invite
+  <div class="col-6 mx-auto">
+    <button type="button" style="width:100%" class="btn btn-secondary mt-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Invite
     </button>
+  </div>
 
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content h-50">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Invite musicians in your band</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-              <%= f.association :user, as: :check_boxes, collection: @mates.sort_by(&:firstname), label_method: :firstname, value_method: :id, multiple: true, class: 'dropdown-menu' %>
+            <div class="modal-body ms-3">
+              <%= f.association :user, as: :check_boxes, collection: @mates.sort_by(&:firstname), label_method: :firstname, value_method: :id, multiple: true %>
             </div>
             <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary">Let's go !</button>
+
             </div>
           </div>
         </div>
       </div>
-    <%= f.submit "create", class: "btn btn-primary" %>
+    <%= f.submit "Create my band", class: "btn long-btn text-white position-fixed p-3", style: "right:20px; bottom:150px; width:90%" %>
   <% end %>
 </div>
