@@ -194,8 +194,6 @@ Message.create!(content: "Hi Len, love your music ! We could make a band but we 
 Message.create!(content: "Do you know someone ? Like a bassist or a drummer ?", invite: pat_len, user: user1)
 
 
-
-
 puts "Creating task..."
 bands.each do |band|
   rand(1..5).times do
@@ -215,10 +213,10 @@ end
 puts "Creating unavailabilities"
 
 unavailabilities = [
-  { start_date: "2024-06-12", end_date: "2024-06-14", user: users[0] },
-  { start_date: "2024-06-23", end_date: "2024-06-24", user: users[1] },
-  { start_date: "2024-06-17", end_date: "2024-06-22", user: users[2] },
-  { start_date: "2024-06-06", end_date: "2024-06-21", user: users[3] }
+  { start_date: "2024-06-06", end_date: "2024-06-08", user: user1 },
+  { start_date: "2024-06-20", end_date: "2024-06-23", user: user1 },
+  { start_date: "2024-06-12", end_date: "2024-06-14", user: user2 },
+  { start_date: "2024-06-21", end_date: "2024-06-25", user: user2 }
 ]
 
 unavailabilities = Unavailability.create!(unavailabilities)
