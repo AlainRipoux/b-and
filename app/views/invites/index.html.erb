@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Notifications</h1>
+  <h1 class="mb-5">Notifications</h1>
 
     <% if @current_user.invites.any? %>
       <%# <p> <strong>Your invitations </strong> </p> %>
@@ -7,6 +7,6 @@
       <%= render "invites/invites_button" %>
 
   <% else %>
-    <p>Waiting for a match <i class="fa-solid fa-fire"></i></p>
+    <p class="text-center">Waiting for a match <i class="fa-solid fa-fire"></i></p>
   <% end %>
 </div>
