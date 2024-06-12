@@ -1,13 +1,12 @@
 <div class="container">
-  <div class="mt-5 mb-5">
-    <h1>Notifications</h1>
-  </div>
+  <h1 class="mb-5">Notifications</h1>
+
     <% if @current_user.invites.any? %>
       <%# <p> <strong>Your invitations </strong> </p> %>
       <%# <%= pluralize @current_user.invites.count, "match" %>
       <%= render "invites/invites_button" %>
 
   <% else %>
-    <p>Waiting for a match <i class="fa-solid fa-fire"></i></p>
+    <p class="text-center">Waiting for a match <i class="fa-solid fa-fire"></i></p>
   <% end %>
 </div>
