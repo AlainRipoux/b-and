@@ -56,6 +56,8 @@ gem 'faker'
 gem "cloudinary"
 gem "pundit"
 gem "time_difference"
+gem "simple_calendar"
+
 
 
 group :development, :test do

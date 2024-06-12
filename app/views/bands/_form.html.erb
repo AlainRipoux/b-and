@@ -1,7 +1,6 @@
 <div class ="container" style="height:80%">
   <%= simple_form_for [ @band ], html: { class:"m-3", style: "font-size:22px"} do |f| %>
     <%= f.input :name %>
-    <%# <%= f.collection_select(:user, @users, :firstname, :id, {:prompt => "Please Select a Sector"}, {:multiple => true}) %>
     <%= f.input :photo, as: :file %>
   <div class="col-6 mx-auto">
     <button type="button" style="width:100%" class="btn btn-secondary mt-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
