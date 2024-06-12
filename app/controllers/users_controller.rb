@@ -39,7 +39,7 @@ class UsersController < ApplicationController
       @users = @users & @close_users
     end
 
-    @users = @users.includes(photo_attachment: :blob)
+    # @users = @users.includes(photo_attachment: :blob)
 
   end
 
