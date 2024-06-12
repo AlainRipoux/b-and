@@ -39,7 +39,7 @@ class UsersController < ApplicationController
       @users = @users.where(id: @close_users.map(&:id))
     end
 
-    # @users = @users.includes(photo_attachment: :blob)
+    @users = @users.includes(photo_attachment: :blob)
 
   end
 
