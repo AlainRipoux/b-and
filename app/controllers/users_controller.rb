@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 
     if params[:location].present?
       @close_users = User.near(current_user.address, params[:location].to_i)
-      @users = @users & @close_users
+      @users = @users.where(id: @close_users.map(&:id))
     end
 
     # @users = @users.includes(photo_attachment: :blob)
