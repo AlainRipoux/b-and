@@ -9,6 +9,8 @@ class BandsController < ApplicationController
     @documents = @band.documents
     @document = Document.new
     @band_message = BandMessage.new
+    start_date = params.fetch(:start_date, Date.today).to_date
+    @unavailabilities = Unavailability.where(starts_at: start_date.beginning_of_month..start_date.end_of_month)
     @unavailabilities = Unavailability.where(user_id: @band.users.pluck(:id))
     @second_users = current_user.invites_sent.where(status: "accepted").map { |invite| invite.second_user }
     @first_users = current_user.invites.where(status: "accepted").map { |invite| invite.first_user }

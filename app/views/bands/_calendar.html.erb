@@ -1,13 +1,20 @@
+<div class="py-3">
+  <h5><strong>Members' unavailabilities</strong></h5>
+</div>
 
-<%# <%= @unavailabilities.inspect %>
+<div>
+  <%= month_calendar(events: @unavailabilities) do |date, unavailabilities| %>
+    <%= date.day %>
 
-<%# <%= month_calendar do |date| %>
-  <%# <%= date.day %>
+      <% unavailabilities.each do |u| %>
+        <div class="unavailability">
+        <%= u.user.firstname %>
+        </div>
+      <% end %>
 
-  <%# <% unavailabilities.each do |u| %>
-    <%# <div>
-      <%= u.start_date %>
-    <%# </div>
   <% end %>
 
-<%# <% end %> 
+  <div class="d-grid gap-2 m-5">
+    <%= link_to "Add event", "#", class:"btn btn-primary long-btn"%>
+  </div>
+</div>
