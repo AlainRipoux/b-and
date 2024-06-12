@@ -102,7 +102,7 @@ user3 = User.new(
   password: "azerty",
   instrument: "Bass",
   biography: "Self-taught bassist looking for an electro collectiv. Love to play on stage !",
-  style: "Electro",
+  style: "Rock",
   address: "16 Villa Gaudelet 75011 Paris",
   availability: "Flexible",
   frequency: "Once a week",
