@@ -30,7 +30,7 @@
         <% if Invite.find_by(first_user: current_user, second_user: @user, status: "accepted" ) %>
           <%= link_to "Chat", invite_invite_messages_path(@invite.first), class: "btn btn-primary long-btn" %>
         <% elsif Invite.find_by(first_user: current_user, second_user: @user, status: "pending" ) %>
-          <div>Invited !</div>
+          <p class="btn btn-primary long-btn">Invited !</p>
         <% elsif Invite.find_by(first_user: current_user, second_user: @user, status: "declined" ) %>
           <div>Invite declined ...</div>
         <% else %>
