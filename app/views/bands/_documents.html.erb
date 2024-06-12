@@ -4,16 +4,14 @@
   <%= f.submit "Upload", class: "btn btn-primary" %>
 <% end %>
 
+<%# <% if @documents.include? %>
 <%# <ul>
   <% @documents.each do |document| %>
     <%# <li>
-      <% if document.representable? %>
-        <%# <%= image_tag document.representation(resize_to_limit: [100, 100]) %>
-      <%# <% else %>
-        <%# <%= link_to rails_blob_path(document, disposition: "attachment") do %>
-          <%# <%= image_tag "placeholder.png", alt: "Download file" %>
-        <%# <% end %>
-      <%# <% end %>
+      <%= cl_image_tag document.file.key, alt: "avatar", height: 50, width: 50, crop: :fill %>
     <%# </li>
   <% end %>
-<%# </ul> %>
+<%# </ul>
+<% else %>
+<%# <%= "no file" %>
+<%# <% end %> %> %> %> %> %> %> %>
