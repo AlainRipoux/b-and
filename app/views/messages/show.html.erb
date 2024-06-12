@@ -23,7 +23,7 @@
           <div class="d-flex flex-row justify-content-start <%= @invite.messages.length == index + 1 ? 'mb-5' : '' %>" style="width:100%">
             <%= cl_image_tag message.user.photo.key, alt: "avatar", width: 45, height: 45, crop: :fill, class:"rounded-circle" %>
             <div id="message-<%= message.id %>" class="text-break" style="max-width: 85%;" >
-              <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;"> <%= message.content %></p>
+              <p class="p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7;"> <%= message.content %></p>
               <p class="small ms-3 mb-3 rounded-3 float-end"><%= message.created_at.strftime("%H:%M | %b %d") %></p>
             </div>
           </div>
