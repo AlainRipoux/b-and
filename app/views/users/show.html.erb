@@ -27,22 +27,20 @@
 
     <% if @user != current_user %>
       <div class="d-grid gap-2 m-3">
-        <% if @first_user || @second_user %>
+        <% if Invite.find_by(first_user: current_user, second_user: @user, status: "accepted" ) %>
           <%= link_to "Chat", invite_invite_messages_path(@invite.first), class: "btn btn-primary long-btn" %>
+        <% elsif Invite.find_by(first_user: current_user, second_user: @user, status: "pending" ) %>
+          <div>Invited !</div>
+        <% elsif Invite.find_by(first_user: current_user, second_user: @user, status: "declined" ) %>
+          <div>Invite declined ...</div>
         <% else %>
-          <div class="d-grid gap-2 m-3">
-            <% if @invite == "decline" %>
-            <% else %>
-            <%= link_to "Invite", invites_path(user_id: @user.id),
-              data: {
-                controller: "invite-button",
-                action: "click->invite-button#disable",
-                turbo_method: :post
-              },
-              class:"btn btn-primary long-btn" %>
-            <% end %>
-
-          </div>
+          <%= link_to "Invite", invites_path(user_id: @user.id),
+            data: {
+              controller: "invite-button",
+              action: "click->invite-button#disable",
+              turbo_method: :post
+            },
+            class:"btn btn-primary long-btn" %>
         <% end %>
       </div>
     <% end %>

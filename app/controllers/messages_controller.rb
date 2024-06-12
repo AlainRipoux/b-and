@@ -1,10 +1,8 @@
 class MessagesController < ApplicationController
   def index
     @messages = policy_scope(Message)
-    # @messages = @messages.includes(:user)
     @invites = Invite.where("first_user_id = ? OR second_user_id = ?", current_user.id, current_user.id).includes(messages: [:user], first_user: [photo_attachment: :blob], second_user: [photo_attachment: :blob])
-    @invites = @invites.sort_by { |invite| invite.messages.last.created_at }.reverse
-    # @invite_messages = @messages.map {|message| message}.group_by(:invite_id)
+    @invites = @invites.reject { |invite| invite.messages.empty? }.sort_by { |invite| invite.messages.last.created_at }.reverse
   end
 
   def show
