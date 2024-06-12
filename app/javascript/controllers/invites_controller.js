@@ -6,7 +6,7 @@ export default class extends Controller {
 
   updateAccept(event) {
     event.preventDefault()
-    const url = this.acceptTarget.href
+    const url = event.currentTarget.href
       fetch(url, {
         method: "PATCH",
         headers: {"Accept": "text/plain"}
@@ -19,9 +19,7 @@ export default class extends Controller {
 
   updateDecline(event) {
     event.preventDefault()
-    const url = this.declineTarget.href
-    console.log(this.lignTarget);
-    console.log(this.declineTarget.href);
+    const url = event.currentTarget.href
       fetch(url, {
         method: "PATCH",
         headers: {"Accept": "text/plain"}
