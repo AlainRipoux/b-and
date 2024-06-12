@@ -6,8 +6,8 @@ export default class extends Controller {
     console.log("hello hello")
   }
 
-  disable() {
-    this.element.innerText = "Invited !";
-    this.element.setAttribute("disabled", "");
+  disable(event) {
+    // this.element.innerText = "Invited !";
+    // this.element.setAttribute("disabled", "");
   }
 }
