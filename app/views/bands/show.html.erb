@@ -38,12 +38,12 @@
       <li class="nav-item" role="presentation">
         <button class="nav-link tag-link <%= "active" if params[:message] %>" id="profile-tab" data-bs-toggle="tab" data-bs-target="#messages" type="button" role="tab" aria-controls="messages" aria-selected="false">Messages</button>
       </li>
-      <li class="nav-item" role="presentation">
+      <%# <li class="nav-item" role="presentation">
         <button class="nav-link tag-link <%= "active" if params[:tab] == "calendar" %>" id="profile-tab" data-bs-toggle="tab" data-bs-target="#calendar" type="button" role="tab" aria-controls="calendar" aria-selected="false">Calendar</button>
-      </li>
-      <li>
+      <%# </li> %>
+      <%# <li>
         <button class="nav-link tag-link <%= "active" if params[:tab] == "documents" %>" id="profile-tab" data-bs-toggle="tab" data-bs-target="#documents" type="button" role="tab" aria-controls="documents" aria-selected="false">Documents</button>
-      </li>
+      <%# </li> %>
       <li class="nav-item" role="presentation">
         <button class="nav-link tag-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#members" type="button" role="tab" aria-controls="members" aria-selected="false">Members</button>
       </li>
@@ -51,9 +51,9 @@
     <div class="tab-content" id="myTabContent">
       <div class="tab-pane fade <%="show active" if params[:tab].nil? && params[:message].nil? %> " id="tasks" role="tabpanel" aria-labelledby="home-tab"><%= render "tasks" %></div>
       <div class="tab-pane fade <%="show active"  if params[:message] %>" id="messages" role="tabpanel" aria-labelledby="messages-tab"><%= render "messages" %></div>
-      <div class="tab-pane fade <%="show active"  if params[:tab] == "calendar" %>" id="calendar" role="tabpanel" aria-labelledby="calendar-tab"><%= render "calendar" %></div>
-      <div class="tab-pane fade <%="show active"  if params[:tab] == "documents" %>" id="documents" role="tabpanel" aria-labelledby="documents-tab"><%= render "documents" %></div>
-      <div class="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab"><%= render "members" %></div>
+      <%# <div class="tab-pane fade <%="show active"  if params[:tab] == "calendar" " id="calendar" role="tabpanel" aria-labelledby="calendar-tab"><%= render "calendar" </div>
+      <%# <div class="tab-pane fade <%="show active"  if params[:tab] == "documents" " id="documents" role="tabpanel" aria-labelledby="documents-tab"><%= render "documents" </div> %>
+      <div class="tab-pane fade" id="members" role="tabpanel" aria-labelledby="members-tab"><%= render "members" %></div> %>
     </div>
 
 
