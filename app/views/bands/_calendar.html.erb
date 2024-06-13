@@ -18,9 +18,56 @@
       <% unavailabilities.each do |u| %>
         <div class="unavailability-user<%=@band.users.index(u.user)%> unavailability-user"></div>
       <% end %>
+
+      <% @band.events.each do |e| %>
+        <div> <%= e.category %></div>
+      <% end %>
   <% end %>
 
-  <div class="d-grid gap-2 m-5">
-    <%= link_to "Add event", "#", class:"btn btn-primary long-btn"%>
-  </div>
+    <% if policy(@band).edit? %>
+    <div class="d-grid gap-2 m-5">
+      <%= link_to "New event", new_band_event_path(@band), class:"btn btn-primary long-btn"%>
+    </div>
+    <% end %>
+
 </div>
+
+  <h5><strong>Events</strong></h5>
+
+ <ul class="nav tabs-line nav-justified" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link tag-link <%= "active" if params[:tab].nil? %>" id="profile-tab" data-bs-toggle="tab" data-bs-target="#upcomings" type="button" role="tab" aria-controls="upcomings" aria-selected="false">Upcomings</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link tag-link <%= "active" if params[:tab] == "past" %>" id="profile-tab" data-bs-toggle="tab" data-bs-target="#past" type="button" role="tab" aria-controls="past" aria-selected="false">Past</button>
+      </li>
+    </ul>
+
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade <%="show active"  if params[:tab].nil? %>" id="calendar" role="tabpanel" aria-labelledby="calendar-tab">
+      <div class="mt-4">
+        <div class="ms-2">
+            <% @events.where("end_date <= ?", Time.current).sort_by(&:created_at).each do |event| %>
+              <%= link_to event_path(event) do %>
+                <span class="small opacity-50"><strong><%= event.start_date.strftime("%d/%m/%Y") %></strong></span><br>
+                <strong><%= event.name %></strong><br>
+                <span class="small opacity-50"><%= event.location %></strong></span>
+              <% end %>
+            <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade <%="show active"  if params[:tab] == "events" %>" id="events" role="tabpanel" aria-labelledby="events-tab">
+      <div class="mt-5">
+        <div class="ms-2">
+          <% @events.where("end_date >= ?", Time.current).sort_by(&:created_at).each do |event| %>
+                <%= link_to event_path(event) do %>
+                  <span class="small opacity-50"><strong><%= event.start_date.strftime("%d/%m/%Y") %></strong></span><br>
+                  <strong><%= event.name %></strong><br>
+                  <span class="small opacity-50"><%= event.location %></strong></span>
+                <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
