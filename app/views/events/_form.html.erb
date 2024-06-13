@@ -3,8 +3,12 @@
     <%= f.input :name %>
     <%= f.input :location %>
     <%= f.input :category %>
-    <%= f.input :start_date %>
-    <%= f.input :end_date %>
+    <%= f.input :start_date,
+            as: :string,
+            input_html: { data: { controller: "datepicker" } } %>
+    <%= f.input :end_date,
+            as: :string,
+            input_html: { data: { controller: "datepicker" } } %>
     <%= f.submit "New event", class: "btn btn-primary long-btn" %>
   <% end %>
 </div>
