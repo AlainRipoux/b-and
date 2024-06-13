@@ -1,0 +1,9 @@
+<div class="container mt-5">
+  <%= link_to mybands_path do %>
+    <i class="fa-solid fa-chevron-left mx-4"></i>
+  <% end %>
+
+  <h1>Edit event</h1>
+
+  <%= render "events/edit_form", event: @event %>
+</div>

@@ -16,7 +16,7 @@
               <%= link_to event_path(event) do %>
                 <span class="small opacity-50"><strong><%= event.start_date.strftime("%d/%m/%Y") %></strong></span><br>
                 <strong><%= event.name %></strong><br>
-                <span class="small opacity-50"><%= event.location %></strong></span>
+                <span class="small opacity-50"><%= event.address %></strong></span>
               <% end %>
             <% end %>
         </div>
@@ -29,7 +29,7 @@
                 <%= link_to event_path(event) do %>
                   <span class="small opacity-50"><strong><%= event.start_date.strftime("%d/%m/%Y") %></strong></span><br>
                   <strong><%= event.name %></strong><br>
-                  <span class="small opacity-50"><%= event.location %></strong></span>
+                  <span class="small opacity-50"><%= event.address %></strong></span>
                 <% end %>
           <% end %>
         </div>

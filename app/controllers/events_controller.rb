@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_band, only: [:new, :create, :edit, :update]
+  before_action :set_band, only: [:new, :create]
 
   def index
     @events = policy_scope(Event)
@@ -12,6 +12,10 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @markers = [{
+      lat: @event.latitude,
+      lng: @event.longitude
+    }]
     authorize @event
   end
 
@@ -19,9 +23,12 @@ class EventsController < ApplicationController
     @event = @band.events.new(event_params)
     @event.user = current_user
     @event.band = @band
-    @event.save
+    if @event.save
+      redirect_to event_path(@event)
+    else
+      render :new, status: :unprocessable_entity
+    end
     authorize @event
-    redirect_to event_path(@event)
   end
 
   def edit
@@ -33,9 +40,12 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
     @band = @event.band
-    @event.update(event_params)
-    redirect_to event_path(@event)
-    authorize @event
+    if @event.update(event_params)
+      authorize @event
+      redirect_to event_path(@event)
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   private
@@ -45,6 +55,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :location, :category, :start_date, :end_date)
+    params.require(:event).permit(:name, :location, :category, :start_date, :end_date, :photo, :description, :private_event)
   end
 end
