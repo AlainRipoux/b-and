@@ -8,24 +8,29 @@
 
         <li class="mybands-cards cards list-unstyled my-4 d-flex">
           <% if user_band.band.photo.attached? %>
-              <div class="img-card text-shadow card-category position-relative" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path user_band.band.photo.key, height: 300, crop: :fill %>')">
-                <h3><%= link_to user_band.band.name, band_path(user_band.band) %></h3>
+            <%= link_to band_path(user_band.band),
+                        class: "img-card text-shadow card-category position-relative",
+                        style: "background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('#{cl_image_path user_band.band.photo.key, height: 300, crop: :fill }')" do %>
+                <h3 class="mb-0"><%= user_band.band.name %></h3>
                 <div class="d-flex">
                   <p class="tag_instru"><%= current_user.id == user_band.band.user_id ? "Leader" : "" %></p>
-                </div>
               </div>
+              <% end %>
+
           <% else %>
-            <div class="img-card text-shadow position-relative card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg)" >
-              <h3><%= link_to user_band.band.name, band_path(user_band.band) %></h3>
-            </div>
+            <%= link_to band_path(user_band.band),
+                        class: "img-card text-shadow card-category position-relative",
+                        style: "background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg)" do %>
+                <h3 class="mb-0"><%= user_band.band.name %></h3>
             <div class="d-flex">
               <p class="tag_instru"><%= current_user.id == user_band.band.user_id ? "Leader" : "" %></p>
             </div>
+            <% end %>
           <% end %>
         </li>
       <% end %>
     <% else %>
-            <p>Sorry, you don't have any band yet.</p>
+            <p class="text-center">Sorry, you don't have any band yet.</p>
     <% end %>
 
   </div>

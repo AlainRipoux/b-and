@@ -18,11 +18,14 @@
     </div>
 
     <h1><%= @event.name %></h1>
+    <p class="opacity-50"><%= @event.private_event ? "Private" : "Public" %> <%= @event.category %></p>
 
-    <div class="d-flex">
-      <div class="mt-4">
+    <div class="d-flex mt-4">
+        <div class="">
         Start:
         <p class="tag-green"><%= @event.start_date %></p>
+        </div>
+        <div class="ms-3">
         End:
         <p class="tag-green"><%= @event.end_date %></p>
       </div>
@@ -32,7 +35,7 @@
     <div class="d-flex">
       <div class="mt-4">
         <h4>Location</h4>
-        <p class="tag-green"><%= @event.location %></p>
+        <p class="tag-green"><%= @event.address %></p>
       </div>
 
       <div class="mt-4 ms-3">
@@ -43,10 +46,14 @@
 
     <div class="mt-4">
       <h4>Description</h4>
-      <p>Put description here</p>
+      <p><%= @event.description %></p>
     </div>
 
 
   </div>
-</div>
+  <div class="rounded-3 mt-5" style="width: 100%; height: 200px;"
+    data-controller="map"
+    data-map-markers-value="<%= @markers.to_json %>"
+    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+  </div>
 </div>
