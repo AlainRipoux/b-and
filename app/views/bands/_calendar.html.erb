@@ -19,9 +19,10 @@
         <div class="unavailability-user<%=@band.users.index(u.user)%> unavailability-user"></div>
       <% end %>
 
-      <% @band.events.each do |e| %>
-        <div> <%= e.category %></div>
-      <% end %>
+      <%# <% @band.events.each do |e| %>
+        <%# <div> <%= e.category %>
+        <%# </div> %>
+      <%# <% end %>
   <% end %>
 
     <% if policy(@band).edit? %>

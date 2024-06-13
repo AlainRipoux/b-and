@@ -13,7 +13,7 @@
     <% @documents.each do |document| %>
       <li>
         <%= link_to "#", data: { bs_toggle: "offcanvas", bs_target: "#offcanvasDocument#{document.id}" }, class: "wrapper" do %>
-          <div class= "aperçu">
+          <div class= "aperçu mt-4">
             <%= cl_image_tag document.file.key, alt: "file", width: 100, height: 100, crop: :fill %>
             <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
           </div>
