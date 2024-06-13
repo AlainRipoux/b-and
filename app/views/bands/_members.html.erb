@@ -14,7 +14,7 @@
     <%= render 'bands/modal', band: @band %>
 
     <% if policy(@band).edit? %>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#invite">
+      <button type="button" class="d-grid gap-2 col-12 mx-auto btn btn-primary long-btn m-5" data-bs-toggle="modal" data-bs-target="#invite">
         Invite
       </button>
     <% end %>

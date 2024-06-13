@@ -28,6 +28,10 @@ gem "jbuilder"
 
 gem "geocoder"
 
+# For Spotify API
+gem 'rest-client'
+gem 'base64'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
@@ -57,8 +61,6 @@ gem "cloudinary"
 gem "pundit"
 gem "time_difference"
 gem "simple_calendar"
-
-
 
 group :development, :test do
   gem "dotenv-rails"

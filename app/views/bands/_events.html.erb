@@ -38,9 +38,7 @@
   </div>
 
   <% if policy(@band).edit? %>
-    <div class="d-grid gap-2 m-5">
-      <%= link_to "New event", new_band_event_path(@band), class:"btn long-btn text-white"%>
-    </div>
+      <%= link_to "New event", new_band_event_path(@band), class:"d-grid gap-2 col-12 mx-auto btn btn-primary long-btn"%>
   <% end %>
 
 </div>
