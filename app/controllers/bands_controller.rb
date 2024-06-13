@@ -6,6 +6,7 @@ class BandsController < ApplicationController
   def show
     @band = Band.find(params[:id])
     @tasks = @band.tasks
+    @band.users.include?(current_user) ? @events = @band.events : @events = @band.events.where(private: false)
     @documents = @band.documents
     @document = Document.new
     @band_message = BandMessage.new

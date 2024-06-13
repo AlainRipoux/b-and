@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get "/mybands", to: "bands#mybands", as: :mybands
   resources :bands do
     resources :tasks, only: [:new, :create]
+    resources :events, only: [:new, :create]
     resources :band_messages, only: :create
     resources :documents, only: [:new, :create]
   end
@@ -24,6 +25,10 @@ Rails.application.routes.draw do
   # Routes for tasks
   resources :tasks, only: %i[destroy edit update]
   get "/tasks/:id", to: "tasks#change_task_status", as: :change_status
+
+  # Routes for events
+  resources :events, only: %i[index show edit update]
+  # get "/events/:id", to: "events#change_task_status", as: :change_status
 
   # Routes for messages
   get "/messages", to: "messages#index", as: :messages
