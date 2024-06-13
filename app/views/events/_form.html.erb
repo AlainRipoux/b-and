@@ -1,7 +1,7 @@
 <div class="container">
   <%= simple_form_for [ @band, @event ] do |f| %>
-    <%= f.input :private_event, as: :boolean, include_hidden: true %>
-    <%= f.input :category, collection: ["Rehearsal", "Gig"] %>
+    <%# <%= f.input :private_event, as: :boolean, include_hidden: true %>
+    <%= f.input :category, collection: ["rehearsal", "gig"] %>
     <%= f.input :photo, as: :file%>
     <%= f.input :name %>
     <%= f.input :address,
@@ -15,7 +15,6 @@
             as: :string,
             input_html: { data: { controller: "datepicker" } } %>
     <%= f.input :description, as: :text %>
-    <%= f.submit "New event", class: "btn btn-primary long-btn" %>
     <%= f.submit "New event", class: "d-grid gap-2 col-12 mx-auto btn btn-primary long-btn" %>
   <% end %>
 </div>
