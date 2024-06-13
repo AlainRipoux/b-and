@@ -24,12 +24,11 @@ class EventsController < ApplicationController
     @event.user = current_user
     @event.band = @band
     if @event.save
-      redirect_to event_path(@event)
+      redirect_to band_path(@band, tab: 'calendar')
     else
       render :new, status: :unprocessable_entity
     end
     authorize @event
-  end
 
   def edit
     @event = Event.find(params[:id])
