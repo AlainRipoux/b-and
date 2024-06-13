@@ -29,6 +29,7 @@ class EventsController < ApplicationController
       render :new, status: :unprocessable_entity
     end
     authorize @event
+  end
 
   def edit
     @event = Event.find(params[:id])
@@ -54,6 +55,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:name, :location, :category, :start_date, :end_date, :photo, :description, :private_event)
+    params.require(:event).permit(:name, :address, :category, :start_date, :end_date, :photo, :description, :private_event)
   end
 end
