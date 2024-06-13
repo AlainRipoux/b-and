@@ -1,4 +1,5 @@
-<div class="py-3">
+<div class="py-3 d-flex justify-content-evenly">
+  <div>
   <h5><strong>Days off</strong></h5>
 
   <% @band.users.each_with_index do |user, index| %>
@@ -7,67 +8,83 @@
       <%= user.firstname %>
     </div>
   <% end %>
+  </div>
+
+  <div>
+    <h5><strong>Events</strong></h5>
+    <div class="d-flex">
+    <p class="event-gig me-2"></p>
+    <p>Gig</p>
+    </div>
+    <div class="d-flex">
+    <p class="event-rehearsal me-2"></p>
+    <p>Rehearsal</p>
+    </div>
+  </div>
 
 </div>
 
-
 <div>
-  <%= month_calendar(events: @unavailabilities) do |date, unavailabilities| %>
+  <%= month_calendar(events: @unavailabilities+@events) do |date, unavailabilities| %>
     <%= date.day %>
 
       <% unavailabilities.each do |u| %>
-        <div class="unavailability-user<%=@band.users.index(u.user)%> unavailability-user"></div>
-      <% end %>
+        <% if u.is_a?(Event) %>
+          <div class="event-<%=u.category%> ">
 
-      <% @band.events.each do |e| %>
-        <div> <%= e.category %></div>
+          </div>
+        <% else %>
+          <div class="unavailability-user<%=@band.users.index(u.user)%> unavailability-user"></div>
+        <% end %>
       <% end %>
   <% end %>
 
-    <% if policy(@band).edit? %>
+  <% if policy(@band).edit? %>
     <div class="d-grid gap-2 m-5">
       <%= link_to "New event", new_band_event_path(@band), class:"btn btn-primary long-btn"%>
     </div>
-    <% end %>
+  <% end %>
 
 </div>
 
-  <h5><strong>Events</strong></h5>
 
- <ul class="nav tabs-line nav-justified" id="myTab" role="tablist">
-      <li class="nav-item" role="presentation">
-        <button class="nav-link tag-link <%= "active" if params[:tab].nil? %>" id="profile-tab" data-bs-toggle="tab" data-bs-target="#upcomings" type="button" role="tab" aria-controls="upcomings" aria-selected="false">Upcomings</button>
-      </li>
-      <li class="nav-item" role="presentation">
-        <button class="nav-link tag-link <%= "active" if params[:tab] == "past" %>" id="profile-tab" data-bs-toggle="tab" data-bs-target="#past" type="button" role="tab" aria-controls="past" aria-selected="false">Past</button>
-      </li>
-    </ul>
+<h5><strong>Events</strong></h5>
 
-  <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade <%="show active"  if params[:tab].nil? %>" id="calendar" role="tabpanel" aria-labelledby="calendar-tab">
-      <div class="mt-4">
-        <div class="ms-2">
-            <% @events.where("end_date <= ?", Time.current).sort_by(&:created_at).each do |event| %>
+<ul class="nav tabs-line nav-justified" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link tag-link <%= "active" if params[:tab] == "past" %>" id="profile-tab" data-bs-toggle="tab" data-bs-target="#past" type="button" role="tab" aria-controls="past" aria-selected="false">Past</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link tag-link <%= "active" if params[:tab].nil? %>" id="profile-tab" data-bs-toggle="tab" data-bs-target="#upcomings" type="button" role="tab" aria-controls="upcomings" aria-selected="false">Upcomings</button>
+  </li>
+
+</ul>
+
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade <%="show active"  if params[:tab].nil? %>" id="calendar" role="tabpanel" aria-labelledby="calendar-tab">
+    <div class="mt-4">
+      <div class="ms-2">
+          <% @events.where("end_date <= ?", Time.current).sort_by(&:created_at).each do |event| %>
+            <%= link_to event_path(event) do %>
+              <span class="small opacity-50"><strong><%= event.start_date.strftime("%d/%m/%Y") %></strong></span><br>
+              <strong><%= event.name %></strong><br>
+              <span class="small opacity-50"><%= event.location %></strong></span>
+            <% end %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="tab-pane fade <%="show active"  if params[:tab] == "events" %>" id="events" role="tabpanel" aria-labelledby="events-tab">
+    <div class="mt-5">
+      <div class="ms-2">
+        <% @events.where("end_date >= ?", Time.current).sort_by(&:created_at).each do |event| %>
               <%= link_to event_path(event) do %>
                 <span class="small opacity-50"><strong><%= event.start_date.strftime("%d/%m/%Y") %></strong></span><br>
                 <strong><%= event.name %></strong><br>
                 <span class="small opacity-50"><%= event.location %></strong></span>
               <% end %>
-            <% end %>
-        </div>
-      </div>
-    </div>
-    <div class="tab-pane fade <%="show active"  if params[:tab] == "events" %>" id="events" role="tabpanel" aria-labelledby="events-tab">
-      <div class="mt-5">
-        <div class="ms-2">
-          <% @events.where("end_date >= ?", Time.current).sort_by(&:created_at).each do |event| %>
-                <%= link_to event_path(event) do %>
-                  <span class="small opacity-50"><strong><%= event.start_date.strftime("%d/%m/%Y") %></strong></span><br>
-                  <strong><%= event.name %></strong><br>
-                  <span class="small opacity-50"><%= event.location %></strong></span>
-                <% end %>
-          <% end %>
-        </div>
+        <% end %>
       </div>
     </div>
   </div>
+</div>

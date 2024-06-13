@@ -21,7 +21,7 @@ class EventsController < ApplicationController
     @event.band = @band
     @event.save
     authorize @event
-    redirect_to event_path(@event)
+    redirect_to band_path(@band, tab: 'calendar')
   end
 
   def edit
