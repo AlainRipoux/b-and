@@ -1,0 +1,26 @@
+.mybands-cards {
+  border-radius: 15px;
+  border: solid #9d9cb5;
+  border-width: thin;
+}
+
+.img-card {
+  border-radius: 15px;
+}
+
+.card-category {
+  background-size: cover;
+  background-position: center;
+  height: 180px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.text-shadow {
+  text-shadow: grey 2px 1px 10px;
+}
