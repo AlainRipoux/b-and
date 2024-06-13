@@ -14,6 +14,7 @@
 @import "components/navbar";
 @import "components/filters";
 @import "components/card";
+@import "components/mybands_cards";
 
 body {
   width: 100%;
@@ -24,6 +25,7 @@ body {
 
 h1 {
   font-size: 2.5em;
+  font-family: Rowdies, sans-serif;
   color: white;
   text-align: center;
 }

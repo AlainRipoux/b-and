@@ -14,6 +14,7 @@ html {
   position: fixed;
   bottom: 0px;
   padding-bottom: 30px;
+  padding-top: 10px;
   left: 0;
   width: 100%;
   background-color: #30214b;
@@ -48,7 +49,7 @@ html {
 }
 
 .navbar li a.active {
-  color: #2FD132;
+  color: #2fd132;
 }
 
 .navbar i {

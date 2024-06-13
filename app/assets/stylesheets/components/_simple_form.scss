@@ -1,3 +1,29 @@
-.input-none {
+// .form-controle.file.optional.input-none {
+//   display: none;
+// }
+
+#document_file {
   display: none;
+}
+
+.form-label.file.optional.document {
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 10px;
+  color: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #D01FE5;
+}
+
+.submit {
+  background-color: #170F23;
+  height: 40px;
+  color: white;
+  font-size: 30px;
+  border: none;
+}
+
+.document-form {
+  margin-bottom: 0 !important;
 }
