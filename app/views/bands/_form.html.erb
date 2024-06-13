@@ -19,8 +19,7 @@
               <%= f.association :user, as: :check_boxes, collection: @mates.sort_by(&:firstname), label_method: :firstname, value_method: :id, multiple: true %>
             </div>
             <div class="modal-footer">
-                      <button type="button" class="btn btn-primary " data-bs-dismiss="modal" aria-label="Close">Invite</button>
-
+              <button type="button" class="btn btn-primary " data-bs-dismiss="modal" aria-label="Close">Invite</button>
             </div>
           </div>
         </div>
