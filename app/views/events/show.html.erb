@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="mx-4">
+
+    <div class="d-flex mt-5">
+      <%= link_to :back do %>
+        <i class="fa-solid fa-chevron-left"></i>
+      <% end %>
+
+      <div class="col mx-auto mb-3 text-end">
+        <% if policy(@event).edit? %>
+          <%= link_to edit_event_path(@event) do%>
+            <i class="fa-solid fa-pen-to-square"></i>
+          <% end %>
+        <% else %>
+            <%# <i class="fa-regular fa-star"></i> %>
+        <% end %>
+      </div>
+    </div>
+
+    <h1><%= @event.name %></h1>
+
+    <div class="d-flex">
+      <div class="mt-4">
+        Start:
+        <p class="tag-green"><%= @event.start_date %></p>
+        End:
+        <p class="tag-green"><%= @event.end_date %></p>
+      </div>
+    </div>
+
+
+    <div class="d-flex">
+      <div class="mt-4">
+        <h4>Location</h4>
+        <p class="tag-green"><%= @event.location %></p>
+      </div>
+
+      <div class="mt-4 ms-3">
+        <h4>Genre</h4>
+        <p class="tag-green"><%= @event.category %></p>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <h4>Description</h4>
+      <p>Put description here</p>
+    </div>
+
+
+  </div>
+</div>
+</div>
