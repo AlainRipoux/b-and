@@ -40,7 +40,9 @@
     <meta name="twitter:image:src" content="<%= meta_image %>">
   </head>
   <body>
-    <%= yield %>
+    <div style='min-height: calc(100vh - 94px)' >
+      <%= yield %>
+    </div>
     <div class="space-navbar"></div>
     <%= render 'shared/navbar' %>
   </body>
