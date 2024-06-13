@@ -1,21 +1,28 @@
 
 <%= simple_form_for([@band, @document]) do |f| %>
-  <%= f.input :file, as: :file, class: "input-none" %>
-  <%= f.submit "Upload", class: "btn btn-primary long-btn" %>
+  <div class= "d-flex simple_form justify-content-center align-items-center gap-3 mt-5 mb-3">
+    <%= f.input :file, as: :file, label: "Upload file", wrapper_html: { class: "document-form form-label file optional document"} %>
+    <%= button_tag type: 'submit', class: "submit" do %>
+      <i class="fa-solid fa-file-export"></i>
+    <% end %>
+  </div>
 <% end %>
 
 <% if @documents.any? %>
   <ul>
     <% @documents.each do |document| %>
       <li>
-        <%= link_to "#", data: { bs_toggle: "offcanvas", bs_target: "#offcanvasDocument#{document.id}" } do %>
-          <%= cl_image_tag document.file.key, alt: "avatar", width: 100, height: 100, crop: :fill %>
+        <%= link_to "#", data: { bs_toggle: "offcanvas", bs_target: "#offcanvasDocument#{document.id}" }, class: "wrapper" do %>
+          <div class= "aperçu">
+            <%= cl_image_tag document.file.key, alt: "file", width: 100, height: 100, crop: :fill %>
+            <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+          </div>
         <% end %>
       </li>
     <% end %>
   </ul>
 <% else %>
-<%= "No file yet" %>
+<%= "" %>
 <% end %>
 
 <% @documents.each do |document| %>

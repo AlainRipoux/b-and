@@ -1,4 +1,21 @@
 .offcanvas.offcanvas-bottom.offcanvas-document {
   height: 90vh;
   background-color: #170F23;
+  img {
+    width: 100%;
+    margin: auto;
+  }
+}
+
+.aperçu {
+  // border : 1px solid white;
+  box-shadow: 3px 3px 8px black;
+  margin : 25px;
+  position: relative;
+  i {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 25px;
+  }
 }
