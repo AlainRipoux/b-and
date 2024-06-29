@@ -31,7 +31,6 @@
       <% unavailabilities.each do |u| %>
         <% if u.is_a?(Event) %>
           <div class="event-<%=u.category%> ">
-
           </div>
         <% else %>
           <div class="unavailability-user<%=@band.users.index(u.user)%> unavailability-user"></div>
@@ -90,4 +89,5 @@
         </div>
       </div>
   </div>
+  <%= console %>
 </div>
