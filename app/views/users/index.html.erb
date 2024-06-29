@@ -11,7 +11,7 @@
           Instrument
         </button>
         <div class="bring-front">
-          <%= select_tag 'instrument[]', options_for_select(User.pluck(:instrument).uniq.flat_map { |c| c.strip }.flat_map {|c| c.split(", ")}.uniq, params[:instrument]), multiple: true, class: 'filter-select dropdown-menu' %>
+          <%= select_tag 'instrument[]', options_for_select(User.pluck(:instrument).compact.uniq.flat_map { |c| c.strip }.flat_map {|c| c.split(", ")}.uniq, params[:instrument]), multiple: true, class: 'filter-select dropdown-menu' %>
         </div>
     </div>
     <div class="dropdown custom-dropdown">
@@ -19,7 +19,7 @@
         Genre
       </button>
       <div class="bring-front">
-        <%= select_tag 'style[]', options_for_select(User.pluck(:style).uniq.flat_map { |c| c.strip }.flat_map {|c| c.split(", ")}.uniq, params[:style]), multiple: true, class: 'filter-select dropdown-menu' %>
+        <%= select_tag 'style[]', options_for_select(User.pluck(:style).compact.uniq.flat_map { |c| c.strip }.flat_map {|c| c.split(", ")}.uniq, params[:style]), multiple: true, class: 'filter-select dropdown-menu' %>
       </div>
     </div>
     <div class="dropdown custom-dropdown">
@@ -27,7 +27,7 @@
         Availability
       </button>
       <div class="bring-front">
-        <%= select_tag 'availability[]', options_for_select(User.pluck(:availability).uniq.flat_map { |c| c.strip }.flat_map {|c| c.split(", ")}.uniq, params[:availability]), multiple: true, class: 'filter-select dropdown-menu' %>
+        <%= select_tag 'availability[]', options_for_select(User.pluck(:availability).compact.uniq.flat_map { |c| c.strip }.flat_map {|c| c.split(", ")}.uniq, params[:availability]), multiple: true, class: 'filter-select dropdown-menu' %>
       </div>
     </div>
     <div class="dropdown custom-dropdown">
@@ -35,7 +35,7 @@
         Frequency
       </button>
       <div class="bring-front">
-        <%= select_tag 'frequency[]', options_for_select(User.pluck(:frequency).uniq.flat_map { |c| c.strip }.flat_map {|c| c.split(", ")}.uniq, params[:frequency]), multiple: true, class: 'filter-select dropdown-menu' %>
+        <%= select_tag 'frequency[]', options_for_select(User.pluck(:frequency).compact.uniq.flat_map { |c| c.strip }.flat_map {|c| c.split(", ")}.uniq, params[:frequency]), multiple: true, class: 'filter-select dropdown-menu' %>
       </div>
     </div>
     <div class="dropdown custom-dropdown">
@@ -43,7 +43,7 @@
         Objectives
       </button>
       <div class="bring-front">
-        <%= select_tag 'objectives[]', options_for_select(User.pluck(:objectives).uniq.flat_map { |c| c.strip }.flat_map {|c| c.split(", ")}.uniq, params[:objectives]), multiple: true, class: 'filter-select dropdown-menu' %>
+        <%= select_tag 'objectives[]', options_for_select(User.pluck(:objectives).compact.uniq.flat_map { |c| c.strip }.flat_map {|c| c.split(", ")}.uniq, params[:objectives]), multiple: true, class: 'filter-select dropdown-menu' %>
       </div>
     </div>
     <div class="dropdown custom-dropdown">
@@ -51,7 +51,7 @@
         Projects
       </button>
       <div class="bring-front">
-        <%= select_tag 'projects[]', options_for_select(User.pluck(:projects).uniq.flat_map { |c| c.strip }.flat_map {|c| c.split(", ")}.uniq, params[:projects]), multiple: true, class: 'filter-select dropdown-menu' %>
+        <%= select_tag 'projects[]', options_for_select(User.pluck(:projects).compact.uniq.flat_map { |c| c.strip }.flat_map {|c| c.split(", ")}.uniq, params[:projects]), multiple: true, class: 'filter-select dropdown-menu' %>
       </div>
     </div>
     <div class="dropdown custom-dropdown">

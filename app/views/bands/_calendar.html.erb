@@ -31,7 +31,6 @@
       <% unavailabilities.each do |u| %>
         <% if u.is_a?(Event) %>
           <div class="event-<%=u.category%> ">
-
           </div>
         <% else %>
           <div class="unavailability-user<%=@band.users.index(u.user)%> unavailability-user"></div>
@@ -45,4 +44,49 @@
     </div>
   <% end %>
 
+</div>
+
+<h5><strong>Events</strong></h5>
+
+<ul class="nav tabs-line nav-justified" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link tag-link <%= "active" if params[:tab].nil? %>" id="profile-tab" data-bs-toggle="tab" data-bs-target="#upcomings" type="button" role="tab" aria-controls="upcomings" aria-selected="false">Upcomings</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link tag-link <%= "active" if params[:tab] == "past" %>" id="profile-tab" data-bs-toggle="tab" data-bs-target="#past" type="button" role="tab" aria-controls="past" aria-selected="false">Past</button>
+  </li>
+
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade <%= "show active" if params[:tab].nil? %>" id="upcomings" role="tabpanel" aria-labelledby="events-tab">
+    <div class="mt-5">
+      <div class="ms-2">
+        <% @events.where("end_date >= ?", DateTime.current).sort_by(&:created_at).each do |event| %>
+          <%= link_to event_path(event) do %>
+            <span class="small opacity-50"><strong><%= event.start_date.strftime("%d/%m/%Y") %></strong></span><br>
+            <strong><%= event.name %></strong><br>
+            <div class="">
+              <span class="small opacity-50"></span>
+              <span class="small opacity-50"><%= event.address %></strong></span>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+    <div class="tab-pane fade <%= "show active" if params[:tab] == "events" %>" id="past" role="tabpanel" aria-labelledby="events-tab">
+      <div class="mt-5">
+        <div class="ms-2">
+          <% @events.where("end_date < ?", DateTime.current).sort_by(&:created_at).each do |event| %>
+            <%= link_to event_path(event) do %>
+              <span class="small opacity-50"><strong><%= event.start_date.strftime("%d/%m/%Y") %></strong></span><br>
+              <strong><%= event.name %></strong><br>
+              <span class="small opacity-50"><%= event.address %></strong></span>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+  </div>
+  <%= console %>
 </div>
